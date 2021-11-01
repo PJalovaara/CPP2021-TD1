@@ -10,7 +10,7 @@ You can use Markdown language to render it as formatted **HTML** file.
 - Atte Tommiska
 
 # Repository organization
-Your project implementation should follow the skelaton organization in this repository.
+Your project implementation should follow the skeleton organization in this repository.
 See readme.md files in each folder.
 
 # Project Implementation 
