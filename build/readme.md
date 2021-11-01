@@ -2,4 +2,7 @@
 This folder should contain only build files of our implementation.
 The cpp and hpp files are in a separate directories `src` and `include` respectively.
 
-It might be useful to describe the contents briefly.
+- Navigate into the `build` directory
+- In terminal run command `cmake ..`, where `..` is the path to the `tower-defense-1` directory which includes the `CMakeLists.txt`
+- After that run the command `make` to create an excecutable `test``
+- Run the excecutable in terminal with command `./test`
