@@ -1,4 +1,4 @@
-# Source content
+# Header files
 This folder should contain only hpp files of your implementation.
 The cpp files are in a separate directory `src`.
 
