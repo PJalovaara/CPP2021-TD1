@@ -8,25 +8,31 @@ In each meeting, you are required to discuss:
 4. Deviations and changes to the project plan, if any
 
 
-# Meeting dd.mm.2021 HH::MM
+# Meeting 01.11.2021 09::15
 
 **Participants**: 
-1. Member 1
-2. Member 2
-3. Member 3
-4. Member 4 
+1. Antti Haavikko
+2. Anna Huttunen
+3. Perttu Jalovaara
+4. Atte Tommiska 
 
 ## Summary of works
-1. Member 1 
+1. Antti Haavikko 
    
    Implementing the class XX. Tested the class XX. 
    Results are in `tests/<class-xx-tests>`. Resolved the identified problems.
 
-2. Member 2
+2. Anna Huttunen
 
    Same as above
 
-3. ...
+3. Perttu Jalovaara
+
+   ...
+
+4. Atte Tommiska
+
+   ...
 
 ## Challenges
 
