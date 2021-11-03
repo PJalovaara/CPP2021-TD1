@@ -4,5 +4,6 @@ The cpp and hpp files are in separate directories `src` and `include` respective
 
 - Navigate into the `build` directory
 - In terminal run command `cmake ..`, where `..` is the path to the `tower-defense-1` directory which includes the `CMakeLists.txt`
+- *Note*: Change the prefix path in the `CMakeLists.txt` to include the configuration file Qt5Config.cmake provided by Qt5
 - After that run the command `make` to create an excecutable `test`
 - Run the excecutable in terminal with the command `./test`

@@ -17,6 +17,7 @@ endif()
 include_directories(include)
 
 # Set the prefix path for the configuration file Qt5Config.cmake provided by Qt5 (otherwise find_package might fail)
+# On Antti's macbook it is /usr/local/Cellar/qt@5/5.15.2_1/lib/cmake/Qt5
 set(CMAKE_PREFIX_PATH /usr/local/Cellar/qt@5/5.15.2_1/lib/cmake/Qt5)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
