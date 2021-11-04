@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
+
 class Game : public QGraphicsView{
 public:
     // member functions

@@ -3,10 +3,16 @@
 #include <QVector>
 #include <QPointF>
 #include <QPolygonF>
+#include <QDebug>
 
 Tower::Tower(QGraphicsItem* parent){
     // Set the graphics
-    setPixmap(QPixmap(":/images/tower.png")); // THIS DOESNT WORK
+    QPixmap pix;
+    if(!(pix.load(("tower-defense-1/resources/images/tower.png")))){
+        qDebug() << "Failed to load the picture";
+    }
+
+    setPixmap(pix);//(":/images/tower.png")); // THIS DOESNT WORK
 
     // Creating (float) points vector for the polygon
     QVector<QPointF> points;
@@ -27,7 +33,7 @@ Tower::Tower(QGraphicsItem* parent){
 
     poly_center = mapToScene(poly_center);
 
-    QPointF tower_center(x() + 44, y() + 44); // Randomly chosen intergers in this case :D
+    QPointF tower_center(x() + 100, y() + 100); // Randomly chosen intergers in this case :D
     QLineF ln(poly_center, tower_center);
     attack_area_->setPos(x() + ln.dx(), y() + ln.dy()); // Moving the attack area along the line from poly_center to tower_center
 }

@@ -12,7 +12,7 @@ public:
     void UpdateAttackRadius(unsigned int new_radius);
 private:
     QGraphicsPolygonItem* attack_area_;
-    unsigned int attack_radius_ = 0;
+    unsigned int attack_radius_ = 30;
 };
 
 
