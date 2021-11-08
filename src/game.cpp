@@ -23,9 +23,9 @@ Game::Game() {
     //QGraphicsRectItem* rect = new QGraphicsRectItem();
     // rect->setRect(0,0, 100, 100);
 
-    // QBrush redBrush(Qt::red);
-    // QPen blackPen(Qt::black);
-    // blackPen.setWidth(6);
+    QBrush redBrush(Qt::red);
+    QPen blackPen(Qt::black);
+    blackPen.setWidth(6);
     
 
     scene->addRect(0, 0, 200, 200, blackPen, redBrush);
