@@ -1,7 +1,6 @@
 # Tower Defense
 
-This is the template for the projects. Please copy the project description here. 
-You can use Markdown language to render it as formatted **HTML** file.
+Our group's project is a tower defense game. The theme of our game is humoristic and close to our lives. In the game, there are geese defending their environment and younglings from teekkaris, who are wandering through different popular locations in Otaniemi. There are different kinds of geese, that have different defense abilities against teekkaris. Geese may be able to slow teekkaris down, hurt or even kill them. Geese also either have a certain radius of effect or they may choose their victim. Teekkaris may be able to walk through the field with different velocities and using different routes. Teekkaris are not able to hurt the geese, but if too many teekkaris make it through the geese's defenses, they will cause damage to baby geese. This leads to the geese losing the game.
 
 # Group 1
 - Antti Haavikko
