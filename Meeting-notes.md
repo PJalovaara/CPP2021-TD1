@@ -57,7 +57,55 @@ We have decided on the topic of the game and designed a tentative class hierarch
 4. Atte: Study Qt!
 
 
-# Meeting 08.11.2021 09:15 (TBD)
+# Meeting 08.11.2021 09:15
+
+**Participants**: 
+1. Antti Haavikko
+2. Anna Huttunen (NOT PRESENT)
+3. Perttu Jalovaara
+4. Atte Tommiska 
+
+## Summary of works
+1. Antti Haavikko 
+   
+   Studied the Qt library extensively and implemented a small graphical test.
+
+2. Anna Huttunen
+
+   Did the majority of the work on the Project Plan.
+
+3. Perttu Jalovaara
+
+   Sketched concept art for geese and finished the Project Plan.
+
+4. Atte Tommiska
+
+   Resolved challenges that appeared in compiling the graphical test.
+
+## Challenges
+
+1. Figuring out how to render an arbitrary goose with Qt.
+2. Implementing a simple test level with one enemy.
+
+## Actions
+1. Antti is going to code some basic functionalities for the classes.
+2. Anna is going to work on art for the game.
+3. Perttu is going to work on representing enemy paths in the game.
+4. Atte is going to solve the goose render issue.
+
+> Please reflect these action decisions in your git commit messages so that 
+> your group members and advisor can follow the progress.
+
+## Project status 
+We have a clear plan and we will now attempt to implement it. Issues will be faced courageously.
+
+### TODOs
+1. Antti: Code some classes!
+2. Anna: Draw geese and teekkaris!
+3. Perttu: Create paths!
+4. Atte: Fix goose!
+
+# Meeting 15.11.2021 09:15 (TBD)
 
 **Participants**: 
 1. Antti Haavikko
