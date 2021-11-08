@@ -6,7 +6,7 @@
 #include <QBrush>
 #include <QPen>
 
-Game::Game(){
+Game::Game() {
     // Creating a scene 
     scene = new QGraphicsScene(this);
 
@@ -15,31 +15,32 @@ Game::Game(){
 
     // Create a new tower
     Tower* t = new Tower();
+    t->UpdateAttackRadius(2000);
 
     // // Add tower to the scene
     // scene->addItem(t);
 
-    QGraphicsRectItem* rect = new QGraphicsRectItem();
+    //QGraphicsRectItem* rect = new QGraphicsRectItem();
+    // rect->setRect(0,0, 100, 100);
 
-    QBrush redBrush(Qt::red);
-    QBrush blueBrush(Qt::blue);
-    QPen blackPen(Qt::black);
-    blackPen.setWidth(6);
-    rect->setRect(0,0, 100, 100);
+    // QBrush redBrush(Qt::red);
+    // QPen blackPen(Qt::black);
+    // blackPen.setWidth(6);
+    
 
     scene->addRect(0,0, 200, 200, blackPen, redBrush);
 
-    SquareTower* st = new SquareTower();
-    st->setRect(50,50, 50, 50);
+    // SquareTower* st = new SquareTower();
+    // st->setRect(50,50, 50, 50);
 
-    scene->addItem(st);
+    // scene->addItem(st);
 
-    st->setFlag(QGraphicsItem::ItemIsFocusable);
-    st->setFocus();
+    // st->setFlag(QGraphicsItem::ItemIsFocusable);
+    // st->setFocus();
 
  
     
     // Add tower to the scene
     scene->addItem(t);
-    scene->addItem(rect);
+    //scene->addItem(rect);
 }

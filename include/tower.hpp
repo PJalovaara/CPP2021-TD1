@@ -4,6 +4,9 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsPolygonItem>
 #include <QGraphicsItem>
+#include <QVector>
+#include <QPointF>
+#include <QPolygonF>
 
 class Tower : public QGraphicsPixmapItem {
 public:
@@ -11,8 +14,9 @@ public:
     unsigned int GetAttackRadius();
     void UpdateAttackRadius(unsigned int new_radius);
 private:
+    QVector<QPointF> points_;
     QGraphicsPolygonItem* attack_area_;
-    unsigned int attack_radius_ = 30;
+    unsigned int attack_radius_ = 40;
 };
 
 
