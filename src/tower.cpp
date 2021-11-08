@@ -14,7 +14,7 @@ Tower::Tower(QGraphicsItem* parent){
 
     setPixmap(pix);
 
-
+    // Add more points to make it more round
     points_ = {QPointF(1,0), QPointF(2,0), QPointF(3,1), QPointF(3,2), QPoint(2,3), QPoint(1,3), QPoint(0,2), QPoint(0,1)};
 
 
