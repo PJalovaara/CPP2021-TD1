@@ -28,7 +28,7 @@ Game::Game() {
     // blackPen.setWidth(6);
     
 
-    scene->addRect(0,0, 200, 200, blackPen, redBrush);
+    scene->addRect(0, 0, 200, 200, blackPen, redBrush);
 
     // SquareTower* st = new SquareTower();
     // st->setRect(50,50, 50, 50);

@@ -2,6 +2,6 @@
 
 #include <QDebug>
 
-void SquareTower::keyPressEvent(QKeyEvent* event){
+void SquareTower::keyPressEvent(QKeyEvent* event) {
     qDebug() << "You pressed a key";
 }

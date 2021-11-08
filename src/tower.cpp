@@ -1,6 +1,8 @@
 #include "tower.hpp"
 #include <QPixmap>
 #include <QDebug>
+#include <QLabel>
+#include <QString>
 
 
 Tower::Tower(QGraphicsItem* parent){
