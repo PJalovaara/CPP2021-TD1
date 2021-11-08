@@ -6,7 +6,7 @@
 #include <QBrush>
 #include <QPen>
 
-Game::Game(){
+Game::Game() {
     // Creating a scene 
     scene = new QGraphicsScene(this);
 
@@ -25,12 +25,12 @@ Game::Game(){
     QBrush blueBrush(Qt::blue);
     QPen blackPen(Qt::black);
     blackPen.setWidth(6);
-    rect->setRect(0,0, 100, 100);
+    rect->setRect(0, 0, 100, 100);
 
-    scene->addRect(0,0, 200, 200, blackPen, redBrush);
+    scene->addRect(0, 0, 200, 200, blackPen, redBrush);
 
     SquareTower* st = new SquareTower();
-    st->setRect(50,50, 50, 50);
+    st->setRect(50, 50, 50, 50);
 
     scene->addItem(st);
 

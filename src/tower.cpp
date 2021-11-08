@@ -4,15 +4,18 @@
 #include <QPointF>
 #include <QPolygonF>
 #include <QDebug>
+#include <QLabel>
+#include <QString>
 
-Tower::Tower(QGraphicsItem* parent){
+
+Tower::Tower(QGraphicsItem* parent) {
     // Set the graphics
     QPixmap pix;
-    if(!(pix.load(("tower-defense-1/resources/images/tower.png")))){
+    if(!(pix.load((":/images/tower.png")))) {
         qDebug() << "Failed to load the picture";
     }
 
-    setPixmap(pix);//(":/images/tower.png")); // THIS DOESNT WORK
+	setPixmap(pix);
 
     // Creating (float) points vector for the polygon
     QVector<QPointF> points;
@@ -20,7 +23,7 @@ Tower::Tower(QGraphicsItem* parent){
            << QPoint(2,3) << QPoint(1,3) << QPoint(0,2) << QPoint(0,1);
 
     // Scaling the polygon to be larger ()
-    for(size_t i = 0, n = points.size(); i < n; i++){
+    for(size_t i = 0, n = points.size(); i < n; i++) {
         points[i] *= attack_radius_;
     }
 
