@@ -47,3 +47,9 @@ dkms.conf
 
 # Vscode
 .vscode/
+
+# Build directory
+build/
+
+# cmake instructions
+CMakeLists.txt
