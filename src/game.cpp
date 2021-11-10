@@ -4,9 +4,9 @@
 #include "bullet.hpp"
 
 #include <QGraphicsRectItem>
-#include <QBrush>
-#include <QPen>
-#include <QDebug>
+// #include <QBrush>
+// #include <QPen>
+// #include <QDebug>
 
 Game::Game() {
     // Creating a scene 
@@ -17,15 +17,16 @@ Game::Game() {
     scene->setSceneRect(0,0,800,600);
 
     // Create a new tower
-    Tower* t = new Tower();
+    Tower* t = new Tower(this);
     t->UpdateAttackRadius(2000);
+    t->setPos(200,150);
 
 
-    QBrush redBrush(Qt::red);
-    QPen blackPen(Qt::black);
-    blackPen.setWidth(6);
+    // QBrush redBrush(Qt::red);
+    // QPen blackPen(Qt::black);
+    // blackPen.setWidth(6);
     
-    scene->addRect(0, 0, 200, 200, blackPen, redBrush);
+    // scene->addRect(0, 0, 200, 200, blackPen, redBrush);
 
     // SquareTower* st = new SquareTower();
     // st->setRect(50,50, 50, 50);
@@ -55,5 +56,5 @@ void Game::mousePressEvent(QMouseEvent* event){
     bullet->setPos(event->pos());
     bullet->setRotation(30); // Rotate 30 degrees clockwise
     scene->addItem(bullet);
-    qDebug() << "Mouse pressed";
+    //qDebug() << "Mouse pressed";
 }
