@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.1.0)
 
-project(test VERSION 1.0.0 LANGUAGES CXX)
+project(game VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOMOC ON) # Should automatically scan header and source files and run moc accordingly
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+
 
 if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -24,6 +25,10 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 # file(GLOB...) allows for wildcard additions
 file(GLOB SOURCES "src/*.cpp")
-add_executable(test ${SOURCES} resources/res.qrc)
 
-target_link_libraries(test Qt5::Widgets)
+file(GLOB HEADERS "include/*.hpp")
+
+# remember to add the resources/res.qrc in the executable
+add_executable(game ${SOURCES} resources/res.qrc ${HEADERS}) # We also seem need the headers for the AUTOMOC to run properly
+
+target_link_libraries(game Qt5::Widgets)

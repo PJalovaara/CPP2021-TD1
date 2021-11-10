@@ -6,6 +6,7 @@
 #include <QGraphicsRectItem>
 #include <QBrush>
 #include <QPen>
+#include <QDebug>
 
 Game::Game() {
     // Creating a scene 
@@ -54,4 +55,5 @@ void Game::mousePressEvent(QMouseEvent* event){
     bullet->setPos(event->pos());
     bullet->setRotation(30); // Rotate 30 degrees clockwise
     scene->addItem(bullet);
+    qDebug() << "Mouse pressed";
 }

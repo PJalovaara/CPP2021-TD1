@@ -8,7 +8,7 @@
 Tower::Tower(QGraphicsItem* parent){
     // Set the graphics
     QPixmap pix;
-    if(!(pix.load((":/images/tower.png")))){
+    if(!(pix.load((":/images/SniperGoose.png")))){
         qDebug() << "Failed to load the picture";
     }
 

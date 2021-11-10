@@ -12,12 +12,14 @@ Bullet::Bullet(QGraphicsItem* parent) {
     QTimer* move_timer = new QTimer(this); // The timer dies when the bullet dies
 
     // Connect a signal to a slot
-    connect(move_timer, SIGNAL(timeout), this, SLOT(move())); 
-     // every 50 ms the timeout signal will be executed -> the bullet move will be executed every 50 ms
+    connect(move_timer, SIGNAL(timeout()), this, SLOT(Move())); 
+
+    // every 50 ms the timeout signal will be executed -> the bullet move will be executed every 50 ms
     move_timer->start(50);
 }
 
-void Bullet::move() {
+
+void Bullet::Move() {
     int STEPSIZE = 30;
     double theta = rotation(); // return the angle in degrees
     double dy = STEPSIZE * qSin(qDegreesToRadians(theta));
