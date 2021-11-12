@@ -16,16 +16,17 @@ public:
     Tower(Game* game, QGraphicsItem* parent = 0);
     unsigned int GetAttackRadius();
     void UpdateAttackRadius(unsigned int new_radius);
-
-public slots:
+    double DistanceTo(QGraphicsItem* item);
     void AttackTarget();
-
+public slots:
+    void AcquireTarget();
 private:
     Game* game_;
     QVector<QPointF> points_;
     QGraphicsPolygonItem* attack_area_;
     unsigned int attack_radius_ = 40;
     QPointF attack_dest_;
+    bool has_target_;
 };
 
 

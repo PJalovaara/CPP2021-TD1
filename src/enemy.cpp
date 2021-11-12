@@ -36,6 +36,7 @@ void Enemy::RotateToFacePoint(QPointF p) {
 
 void Enemy::MoveForward() {
     // If close to dest, rotate towards the next dest
+    // TO DO: If enemy reacheas final destination, player loses HP and enemy is destroyed (free the memory)
     QLineF ln(pos(), dest_);
     if(ln.length() < 10 && point_index_ < points_.length() - 1){ // Check the size of the radius
         point_index_++;
@@ -50,3 +51,5 @@ void Enemy::MoveForward() {
     double dx = STEPSIZE * qCos(qDegreesToRadians(theta));
     setPos(x() + dx, y() + dy);
 };
+
+
