@@ -9,12 +9,8 @@
 Tower::Tower(Game* game, QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem(parent) {
     game_ = game;
     // Set the graphics
-    QPixmap pix;
-    if(!(pix.load((":/images/SniperGoose.png")))){
-        qDebug() << "Failed to load the picture";
-    }
-
-    setPixmap(pix);
+    QPixmap p = QPixmap(":/images/SniperGoose.png");
+    setPixmap(p.scaled(200, 100, Qt::KeepAspectRatio)); // Set size for the goose
 
     // Add more points to make it more round
     points_ = {QPointF(1,0), QPointF(2,0), QPointF(3,1), QPointF(3,2), QPoint(2,3), QPoint(1,3), QPoint(0,2), QPoint(0,1)};
@@ -41,7 +37,7 @@ Tower::Tower(Game* game, QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem
 
 
     // SET ATTACK DEST
-    attack_dest = QPointF(600,0);
+    attack_dest_ = QPointF(600,0);
 }
 
 unsigned int Tower::GetAttackRadius(){
@@ -62,9 +58,9 @@ void Tower::UpdateAttackRadius(unsigned int new_radius){
 
 void Tower::AttackTarget(){
     Bullet* bullet = new Bullet();
-    bullet->setPos(x(), y()); // Maybe center this later???
+    bullet->setPos(x() + 20, y() + 20); // Maybe center this later???
 
-    QLineF ln(QPointF(x(), y()), attack_dest);
+    QLineF ln(QPointF(x(), y()), attack_dest_);
 
     int angle = -ln.angle(); // ln.angle() is the angle of the ln counterclockwise,  NOTE: rotation will rotate clockwise
     bullet->setRotation(angle); // Rotate it 

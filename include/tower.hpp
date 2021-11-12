@@ -25,7 +25,7 @@ private:
     QVector<QPointF> points_;
     QGraphicsPolygonItem* attack_area_;
     unsigned int attack_radius_ = 40;
-    QPointF attack_dest;
+    QPointF attack_dest_;
 };
 
 

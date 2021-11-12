@@ -2,6 +2,7 @@
 #include "tower.hpp"
 #include "square_tower.hpp"
 #include "bullet.hpp"
+#include "enemy.hpp"
 
 #include <QGraphicsRectItem>
 // #include <QBrush>
@@ -21,6 +22,9 @@ Game::Game() {
     t->UpdateAttackRadius(2000);
     t->setPos(200,150);
 
+    // Create an enemy
+    Enemy* e = new Enemy();
+    scene->addItem(e);
 
     // QBrush redBrush(Qt::red);
     // QPen blackPen(Qt::black);
