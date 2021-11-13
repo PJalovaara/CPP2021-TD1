@@ -51,5 +51,5 @@ dkms.conf
 # Build directory
 build/
 
-# cmake instructions
+# CMake instructions
 *.txt

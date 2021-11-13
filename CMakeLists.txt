@@ -29,6 +29,6 @@ file(GLOB SOURCES "src/*.cpp")
 file(GLOB HEADERS "include/*.hpp")
 
 # remember to add the resources/res.qrc in the executable
-add_executable(game ${SOURCES} resources/res.qrc ${HEADERS}) # We also seem need the headers for the AUTOMOC to run properly
+add_executable(game ${SOURCES} resources/res.qrc ${HEADERS}) # We also seem to need the headers for the AUTOMOC to run properly
 
 target_link_libraries(game Qt5::Widgets)
