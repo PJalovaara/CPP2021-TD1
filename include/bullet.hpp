@@ -12,8 +12,9 @@ public:
 
 public slots:
     void Move();
-    
-private:
+
+protected:
+    unsigned int speed_;
 };
 
 

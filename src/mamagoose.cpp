@@ -3,14 +3,23 @@
 #include "enemy.hpp"
 #include <QTimer>
 #include <QList>
+#include <QDebug>
 
-MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
+MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {    
     // Set the graphics
     QPixmap p = QPixmap(":/images/MamaGoose.png");
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
-    UpdateAttackRadius(80); // MamaGoose has a larger radius
-    attack_speed_ = 3;
+    attack_speed_ = 3; // Attack 3 times a second
+
+    // Set attack_radius and tower width, height and center
+    tower_width_ = p.width();
+    tower_height_ = p.height();
+    tower_center_ = QPointF(tower_width_ / 2, tower_height_ / 2);
+
+    // Set the attack area to nullptr and then create it with the UpdateAttackRadius function
+    attack_area_ = nullptr;
+    UpdateAttackRadius(80); // MamaGoose has attackRadius of 80
 
     // CONNECT TIMER TO ATTACK_TARGET
     QTimer* timer = new QTimer();

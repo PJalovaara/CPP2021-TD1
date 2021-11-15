@@ -11,7 +11,7 @@ Enemy::Enemy(QGraphicsItem* parent) {
     setPixmap(p.scaled(50, 100, Qt::KeepAspectRatio)); // Set size for the enemy
 
     // Set the points in the path and the index of the point list
-    points_ << QPointF(200,200) << QPointF(400, 200);
+    points_ << QPointF(200,200) << QPointF(700, 200) << QPointF(10, 10) << QPoint(700, 700);
     point_index_ = 0;
 
      // Set initial destination

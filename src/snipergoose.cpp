@@ -2,7 +2,7 @@
 
 
 #include "mamagoose.hpp"
-#include "bullet.hpp"
+#include "goldenbullet.hpp"
 #include "enemy.hpp"
 #include <QTimer>
 #include <QList>
@@ -12,8 +12,16 @@ SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
     QPixmap p = QPixmap(":/images/SniperGoose.png");
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
+    attack_speed_ = 1; // And a slow attack speed
+
+    // Set attack_radius and tower width, height and center
+    tower_width_ = p.width();
+    tower_height_ = p.height();
+    tower_center_ = QPointF(tower_width_ / 2, tower_height_ / 2);
+
+    attack_area_ = nullptr;
     UpdateAttackRadius(200); // SniperGoose has a very large radius
-    attack_speed_ = 1;
+
 
     // CONNECT TIMER TO ATTACK_TARGET
     QTimer* timer = new QTimer();
@@ -22,7 +30,7 @@ SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
 };
 
 void SniperGoose::AttackTarget(){
-    Bullet* bullet = new Bullet();
+    GoldenBullet* bullet = new GoldenBullet();
     QPointF bullet_center = mapToScene(tower_center_); // Center the bullet position w.r.t the goose
     bullet->setPos(bullet_center.x(), bullet_center.y());
 

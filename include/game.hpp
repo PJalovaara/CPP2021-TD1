@@ -8,6 +8,7 @@
 #include <QString>
 
 #include "tower.hpp"
+#include "mamagoose.hpp"
 
 class Game : public QGraphicsView{
 public:

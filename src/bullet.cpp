@@ -15,15 +15,17 @@ Bullet::Bullet(QGraphicsItem* parent) {
     // Connect a signal to a slot
     connect(move_timer, SIGNAL(timeout()), this, SLOT(Move())); 
 
+    // Set the speed of the bullet
+    speed_ = 30;
+
     // every 50 ms the timeout signal will be executed -> the bullet move will be executed every 50 ms
     move_timer->start(50);
 }
 
 
 void Bullet::Move() {
-    int STEPSIZE = 30;
     double theta = rotation(); // return the angle in degrees
-    double dy = STEPSIZE * qSin(qDegreesToRadians(theta));
-    double dx = STEPSIZE * qCos(qDegreesToRadians(theta));
+    double dy = speed_ * qSin(qDegreesToRadians(theta));
+    double dx = speed_ * qCos(qDegreesToRadians(theta));
     setPos(x() + dx, y() + dy);
 }
