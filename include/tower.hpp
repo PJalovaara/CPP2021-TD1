@@ -17,17 +17,20 @@ public:
     unsigned int GetAttackRadius();
     void UpdateAttackRadius(unsigned int new_radius);
     double DistanceTo(QGraphicsItem* item);
-    void AttackTarget();
+    virtual void AttackTarget() = 0;
+
 public slots:
-    void AcquireTarget();
-private:
+    virtual void AcquireTarget() = 0;
+
+protected:
     QGraphicsScene* scene_;
     QVector<QPointF> points_;
     QPointF tower_center_;
     int tower_width_;
     int tower_height_;
     QGraphicsPolygonItem* attack_area_;
-    unsigned int attack_radius_;;
+    unsigned int attack_radius_;
+    unsigned int attack_speed_;
     QPointF attack_dest_;
     bool has_target_;
 };

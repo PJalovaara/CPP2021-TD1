@@ -3,13 +3,15 @@
 #include "bullet.hpp"
 #include "enemy.hpp"
 #include "build_tower_icon.hpp"
+#include "mamagoose.hpp"
+#include "snipergoose.hpp"
 
 #include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
 #include <QPixmap>
-// #include <QBrush>
-// #include <QPen>
-// #include <QDebug>
+#include <QBrush>
+#include <QPen>
+#include <QDebug>
 
 Game::Game() {
     // Creating a scene 
@@ -35,20 +37,25 @@ Game::Game() {
     //SetCursor(":images/SniperGoose.png");
     setMouseTracking(true);
 
-    
 
-    // Create a new tower
-    Tower* t = new Tower(scene_);
+    // Create a new sniper goose tower
+    SniperGoose* sniper = new SniperGoose(scene_);
     //t->UpdateAttackRadius(2000);
-    t->setPos(200,150);
+    sniper->setPos(300,150);
+    // Add tower to the scene 
+    scene_->addItem(sniper);
 
     // Create an enemy
     Enemy* e = new Enemy();
     scene_->addItem(e);
 
+
+    // Create a new sniper goose
+    MamaGoose* mama = new MamaGoose(scene_);
+    mama->setPos(200,100);
+    scene_->addItem(mama);
  
-    // Add tower to the scene 
-    scene_->addItem(t);
+    
 
     setFixedSize(800, 600);
     // No vertical nor horizontal scroll bars

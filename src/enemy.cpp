@@ -17,13 +17,15 @@ Enemy::Enemy(QGraphicsItem* parent) {
      // Set initial destination
     dest_ = points_[point_index_];
     RotateToFacePoint(dest_);
+    enemy_center_ = QPointF(p.width() / 2, p.height() / 2);
+    speed_ = 10;
 
     // Connect a timer to the move forward
     QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(MoveForward()));
 
-    // Call the MoveForward function every 150 ms
-    timer->start(150);
+    // Call the MoveForward function every 80 ms
+    timer->start(80);
 };
     
     
@@ -45,10 +47,9 @@ void Enemy::MoveForward() {
     }
     
     // Move enemy forwards with its current angle
-    int STEPSIZE = 20;
     double theta = rotation(); // return the angle in degrees
-    double dy = STEPSIZE * qSin(qDegreesToRadians(theta));
-    double dx = STEPSIZE * qCos(qDegreesToRadians(theta));
+    double dy = speed_ * qSin(qDegreesToRadians(theta));
+    double dx = speed_ * qCos(qDegreesToRadians(theta));
     setPos(x() + dx, y() + dy);
 };
 

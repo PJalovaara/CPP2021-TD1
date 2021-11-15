@@ -16,6 +16,8 @@ public slots:
 private:
     QList<QPointF> points_;
     QPointF dest_;
+    QPointF enemy_center_;
+    int speed_;
     int point_index_;
 };
 
