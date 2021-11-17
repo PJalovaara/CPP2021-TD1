@@ -5,19 +5,19 @@
 #include <qmath.h>
 #include <QDebug>
 
-Enemy::Enemy(QGraphicsItem* parent) {
+Enemy::Enemy(QList<QPointF> pathPoints, QGraphicsItem* parent) {
     // Set graphics
     QPixmap p = QPixmap(":/images/arrow.png");
     setPixmap(p.scaled(50, 100, Qt::KeepAspectRatio)); // Set size for the enemy
 
     // Set the points in the path and the index of the point list
-    points_ << QPointF(200,200) << QPointF(700, 200) << QPointF(10, 10) << QPoint(700, 700);
-    point_index_ = 0;
+    pathPoints_ = pathPoints;
+    pointIndex_ = 0;
 
      // Set initial destination
-    dest_ = points_[point_index_];
+    dest_ = pathPoints_[pointIndex_];
     RotateToFacePoint(dest_);
-    enemy_center_ = QPointF(p.width() / 2, p.height() / 2);
+    enemyCenter_ = QPointF(p.width() / 2, p.height() / 2);
     speed_ = 10;
 
     // Connect a timer to the move forward
@@ -38,11 +38,19 @@ void Enemy::RotateToFacePoint(QPointF p) {
 
 void Enemy::MoveForward() {
     // If close to dest, rotate towards the next dest
-    // TO DO: If enemy reacheas final destination, player loses HP and enemy is destroyed (free the memory)
+    // TO DO: If enemy reaches final destination, player loses HP
     QLineF ln(pos(), dest_);
-    if(ln.length() < 10 && point_index_ < points_.length() - 1){ // Check the size of the radius
-        point_index_++;
-        dest_ = points_[point_index_];
+    
+    // Enemy reaches final destination and the memory is freed
+    if(ln.length() < 50 && pointIndex_ >= pathPoints_.length() - 1) {
+        delete this;
+        return;
+    }
+
+    // Rotate to face the next point
+    if(ln.length() < 10 && pointIndex_ < pathPoints_.length() - 1){ // Check the size of the radius
+        pointIndex_++;
+        dest_ = pathPoints_[pointIndex_];
         RotateToFacePoint(dest_);
     }
     

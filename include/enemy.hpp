@@ -9,16 +9,16 @@
 class Enemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
-    Enemy(QGraphicsItem* parent = 0);
+    Enemy(QList<QPointF> pathPoints, QGraphicsItem* parent = 0);
     void RotateToFacePoint(QPointF p);
 public slots:
     void MoveForward();
 private:
-    QList<QPointF> points_;
+    QList<QPointF> pathPoints_;
     QPointF dest_;
-    QPointF enemy_center_;
+    QPointF enemyCenter_;
     int speed_;
-    int point_index_;
+    int pointIndex_;
 };
 
 #endif

@@ -15,8 +15,10 @@ Bullet::Bullet(QGraphicsItem* parent) {
     // Connect a signal to a slot
     connect(move_timer, SIGNAL(timeout()), this, SLOT(Move())); 
 
-    // Set the speed of the bullet
+    // Initialize the speed, max_range_ and distance_traveled of the bullet
     speed_ = 30;
+    max_range_ = 100;
+    distance_traveled_ = 0;
 
     // every 50 ms the timeout signal will be executed -> the bullet move will be executed every 50 ms
     move_timer->start(50);
@@ -28,4 +30,26 @@ void Bullet::Move() {
     double dy = speed_ * qSin(qDegreesToRadians(theta));
     double dx = speed_ * qCos(qDegreesToRadians(theta));
     setPos(x() + dx, y() + dy);
+
+    // Update the distance traveled and delete the bullet after traversing max_range_ 
+    distance_traveled_ += qSqrt(dx*dx + dy*dy);
+    if(distance_traveled_ >= max_range_) {
+        delete this;
+    }
 }
+
+double Bullet::GetMaxRange() {
+    return max_range_;
+};
+
+void Bullet::SetMaxRange(double range) {
+    max_range_ = range;
+};
+
+double Bullet::GetDistanceTraveled() {
+    return distance_traveled_;
+};
+
+void Bullet::SetDistanceTraveled(double dist) {
+    distance_traveled_ = dist;
+};

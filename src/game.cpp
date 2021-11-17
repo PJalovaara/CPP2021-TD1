@@ -2,7 +2,9 @@
 
 #include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
+#include <QGraphicsLineItem>
 #include <QPixmap>
+#include <QLineF>
 #include <QBrush>
 #include <QPen>
 
@@ -15,8 +17,10 @@
 #include "snipergoose.hpp"
 
 Game::Game() {
-    // Creating a scene 
+    // Creating a scene and a timer to spawn enemies on the pathPoints path
     scene_ = new QGraphicsScene(this);
+    enemySpawnTimer_ = new QTimer(this);
+    pathPoints_ << QPoint(800,0) << QPoint(400,300) << QPoint(800, 600);
 
     // Set the scene
     setScene(scene_); // Visualize this scene
@@ -26,8 +30,10 @@ Game::Game() {
     QBrush grayBrush(Qt::gray);
     QPen blackPen(Qt::black);
     blackPen.setWidth(1);
-    
     scene_->addRect(0, 0, 800, 600, blackPen, grayBrush);
+
+    // Create a path for the enemies
+    CreatePath();
 
     // Add the build icons
     BuildMamaIcon* mama_icon = new BuildMamaIcon(this);
@@ -45,23 +51,8 @@ Game::Game() {
     //SetCursor(":images/SniperGoose.png");
     setMouseTracking(true);
 
-
-    // Create a new sniper goose tower
-    SniperGoose* sniper = new SniperGoose(scene_);
-    //t->UpdateAttackRadius(2000);
-    sniper->setPos(300,150);
-    // Add tower to the scene 
-    scene_->addItem(sniper);
-
-    // Create an enemy
-    Enemy* e = new Enemy();
-    scene_->addItem(e);
-
-
-    // Create a new mama goose
-    MamaGoose* mama = new MamaGoose(scene_);
-    mama->setPos(200,100);
-    scene_->addItem(mama);
+    // Creates 5 enemies, one every second
+    CreateEnemies(5);
  
 
     setFixedSize(800, 600);
@@ -122,4 +113,38 @@ void Game::mousePressEvent(QMouseEvent* event) {
 
 Tower* Game::GetBuild() {
     return build_;
+};
+
+void Game::CreateEnemies(int numberOfEnemies) {
+    enemiesSpawned_ = 0;
+    maxNoOfEnemies_ = numberOfEnemies;
+    connect(enemySpawnTimer_, SIGNAL(timeout()), this, SLOT(SpawnEnemy()));
+    enemySpawnTimer_->start(1000); // spawn an enemy every 1000 ms
+};
+
+void Game::SpawnEnemy() {
+    Enemy* enemy = new Enemy(pathPoints_);
+    enemy->setPos(pathPoints_[0]); // Start from the first point of the path
+    scene_->addItem(enemy);
+    enemiesSpawned_ += 1;
+
+    // Have we spawned enough enemies?
+    if(enemiesSpawned_ >= maxNoOfEnemies_) {
+        enemySpawnTimer_->disconnect();
+    }
+}
+
+
+void Game::CreatePath() {
+    for(int i = 0; i < pathPoints_.size() - 1; i++){
+        QLineF line(pathPoints_[i], pathPoints_[i+1]);
+        QGraphicsLineItem* lineItem = new QGraphicsLineItem(line);
+
+        QPen pen;
+        pen.setWidth(50); // Width of the drawn path/line
+        pen.setColor(Qt::darkBlue); // Set the color of the path
+        lineItem->setPen(pen);
+
+        scene_->addItem(lineItem);
+    }
 };
