@@ -48,12 +48,11 @@ Game::Game() {
     // Create a health bar for the player
     health_bar_ = new QProgressBar(this);
     health_bar_->move(10, WINDOW_HEIGHT - health_bar_->height());
-    health_bar_->setValue(60);
+    health_bar_->setValue(100);
     health_bar_->setAlignment(Qt::AlignVCenter);
-    health_bar_->setFormat("HP: " + QString::number(health_bar_->value()));
-    QString style_sheet = QString("QProgressBar::chunk {background-color: rgb(50,150,50); width: 20px;} QProgressBar {color: black;}");
+    health_bar_->setFormat(" HP: " + QString::number(health_bar_->value()));
+    QString style_sheet = QString("QProgressBar::chunk {background-color: rgb(50,150,50); width: 20 px;} QProgressBar {color: black; font: bold;}");
     health_bar_->setStyleSheet(style_sheet);
-
 
 
     // Create a path for the enemies

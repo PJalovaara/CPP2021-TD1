@@ -72,7 +72,7 @@ void Enemy::MoveForward() {
         QProgressBar* health_bar = game_->GetHealthBar();
         int current_health = health_bar->value();
         health_bar->setValue(current_health - damage_);
-        health_bar->setFormat("HP: " + QString::number(current_health - damage_));
+        health_bar->setFormat(" HP: " + QString::number(current_health - damage_));
         return;
     }
 
