@@ -105,7 +105,7 @@ We have a clear plan and we will now attempt to implement it. Issues will be fac
 3. Perttu: Create paths!
 4. Atte: Fix goose!
 
-# Meeting 18.11.2021 09:15 (TBD)
+# Meeting 18.11.2021 09:15
 
 **Participants**: 
 1. Antti Haavikko
