@@ -8,6 +8,7 @@ BuildSniperIcon::BuildSniperIcon(Game* game, QGraphicsItem* parent) : QGraphicsP
     QPixmap p = QPixmap(":/images/SniperGoose.png"); // TODO: Change to an icon later
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
+    setOffset(-p.width() / 2, -p.height() / 2); // Centering
     game_ = game;
 };
 

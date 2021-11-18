@@ -8,6 +8,7 @@ BuildMamaIcon::BuildMamaIcon(Game* game, QGraphicsItem* parent) : QGraphicsPixma
     QPixmap p = QPixmap(":/images/MamaGoose.png"); // TODO: Change to an icon later
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
+    setOffset(-p.width() / 2, -p.height() / 2); // Centering
     game_ = game;
 };
 

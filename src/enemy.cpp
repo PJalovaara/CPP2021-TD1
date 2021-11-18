@@ -11,7 +11,9 @@ Enemy::Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent) {
     game_ = game;
     // Set graphics
     QPixmap p = QPixmap(":/images/arrow.png");
-    setPixmap(p.scaled(50, 100, Qt::KeepAspectRatio)); // Set size for the enemy
+    p = p.scaled(50, 100, Qt::KeepAspectRatio); // Set size for the enemy
+    setPixmap(p);
+    setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
     // Initialize enemy damage
     damage_ = 10;
@@ -22,8 +24,7 @@ Enemy::Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent) {
 
      // Set initial destination
     dest_ = path_points_[point_index_];
-    RotateToFacePoint(dest_);
-    enemy_center_ = mapToScene(QPointF(p.width() / 2, p.height() / 2));
+    //RotateToFacePoint(dest_);
     speed_ = 3;
 
     // Connect a timer to the move forward
@@ -33,16 +34,11 @@ Enemy::Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent) {
     // Call the MoveForward function every 40 ms (approx 25 fps)
     timer->start(40);
 };
-
-QPointF Enemy::GetEnemyCenter() {
-    return enemy_center_;
-}
-    
     
 void Enemy::RotateToFacePoint(QPointF p) {
     QLineF ln(pos(), p);
     // Note that ln.angle() will return the the angle in counterclockwise direction but setRotation is clockwise
-    setRotation(-ln.angle()); 
+    setRotation(-ln.angle()); //-ln.angle()
 };
 
 
@@ -54,7 +50,6 @@ void Enemy::MoveForward() {
     // Getting hit by a bullet destroys the enemy
     // List of items within the attack_area
     QList<QGraphicsItem*> colliding_items = this->collidingItems();
-
 
     for(auto item : colliding_items) {
         // Do dynamic casting to deduce whether we have a tower or an enemy

@@ -13,7 +13,6 @@ class Enemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent = 0);
-    QPointF GetEnemyCenter();
     void RotateToFacePoint(QPointF p);
 public slots:
     void MoveForward();

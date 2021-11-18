@@ -17,11 +17,11 @@ SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
     // Set attack_radius and tower width, height and center
     tower_width_ = p.width();
     tower_height_ = p.height();
-    tower_center_ = mapToScene(QPointF(tower_width_ / 2, tower_height_ / 2));
+
+    setOffset(-tower_width_ / 2, -tower_height_ / 2); // Centering
 
     attack_area_ = nullptr;
     UpdateAttackRadius(400); // SniperGoose has a very large radius
-
 
     // CONNECT TIMER TO ATTACK_TARGET
     QTimer* timer = new QTimer();
@@ -32,11 +32,9 @@ SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
 void SniperGoose::AttackTarget(){
     GoldenBullet* bullet = new GoldenBullet();
     bullet->SetMaxRange(attack_radius_);
+    bullet->setPos(pos()); // Center the bullet position w.r.t the goose
 
-    QPointF bullet_center = mapToScene(tower_center_); // Center the bullet position w.r.t the goose
-    bullet->setPos(bullet_center.x(), bullet_center.y());
-
-    QLineF ln(mapToScene(tower_center_), attack_dest_);
+    QLineF ln(pos(), attack_dest_);
     int angle = -ln.angle(); // ln.angle() is the angle of the ln counterclockwise,  NOTE: rotation will rotate clockwise
     bullet->setRotation(angle); // Rotate the bullet
     scene_->addItem(bullet); // Add the bullet into the scene
@@ -57,7 +55,7 @@ void SniperGoose::AcquireTarget() {
             double this_dist = DistanceTo(enemy);
             if(this_dist < closest_dist) {
                 closest_dist = this_dist;
-                closest_point = enemy->GetEnemyCenter();
+                closest_point = enemy->pos();
                 has_target_ = true;
             }
         }

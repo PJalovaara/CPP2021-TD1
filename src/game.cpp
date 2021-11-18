@@ -60,10 +60,11 @@ Game::Game() {
 
     // Add the build icons
     BuildMamaIcon* mama_icon = new BuildMamaIcon(this);
+    mama_icon->setPos(50,50);
     scene_->addItem(mama_icon);
 
     BuildSniperIcon* sniper_icon = new BuildSniperIcon(this);
-    sniper_icon->setPos(0,100);
+    sniper_icon->setPos(50,150);
     scene_->addItem(sniper_icon);
 
 
@@ -112,6 +113,7 @@ void Game::SetCursor(QString filename) {
     QPixmap p = QPixmap(filename);
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     cursor_->setPixmap(p);
+    cursor_->setOffset(-p.width() / 2, -p.height() / 2); // Centering
     scene_->addItem(cursor_);
 };
 
