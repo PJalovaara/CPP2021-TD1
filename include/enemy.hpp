@@ -5,21 +5,26 @@
 #include <QObject>
 #include <QList> // List << element 
 #include <QPointF>
+#include <QProgressBar>
+
+#include "game.hpp"
 
 class Enemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
-    Enemy(QList<QPointF> pathPoints, QGraphicsItem* parent = 0);
+    Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent = 0);
     QPointF GetEnemyCenter();
     void RotateToFacePoint(QPointF p);
 public slots:
     void MoveForward();
 private:
-    QList<QPointF> pathPoints_;
+    QList<QPointF> path_points_;
     QPointF dest_;
-    QPointF enemyCenter_;
+    QPointF enemy_center_;
+    int damage_;
     int speed_;
-    int pointIndex_;
+    int point_index_;
+    Game* game_;
 };
 
 #endif

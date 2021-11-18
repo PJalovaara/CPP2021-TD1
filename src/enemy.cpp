@@ -7,31 +7,35 @@
 
 #include <bullet.hpp>
 
-Enemy::Enemy(QList<QPointF> pathPoints, QGraphicsItem* parent) {
+Enemy::Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent) {
+    game_ = game;
     // Set graphics
     QPixmap p = QPixmap(":/images/arrow.png");
     setPixmap(p.scaled(50, 100, Qt::KeepAspectRatio)); // Set size for the enemy
 
+    // Initialize enemy damage
+    damage_ = 10;
+
     // Set the points in the path and the index of the point list
-    pathPoints_ = pathPoints;
-    pointIndex_ = 0;
+    path_points_ = pathPoints;
+    point_index_ = 0;
 
      // Set initial destination
-    dest_ = pathPoints_[pointIndex_];
+    dest_ = path_points_[point_index_];
     RotateToFacePoint(dest_);
-    enemyCenter_ = mapToScene(QPointF(p.width() / 2, p.height() / 2));
-    speed_ = 10;
+    enemy_center_ = mapToScene(QPointF(p.width() / 2, p.height() / 2));
+    speed_ = 3;
 
     // Connect a timer to the move forward
     QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(MoveForward()));
 
-    // Call the MoveForward function every 80 ms
-    timer->start(80);
+    // Call the MoveForward function every 40 ms (approx 25 fps)
+    timer->start(40);
 };
 
 QPointF Enemy::GetEnemyCenter() {
-    return enemyCenter_;
+    return enemy_center_;
 }
     
     
@@ -62,16 +66,20 @@ void Enemy::MoveForward() {
         }
     }
     
-    // Enemy reaches final destination and the memory is freed
-    if(ln.length() < 50 && pointIndex_ >= pathPoints_.length() - 1) {
+    // If enemy reaches final destination, the player loses hp and the memory is freed
+    if(ln.length() < 50 && point_index_ >= path_points_.length() - 1) {
         delete this;
+        QProgressBar* health_bar = game_->GetHealthBar();
+        int current_health = health_bar->value();
+        health_bar->setValue(current_health - damage_);
+        health_bar->setFormat("HP: " + QString::number(current_health - damage_));
         return;
     }
 
     // Rotate to face the next point
-    if(ln.length() < 10 && pointIndex_ < pathPoints_.length() - 1){ // Check the size of the radius
-        pointIndex_++;
-        dest_ = pathPoints_[pointIndex_];
+    if(ln.length() < 10 && point_index_ < path_points_.length() - 1){ // Check the size of the radius
+        point_index_++;
+        dest_ = path_points_[point_index_];
         RotateToFacePoint(dest_);
     }
     

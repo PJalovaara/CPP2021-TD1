@@ -20,8 +20,8 @@ Bullet::Bullet(QGraphicsItem* parent) {
     max_range_ = 100;
     distance_traveled_ = 0;
 
-    // every 50 ms the timeout signal will be executed -> the bullet move will be executed every 50 ms
-    move_timer->start(50);
+    // every 40 ms the timeout signal will be executed -> the bullet move will be executed every 40 ms
+    move_timer->start(40);
 }
 
 

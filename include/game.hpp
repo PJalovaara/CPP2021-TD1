@@ -9,9 +9,9 @@
 #include <QList>
 #include <QPointF>
 #include <QTimer>
+#include <QProgressBar>
 
 #include "tower.hpp"
-#include "mamagoose.hpp"
 
 class Game : public QGraphicsView{
     Q_OBJECT
@@ -22,6 +22,7 @@ public:
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     
+    QProgressBar* GetHealthBar();
     Tower* GetBuild();
     void SetBuild(Tower* newBuild);
     QGraphicsScene* GetScene();
@@ -40,11 +41,12 @@ private:
     QGraphicsScene* scene_;
     Tower* build_;
     QGraphicsPixmapItem* cursor_;
-    QTimer* enemySpawnTimer_;
-    int enemiesSpawned_;
-    int maxNoOfEnemies_;
-    QList<QPointF> pathPoints_;
+    QTimer* enemy_spawn_timer_;
+    int enemies_spawned_;
+    int max_no_of_enemies_;
+    QList<QPointF> path_points_;
     QList<Tower*> towers_;
+    QProgressBar* health_bar_;
 };
 
 

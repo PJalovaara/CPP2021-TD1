@@ -8,6 +8,8 @@
 #include <QBrush>
 #include <QPen>
 #include <QPushButton>
+#include <QProgressBar>
+#include <QLineEdit>
 
 #include "tower.hpp"
 #include "bullet.hpp"
@@ -23,8 +25,8 @@
 Game::Game() {
     // Creating a scene and a timer to spawn enemies on the pathPoints path
     scene_ = new QGraphicsScene(this);
-    enemySpawnTimer_ = new QTimer(this);
-    pathPoints_ << QPoint(800,0) << QPoint(400,300) << QPoint(800, 600);
+    enemy_spawn_timer_ = new QTimer(this);
+    path_points_ << QPoint(800,0) << QPoint(400,300) << QPoint(800, 600);
 
     // Set the scene
     setScene(scene_); // Visualize this scene
@@ -42,6 +44,17 @@ Game::Game() {
 
     startButton->move(WINDOW_WIDTH / 2 - startButton->width() / 2, 10);
     clearButton->move(WINDOW_WIDTH / 2 - startButton->width() / 2, 40);
+
+    // Create a health bar for the player
+    health_bar_ = new QProgressBar(this);
+    health_bar_->move(10, WINDOW_HEIGHT - health_bar_->height());
+    health_bar_->setValue(60);
+    health_bar_->setAlignment(Qt::AlignVCenter);
+    health_bar_->setFormat("HP: " + QString::number(health_bar_->value()));
+    QString style_sheet = QString("QProgressBar::chunk {background-color: rgb(50,150,50); width: 20px;} QProgressBar {color: black;}");
+    health_bar_->setStyleSheet(style_sheet);
+
+
 
     // Create a path for the enemies
     CreatePath();
@@ -132,28 +145,28 @@ Tower* Game::GetBuild() {
 };
 
 void Game::CreateEnemies() {
-    enemiesSpawned_ = 0;
-    maxNoOfEnemies_ = 5;
-    connect(enemySpawnTimer_, SIGNAL(timeout()), this, SLOT(SpawnEnemy()));
-    enemySpawnTimer_->start(1000); // spawn an enemy every 1000 ms
+    enemies_spawned_ = 0;
+    max_no_of_enemies_ = 5;
+    connect(enemy_spawn_timer_, SIGNAL(timeout()), this, SLOT(SpawnEnemy()));
+    enemy_spawn_timer_->start(1000); // spawn an enemy every 1000 ms
 };
 
 void Game::SpawnEnemy() {
-    Enemy* enemy = new Enemy(pathPoints_);
-    enemy->setPos(pathPoints_[0]); // Start from the first point of the path
+    Enemy* enemy = new Enemy(path_points_, this);
+    enemy->setPos(path_points_[0]); // Start from the first point of the path
     scene_->addItem(enemy);
-    enemiesSpawned_ += 1;
+    enemies_spawned_ += 1;
 
     // Have we spawned enough enemies?
-    if(enemiesSpawned_ >= maxNoOfEnemies_) {
-        enemySpawnTimer_->disconnect();
+    if(enemies_spawned_ >= max_no_of_enemies_) {
+        enemy_spawn_timer_->disconnect();
     }
 }
 
 
 void Game::CreatePath() {
-    for(int i = 0; i < pathPoints_.size() - 1; i++){
-        QLineF line(pathPoints_[i], pathPoints_[i+1]);
+    for(int i = 0; i < path_points_.size() - 1; i++){
+        QLineF line(path_points_[i], path_points_[i+1]);
         QGraphicsLineItem* lineItem = new QGraphicsLineItem(line);
 
         QPen pen;
@@ -170,4 +183,8 @@ void Game::ClearTowers() {
         delete i;
     }
     towers_.clear();
+};
+
+QProgressBar* Game::GetHealthBar() {
+    return health_bar_;
 };
