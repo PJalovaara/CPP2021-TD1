@@ -105,11 +105,59 @@ We have a clear plan and we will now attempt to implement it. Issues will be fac
 3. Perttu: Create paths!
 4. Atte: Fix goose!
 
+# Meeting 18.11.2021 09:15 (TBD)
+
+**Participants**: 
+1. Antti Haavikko
+2. Anna Huttunen (NOT PRESENT)
+3. Perttu Jalovaara
+4. Atte Tommiska 
+
+## Summary of works
+1. Antti Haavikko 
+   
+   Coded the demo version of the game according to the tutorial ("C++ Qt Game Tutorial" by Abdullah).
+
+2. Anna Huttunen
+
+   Brainstormed visuals for the game.
+
+3. Perttu Jalovaara
+
+   Acted as a rubber duck while Antti did the coding. 
+
+4. Atte Tommiska
+
+   Fixed goose. Generated the first version of Docs for the game.
+
+## Challenges
+
+1. Level editor and text encoding for levels.
+2. Main menu and reset/start buttons for the game.
+
+## Actions
+1. Antti is going to develop the vital parts of the game.
+2. Anna is going to draw graphics with her newly-obtained drawing pad.
+3. Perttu is going to work on the level-editor with path exportation.
+4. Atte is going to code the tentative main menu.
+
+> Please reflect these action decisions in your git commit messages so that 
+> your group members and advisor can follow the progress.
+
+## Project status 
+Short summary of current project status. 
+
+### TODOs
+1. Antti: Enemy destructability, player HP, start and reset buttons.
+2. Anna: Draw geese and teekkaris, teekkari class inheritance and comments.
+3. Perttu: Level editor: path creation (saved to .txt, input as param to Game)
+4. Atte: Create a tentative main menu with buttons to game and level editor.
+
 # Meeting 15.11.2021 09:15 (TBD)
 
 **Participants**: 
 1. Antti Haavikko
-2. Anna Huttunen
+2. Anna Huttunen (NOT PRESENT)
 3. Perttu Jalovaara
 4. Atte Tommiska 
 
