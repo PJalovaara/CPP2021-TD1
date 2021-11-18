@@ -7,6 +7,7 @@
 #include <QLineF>
 #include <QBrush>
 #include <QPen>
+#include <QPushButton>
 
 #include "tower.hpp"
 #include "bullet.hpp"
@@ -16,6 +17,9 @@
 #include "mamagoose.hpp"
 #include "snipergoose.hpp"
 
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+
 Game::Game() {
     // Creating a scene and a timer to spawn enemies on the pathPoints path
     scene_ = new QGraphicsScene(this);
@@ -24,13 +28,20 @@ Game::Game() {
 
     // Set the scene
     setScene(scene_); // Visualize this scene
-    scene_->setSceneRect(0,0,800,600);
+    scene_->setSceneRect(0,0,WINDOW_WIDTH, WINDOW_HEIGHT);
 
     // Add a grey background for better visibility
     QBrush grayBrush(Qt::gray);
     QPen blackPen(Qt::black);
     blackPen.setWidth(1);
-    scene_->addRect(0, 0, 800, 600, blackPen, grayBrush);
+    scene_->addRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, blackPen, grayBrush);
+
+    // Create a start button
+    QPushButton* startButton = new QPushButton(QString("START"), this);
+    QPushButton* clearButton = new QPushButton(QString("CLEAR"), this);
+
+    startButton->move(WINDOW_WIDTH / 2 - startButton->width() / 2, 10);
+    clearButton->move(WINDOW_WIDTH / 2 - startButton->width() / 2, 40);
 
     // Create a path for the enemies
     CreatePath();
@@ -52,10 +63,14 @@ Game::Game() {
     setMouseTracking(true);
 
     // Creates 5 enemies, one every second
-    CreateEnemies(5);
+    connect(startButton, SIGNAL(clicked()), this, SLOT(CreateEnemies()));
+
+    // Connect CLEAR button to the slot ClearTowers
+    connect(clearButton, SIGNAL(clicked()), this, SLOT(ClearTowers()));
+    
  
 
-    setFixedSize(800, 600);
+    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     // No vertical nor horizontal scroll bars
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -103,6 +118,7 @@ void Game::SetBuild(Tower* newBuild) {
 void Game::mousePressEvent(QMouseEvent* event) {
     if(build_){
         scene_->addItem(build_);
+        towers_ << build_;
         build_->setPos(event->pos());
         ResetCursor();
         build_ = nullptr;
@@ -115,9 +131,9 @@ Tower* Game::GetBuild() {
     return build_;
 };
 
-void Game::CreateEnemies(int numberOfEnemies) {
+void Game::CreateEnemies() {
     enemiesSpawned_ = 0;
-    maxNoOfEnemies_ = numberOfEnemies;
+    maxNoOfEnemies_ = 5;
     connect(enemySpawnTimer_, SIGNAL(timeout()), this, SLOT(SpawnEnemy()));
     enemySpawnTimer_->start(1000); // spawn an enemy every 1000 ms
 };
@@ -147,4 +163,11 @@ void Game::CreatePath() {
 
         scene_->addItem(lineItem);
     }
+};
+
+void Game::ClearTowers() {
+    for(auto i : towers_) {
+        delete i;
+    }
+    towers_.clear();
 };

@@ -29,12 +29,13 @@ public:
     void ResetCursor();
 
     void CreatePath();
-    void CreateEnemies(int numberOfEnemies);
+    
 
 public slots:
     void SpawnEnemy();
+    void CreateEnemies();
+    void ClearTowers();
 
-    
 private:
     QGraphicsScene* scene_;
     Tower* build_;
@@ -43,6 +44,7 @@ private:
     int enemiesSpawned_;
     int maxNoOfEnemies_;
     QList<QPointF> pathPoints_;
+    QList<Tower*> towers_;
 };
 
 

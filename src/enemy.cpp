@@ -5,6 +5,8 @@
 #include <qmath.h>
 #include <QDebug>
 
+#include <bullet.hpp>
+
 Enemy::Enemy(QList<QPointF> pathPoints, QGraphicsItem* parent) {
     // Set graphics
     QPixmap p = QPixmap(":/images/arrow.png");
@@ -17,7 +19,7 @@ Enemy::Enemy(QList<QPointF> pathPoints, QGraphicsItem* parent) {
      // Set initial destination
     dest_ = pathPoints_[pointIndex_];
     RotateToFacePoint(dest_);
-    enemyCenter_ = QPointF(p.width() / 2, p.height() / 2);
+    enemyCenter_ = mapToScene(QPointF(p.width() / 2, p.height() / 2));
     speed_ = 10;
 
     // Connect a timer to the move forward
@@ -27,6 +29,10 @@ Enemy::Enemy(QList<QPointF> pathPoints, QGraphicsItem* parent) {
     // Call the MoveForward function every 80 ms
     timer->start(80);
 };
+
+QPointF Enemy::GetEnemyCenter() {
+    return enemyCenter_;
+}
     
     
 void Enemy::RotateToFacePoint(QPointF p) {
@@ -40,6 +46,21 @@ void Enemy::MoveForward() {
     // If close to dest, rotate towards the next dest
     // TO DO: If enemy reaches final destination, player loses HP
     QLineF ln(pos(), dest_);
+
+    // Getting hit by a bullet destroys the enemy
+    // List of items within the attack_area
+    QList<QGraphicsItem*> colliding_items = this->collidingItems();
+
+
+    for(auto item : colliding_items) {
+        // Do dynamic casting to deduce whether we have a tower or an enemy
+        Bullet* bullet = dynamic_cast<Bullet*>(item);
+        if(bullet) { // If cast is successful
+            delete this;
+            delete bullet;
+            return;
+        }
+    }
     
     // Enemy reaches final destination and the memory is freed
     if(ln.length() < 50 && pointIndex_ >= pathPoints_.length() - 1) {

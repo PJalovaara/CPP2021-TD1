@@ -15,13 +15,13 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
     // Set attack_radius and tower width, height and center
     tower_width_ = p.width();
     tower_height_ = p.height();
-    tower_center_ = QPointF(tower_width_ / 2, tower_height_ / 2);
+    tower_center_ = mapToScene(QPointF(tower_width_ / 2, tower_height_ / 2));
 
     // Set the attack area to nullptr and then create it with the UpdateAttackRadius function
     attack_area_ = nullptr;
     UpdateAttackRadius(80); // MamaGoose has attackRadius of 80
 
-    // CONNECT TIMER TO ATTACK_TARGET
+    // Connect timer to AcquireTarget
     QTimer* timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(AcquireTarget()));
     timer->start(1000 / attack_speed_);
@@ -31,7 +31,7 @@ void MamaGoose::AttackTarget(){
     Bullet* bullet = new Bullet();
     bullet->SetMaxRange(attack_radius_); // Set max range for the bullet to equal the range of the tower
 
-    QPointF bullet_center = mapToScene(tower_center_); // Center the bullet position w.r.t the goose
+    QPointF bullet_center = tower_center_; // Center the bullet position w.r.t the goose
     bullet->setPos(bullet_center.x(), bullet_center.y());
 
     QLineF ln(QPointF(x(), y()), attack_dest_);

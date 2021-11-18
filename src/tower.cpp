@@ -37,7 +37,7 @@ void Tower::UpdateAttackRadius(unsigned int new_radius){
     QPointF poly_center(1.5, 1.5);
     poly_center *= new_radius; // The scale factor for the polygon
     poly_center = mapToScene(poly_center);
-    QLineF ln(poly_center, mapToScene(tower_center_));
+    QLineF ln(poly_center, tower_center_);
     attack_area_->setPos(x() + ln.dx(), y() + ln.dy()); // Moving the attack area along the line from poly_center to tower_center
 
     attack_radius_ = new_radius; // Update the radius

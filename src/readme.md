@@ -1,5 +1,5 @@
 # Source content
-This folder should contain only hpp/cpp files of your implementation. 
+This folder should contain only cpp files of your implementation. 
 The hpp files are in a separate directory `include`.
 
 You can create a summary of files here. It might be useful to describe 
