@@ -7,6 +7,55 @@ In each meeting, you are required to discuss:
 3. Plan for the next week for everyone
 4. Deviations and changes to the project plan, if any
 
+# Meeting 22.11.2021 10:15
+
+**Participants**: 
+1. Antti Haavikko
+2. Anna Huttunen
+3. Perttu Jalovaara
+4. Atte Tommiska 
+
+## Summary of works
+1. Antti Haavikko 
+   
+   Added startRound, clearTowers and healtBars to the game. 
+
+2. Anna Huttunen
+
+   Nothing.
+
+3. Perttu Jalovaara
+
+   Centered all graphical elements. Fixed aiming.
+
+4. Atte Tommiska
+
+   Studied Doxygen and talked with other students that have taken this course.
+
+## Challenges
+
+1. Implementing level editor.
+2. Time management. 
+
+## Actions
+1. Antti is going to add the money earning principle. Add Cruiseship to enemies. Upgrade towers.
+2. Anna is going to add different enemies and Pooper goose to Towers.
+3. Perttu is going to do the level-editor with path exportation.
+4. Atte is going to implement the main menu.
+
+> Please reflect these action decisions in your git commit messages so that 
+> your group members and advisor can follow the progress.
+
+## Project status 
+We have three weeks left, but effectively two weeks, because we want to get the game ready by Monday 6.12. to have enough time for final testing and documentation. Now we have the base classes and some functions for them. We also have subclasses for some towers already. Coding continues.
+
+### TODOs
+1. Antti: money earning principle. Cruiseship to enemies. Upgrade towers.
+2. Anna: different enemies and Pooper goose to Towers.
+3. Perttu: level-editor with path exportation.
+4. Atte: main menu.
+
+
 # Meeting 18.11.2021 09:15
 
 **Participants**: 
@@ -47,7 +96,7 @@ In each meeting, you are required to discuss:
 > your group members and advisor can follow the progress.
 
 ## Project status 
-Short summary of current project status. 
+We have a working demo as planned. Coding continues.
 
 ### TODOs
 1. Antti: Enemy destructability, player HP, start and reset buttons.
