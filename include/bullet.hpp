@@ -13,6 +13,7 @@ public:
     void SetMaxRange(double range);
     double GetDistanceTraveled();
     void SetDistanceTraveled(double dist);
+    int GetDamage();
 public slots:
     void Move();
 
@@ -20,6 +21,7 @@ protected:
     unsigned int speed_;
     double max_range_;
     double distance_traveled_;
+    int bullet_damage_;
 };
 
 

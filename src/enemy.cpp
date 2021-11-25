@@ -16,8 +16,10 @@ Enemy::Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent) {
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
-    // Initialize enemy damage
+    // Initialize enemy damage, enemy hp and price
+    enemy_hp_ = 5;
     damage_ = 10;
+    price_ = 10;
 
     // Set the points in the path and the index of the point list
     path_points_ = pathPoints;
@@ -56,11 +58,14 @@ void Enemy::MoveForward() {
         // Do dynamic casting to deduce whether we have a tower or an enemy
         Bullet* bullet = dynamic_cast<Bullet*>(item);
         if(bullet) { // If cast is successful
-            game_->SetMoney(game_->GetMoney() + 10);
-            game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
-            delete this;
+            enemy_hp_ -= bullet->GetDamage();
+            if(enemy_hp_ <= 0){ // If enemy dies
+                game_->SetMoney(game_->GetMoney() + price_);
+                game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
+                delete this;
+                return;
+            }
             delete bullet;
-            return;
         }
     }
     

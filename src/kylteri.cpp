@@ -5,4 +5,7 @@ Kylteri::Kylteri(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent) :
     p = p.scaled(50, 100, Qt::KeepAspectRatio); // Set size for the enemy
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
+
+    // Destroying a kylteri gives you more money
+    price_ = 20;
 };

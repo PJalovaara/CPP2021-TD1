@@ -24,6 +24,8 @@ protected:
     int speed_;
     int point_index_;
     Game* game_;
+    int price_;
+    int enemy_hp_;
 };
 
 #endif

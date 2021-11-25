@@ -38,7 +38,7 @@ public:
     
 
 public slots:
-    void SpawnEnemy();
+    void SpawnFyysikko();
     void CreateEnemies();
     void ClearTowers();
 

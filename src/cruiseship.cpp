@@ -11,6 +11,8 @@ Cruiseship::Cruiseship(QList<QPointF> pathPoints, Game* game, QGraphicsItem* par
     p = p.scaled(50, 100, Qt::KeepAspectRatio); // Set size for the enemy
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
+
+    enemy_hp_ = 10;
  };
 
 
@@ -27,20 +29,26 @@ void Cruiseship::MoveForward() {
         // Do dynamic casting to deduce whether we have a tower or an enemy
         Bullet* bullet = dynamic_cast<Bullet*>(item);
         if(bullet) { // If cast is successful
-            // Update the money system
-            game_->SetMoney(game_->GetMoney() + 10);
-            game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
+            // Decrease the enemy hp by the bullet damage 
+            enemy_hp_ -= bullet->GetDamage();
+            if(enemy_hp_ <= 0) { // If enemy dies
+                // Update the money system
+                game_->SetMoney(game_->GetMoney() + 10);
+                game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
 
-            // Spawn new enemies
-            Koneteekkari* k = new Koneteekkari(game_->GetPathPoints(), game_);
-            Fyysikko* f = new Fyysikko(game_->GetPathPoints(), game_);
-            game_->GetScene()->addItem(k);
-            game_->GetScene()->addItem(f);
+                // Spawn new enemies
+                Koneteekkari* k = new Koneteekkari(game_->GetPathPoints(), game_);
+                Fyysikko* f = new Fyysikko(game_->GetPathPoints(), game_);
+                game_->GetScene()->addItem(k);
+                game_->GetScene()->addItem(f);
 
-            // Free the memory
-            delete this;
+                // Free the memory
+                delete this;
+                return;
+            }
+            
+
             delete bullet;
-            return;
         }
     }
     

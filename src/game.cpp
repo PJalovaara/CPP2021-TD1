@@ -20,6 +20,10 @@
 #include "mamagoose.hpp"
 #include "snipergoose.hpp"
 #include "cruiseship.hpp"
+#include "fyysikko.hpp"
+#include "kylteri.hpp"
+#include "koneteekkari.hpp"
+#include "dokaani.hpp"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -163,12 +167,12 @@ Tower* Game::GetBuild() {
 void Game::CreateEnemies() {
     enemies_spawned_ = 0;
     max_no_of_enemies_ = 5;
-    connect(enemy_spawn_timer_, SIGNAL(timeout()), this, SLOT(SpawnEnemy()));
+    connect(enemy_spawn_timer_, SIGNAL(timeout()), this, SLOT(SpawnFyysikko()));
     enemy_spawn_timer_->start(1000); // spawn an enemy every 1000 ms
 };
 
-void Game::SpawnEnemy() {
-    Enemy* enemy = new Enemy(path_points_, this);
+void Game::SpawnFyysikko() {
+    Enemy* enemy = new Fyysikko(path_points_, this);
     enemy->setPos(path_points_[0]); // Start from the first point of the path
     scene_->addItem(enemy);
     enemies_spawned_ += 1;

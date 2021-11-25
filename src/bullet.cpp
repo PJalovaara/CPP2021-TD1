@@ -15,10 +15,11 @@ Bullet::Bullet(QGraphicsItem* parent) {
     // Connect a signal to a slot
     connect(move_timer, SIGNAL(timeout()), this, SLOT(Move())); 
 
-    // Initialize the speed, max_range_ and distance_traveled of the bullet
+    // Initialize the speed, max_range_, bullet_damage_ and distance_traveled of the bullet
     speed_ = 30;
     max_range_ = 100;
     distance_traveled_ = 0;
+    bullet_damage_ = 5;
 
     // every 40 ms the timeout signal will be executed -> the bullet move will be executed every 40 ms
     move_timer->start(40);
@@ -52,4 +53,8 @@ double Bullet::GetDistanceTraveled() {
 
 void Bullet::SetDistanceTraveled(double dist) {
     distance_traveled_ = dist;
+};
+
+int Bullet::GetDamage() {
+    return bullet_damage_;
 };
