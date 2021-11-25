@@ -20,7 +20,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
 
     // Set the attack area to nullptr and then create it with the UpdateAttackRadius function
     attack_area_ = nullptr;
-    UpdateAttackRadius(80); // MamaGoose has attackRadius of 80
+    UpdateAttackRadius(120); // MamaGoose has attackRadius of 80
     
     // Connect timer to AcquireTarget
     QTimer* timer = new QTimer();

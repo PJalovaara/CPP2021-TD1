@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QProgressBar>
 #include <QLineEdit>
+#include <QDebug>
 
 #include "tower.hpp"
 #include "bullet.hpp"
@@ -18,6 +19,7 @@
 #include "build_sniper_icon.hpp"
 #include "mamagoose.hpp"
 #include "snipergoose.hpp"
+#include "cruiseship.hpp"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -44,6 +46,7 @@ Game::Game() {
 
     startButton->move(WINDOW_WIDTH / 2 - startButton->width() / 2, 10);
     clearButton->move(WINDOW_WIDTH / 2 - startButton->width() / 2, 40);
+    
 
     // Create a health bar for the player
     health_bar_ = new QProgressBar(this);
@@ -53,6 +56,12 @@ Game::Game() {
     health_bar_->setFormat(" HP: " + QString::number(health_bar_->value()));
     QString style_sheet = QString("QProgressBar::chunk {background-color: rgb(50,150,50); width: 20 px;} QProgressBar {color: black; font: bold;}");
     health_bar_->setStyleSheet(style_sheet);
+
+    // Initialize the amount of money to zero
+    money_ = 0;
+    money_text_ = new QLineEdit(this);
+    money_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height());
+    money_text_->setText(QString(" MONEY: ") + QString::number(money_));
 
 
     // Create a path for the enemies
@@ -87,6 +96,12 @@ Game::Game() {
     // No vertical nor horizontal scroll bars
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+
+
+    // Test code: Create a cruiseship
+    Cruiseship* cruiseship = new Cruiseship(path_points_, this);
+    scene_->addItem(cruiseship);
 }
 
 
@@ -188,4 +203,22 @@ void Game::ClearTowers() {
 
 QProgressBar* Game::GetHealthBar() {
     return health_bar_;
+};
+
+
+int Game::GetMoney() {
+    return money_;
+};
+
+void Game::SetMoneyText(const QString& text) {
+    money_text_->setText(text);
+};
+
+
+void Game::SetMoney(int new_money) {
+    money_ = new_money;
+};
+
+QList<QPointF> Game::GetPathPoints() {
+    return path_points_;
 };

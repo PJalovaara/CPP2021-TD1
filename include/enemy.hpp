@@ -15,8 +15,8 @@ public:
     Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent = 0);
     void RotateToFacePoint(QPointF p);
 public slots:
-    void MoveForward();
-private:
+    virtual void MoveForward();
+protected:
     QList<QPointF> path_points_;
     QPointF dest_;
     QPointF enemy_center_;

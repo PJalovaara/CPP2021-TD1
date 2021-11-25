@@ -9,6 +9,7 @@
 #include <QList>
 #include <QPointF>
 #include <QTimer>
+#include <QLineEdit>
 #include <QProgressBar>
 
 #include "tower.hpp"
@@ -23,12 +24,16 @@ public:
     void mousePressEvent(QMouseEvent* event);
     
     QProgressBar* GetHealthBar();
+    int GetMoney();
+    void SetMoney(int new_money);
+    void SetMoneyText(const QString& text);
     Tower* GetBuild();
-    void SetBuild(Tower* newBuild);
+    void SetBuild(Tower* new_build);
     QGraphicsScene* GetScene();
     QGraphicsPixmapItem* GetCursor();
     void ResetCursor();
 
+    QList<QPointF> GetPathPoints();
     void CreatePath();
     
 
@@ -47,6 +52,8 @@ private:
     QList<QPointF> path_points_;
     QList<Tower*> towers_;
     QProgressBar* health_bar_;
+    int money_;
+    QLineEdit* money_text_;
 };
 
 
