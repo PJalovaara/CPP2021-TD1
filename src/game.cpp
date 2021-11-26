@@ -10,7 +10,10 @@
 #include <QPushButton>
 #include <QProgressBar>
 #include <QLineEdit>
+#include <QPalette>
+
 #include <QDebug>
+
 
 #include "tower.hpp"
 #include "bullet.hpp"
@@ -66,19 +69,34 @@ Game::Game() {
     money_text_ = new QLineEdit(this);
     money_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height());
     money_text_->setText(QString(" MONEY: ") + QString::number(money_));
+    money_text_->setReadOnly(true);
+    money_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
 
 
     // Create a path for the enemies
     CreatePath();
 
-    // Add the build icons
+    // Add the build icons and their prices
     BuildMamaIcon* mama_icon = new BuildMamaIcon(this);
     mama_icon->setPos(50,50);
     scene_->addItem(mama_icon);
+    QLineEdit* mama_price_text = new QLineEdit(this);
+    mama_price_text->setReadOnly(true);
+    mama_price_text->setAlignment(Qt::AlignCenter);
+    mama_price_text->setText(QString::number(100));
+    mama_price_text->move(0, 100);
+    mama_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
     BuildSniperIcon* sniper_icon = new BuildSniperIcon(this);
-    sniper_icon->setPos(50,150);
+    sniper_icon->setPos(50, 170);
     scene_->addItem(sniper_icon);
+    QLineEdit* sniper_price_text = new QLineEdit(this);
+    sniper_price_text->setReadOnly(true);
+    sniper_price_text->setAlignment(Qt::AlignCenter);
+    sniper_price_text->setText(QString::number(200));
+    sniper_price_text->move(0, 200);
+    sniper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
+
 
 
     // Set cursor and build ptr to nullptr and turn on mouse tracking
@@ -101,7 +119,7 @@ Game::Game() {
 
 
 
-    // Test code: Create a cruiseship
+    // Test code: Create a cruiseship and dokaani
     // Cruiseship* cruiseship = new Cruiseship(path_points_, this);
     // scene_->addItem(cruiseship);
 

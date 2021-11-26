@@ -10,12 +10,17 @@ BuildMamaIcon::BuildMamaIcon(Game* game, QGraphicsItem* parent) : QGraphicsPixma
     setPixmap(p); // Set size for the goose
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
     game_ = game;
+    price_ = 100; // Set price
 };
 
 void BuildMamaIcon::mousePressEvent(QGraphicsSceneMouseEvent* event) {
-    if(!(game_->GetBuild())) {
+    if(!(game_->GetBuild()) && game_->GetMoney() >= price_) {
+        // Create a new tower to the build_ pointer
         MamaGoose* newGoose = new MamaGoose(game_->GetScene());
         game_->SetBuild(newGoose);
         game_->SetCursor(QString(":images/MamaGoose.png"));
+        // Player buys the tower which takes money
+        game_->SetMoney(game_->GetMoney() - price_);
+        game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
     }
 }
