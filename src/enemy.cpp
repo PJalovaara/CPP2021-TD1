@@ -21,13 +21,15 @@ Enemy::Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent) {
     damage_ = 10;
     price_ = 10;
 
-    // Set the points in the path and the index of the point list
+    // Set the points in the path
     path_points_ = pathPoints;
-    point_index_ = 0;
 
-     // Set initial destination
+    // Set initial pos and initial destination
+    this->setPos(path_points_[0]); // Start from the first point in the path
+    point_index_ = 1;
     dest_ = path_points_[point_index_];
-    //RotateToFacePoint(dest_);
+
+    RotateToFacePoint(dest_);
     speed_ = 3;
 
     // Connect a timer to the move forward
@@ -47,7 +49,6 @@ void Enemy::RotateToFacePoint(QPointF p) {
 
 void Enemy::MoveForward() {
     // If close to dest, rotate towards the next dest
-    // TO DO: If enemy reaches final destination, player loses HP
     QLineF ln(pos(), dest_);
 
     // Getting hit by a bullet destroys the enemy
@@ -70,12 +71,17 @@ void Enemy::MoveForward() {
     }
     
     // If enemy reaches final destination, the player loses hp and the memory is freed
-    if(ln.length() < 50 && point_index_ >= path_points_.length() - 1) {
+    if(ln.length() < 30 && point_index_ >= path_points_.length() - 1) {
         delete this;
         QProgressBar* health_bar = game_->GetHealthBar();
         int current_health = health_bar->value();
-        health_bar->setValue(current_health - damage_);
-        health_bar->setFormat(" HP: " + QString::number(current_health - damage_));
+        if(current_health - damage_ >= 0) {
+            health_bar->setValue(current_health - damage_);
+            health_bar->setFormat(" HP: " + QString::number(current_health - damage_));
+        } else {
+            health_bar->setValue(0);
+            health_bar->setFormat(" HP: " + QString::number(0));
+        }
         return;
     }
 
@@ -91,6 +97,10 @@ void Enemy::MoveForward() {
     double dy = speed_ * qSin(qDegreesToRadians(theta));
     double dx = speed_ * qCos(qDegreesToRadians(theta));
     setPos(x() + dx, y() + dy);
+};
+
+QPointF Enemy::GetDest() {
+    return dest_;
 };
 
 

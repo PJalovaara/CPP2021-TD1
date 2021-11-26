@@ -44,7 +44,7 @@ Game::Game() {
     blackPen.setWidth(1);
     scene_->addRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, blackPen, grayBrush);
 
-    // Create a start button
+    // Create start and clear buttons
     QPushButton* startButton = new QPushButton(QString("START"), this);
     QPushButton* clearButton = new QPushButton(QString("CLEAR"), this);
 
@@ -61,8 +61,8 @@ Game::Game() {
     QString style_sheet = QString("QProgressBar::chunk {background-color: rgb(50,150,50); width: 20 px;} QProgressBar {color: black; font: bold;}");
     health_bar_->setStyleSheet(style_sheet);
 
-    // Initialize the amount of money to zero
-    money_ = 0;
+    // Initialize the amount of money to 200 and create a text for the player money
+    money_ = 200;
     money_text_ = new QLineEdit(this);
     money_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height());
     money_text_->setText(QString(" MONEY: ") + QString::number(money_));
@@ -81,11 +81,9 @@ Game::Game() {
     scene_->addItem(sniper_icon);
 
 
-    // Set cursor and build ptr to nullptr
+    // Set cursor and build ptr to nullptr and turn on mouse tracking
     cursor_ = nullptr;
     build_ = nullptr;
-    // Test code with the SniperGoose.pngs
-    //SetCursor(":images/SniperGoose.png");
     setMouseTracking(true);
 
     // Creates 5 enemies, one every second
@@ -104,8 +102,11 @@ Game::Game() {
 
 
     // Test code: Create a cruiseship
-    Cruiseship* cruiseship = new Cruiseship(path_points_, this);
-    scene_->addItem(cruiseship);
+    // Cruiseship* cruiseship = new Cruiseship(path_points_, this);
+    // scene_->addItem(cruiseship);
+
+    Dokaani* dok = new Dokaani(path_points_, this);
+    scene_->addItem(dok);
 }
 
 
@@ -151,7 +152,7 @@ void Game::SetBuild(Tower* newBuild) {
 void Game::mousePressEvent(QMouseEvent* event) {
     if(build_){
         scene_->addItem(build_);
-        towers_ << build_;
+        towers_ << build_; // Add the new tower to the list of towers
         build_->setPos(event->pos());
         ResetCursor();
         build_ = nullptr;
@@ -173,7 +174,6 @@ void Game::CreateEnemies() {
 
 void Game::SpawnFyysikko() {
     Enemy* enemy = new Fyysikko(path_points_, this);
-    enemy->setPos(path_points_[0]); // Start from the first point of the path
     scene_->addItem(enemy);
     enemies_spawned_ += 1;
 

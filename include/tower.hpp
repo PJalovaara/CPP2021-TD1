@@ -9,6 +9,7 @@
 #include <QPolygonF>
 #include <QObject>
 #include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
 
 class Tower : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
@@ -18,6 +19,7 @@ public:
     void UpdateAttackRadius(unsigned int new_radius);
     double DistanceTo(QGraphicsItem* item);
     virtual void AttackTarget() = 0;
+    void mousePressEvent(QGraphicsSceneMouseEvent* event);
 
 public slots:
     virtual void AcquireTarget() = 0;

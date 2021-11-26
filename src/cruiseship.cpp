@@ -2,9 +2,11 @@
 
 #include <qmath.h>
 #include "koneteekkari.hpp"
+#include "kylteri.hpp"
 #include "fyysikko.hpp"
 #include "bullet.hpp"
 
+#include <QDebug>
 
 Cruiseship::Cruiseship(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent) : Enemy(pathPoints, game) {
     QPixmap p = QPixmap(":/images/cruiseship.png");
@@ -12,7 +14,8 @@ Cruiseship::Cruiseship(QList<QPointF> pathPoints, Game* game, QGraphicsItem* par
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
-    enemy_hp_ = 10;
+    enemy_hp_ = 10; // Has higher hp than an average enemy
+    damage_ = 50;
  };
 
 
@@ -36,11 +39,22 @@ void Cruiseship::MoveForward() {
                 game_->SetMoney(game_->GetMoney() + 10);
                 game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
 
-                // Spawn new enemies
-                Koneteekkari* k = new Koneteekkari(game_->GetPathPoints(), game_);
-                Fyysikko* f = new Fyysikko(game_->GetPathPoints(), game_);
+                // Spawn new enemies where the cruiseship got destroyed
+                QList<QPointF> path_points_left(game_->GetPathPoints().mid(point_index_ - 1, game_->GetPathPoints().length()));
+                path_points_left[0] = pos();
+
+                Fyysikko* f = new Fyysikko(path_points_left, game_);
+                f->setPos(f->pos().x() + 10, f->pos().y()); // Some offset
+                f->RotateToFacePoint(f->GetDest());
+                Kylteri* kyl = new Kylteri(path_points_left, game_);
+                f->setPos(f->pos().x(), f->pos().y() + 12); // Some offset
+                f->RotateToFacePoint(f->GetDest());
+
+                Koneteekkari* k = new Koneteekkari(path_points_left, game_);
+
                 game_->GetScene()->addItem(k);
                 game_->GetScene()->addItem(f);
+                game_->GetScene()->addItem(kyl);
 
                 // Free the memory
                 delete this;

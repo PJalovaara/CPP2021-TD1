@@ -5,6 +5,12 @@
 #include <QString>
 #include <QTimer>
 #include <QList>
+#include <QPushButton>
+#include <QGraphicsRectItem>
+#include <QBrush>
+#include <QPen>
+
+#include <QDebug>
 
 #include "bullet.hpp"
 #include "enemy.hpp"
@@ -16,6 +22,17 @@ Tower::Tower(QGraphicsScene* scene, QGraphicsItem* parent) : QObject(), QGraphic
 unsigned int Tower::GetAttackRadius(){
     return attack_radius_;
 }
+
+void Tower::mousePressEvent(QGraphicsSceneMouseEvent* event) {
+    // QPushButton* deleteButton = new QPushButton(QString("DELETE"));
+    // scene_->addItem(deleteButton);
+    QGraphicsRectItem* redRect = new QGraphicsRectItem(x() - tower_width_ / 2, y() - tower_height_ / 2, tower_width_, tower_height_);
+    QPen redPen(Qt::red);
+    redPen.setWidth(3);
+    redRect->setPen(redPen);
+    scene_->addItem(redRect);
+
+};
 
 void Tower::UpdateAttackRadius(unsigned int new_radius){
     // Points for the "unit" polygon around the tower
