@@ -21,6 +21,6 @@ void BuildMamaIcon::mousePressEvent(QGraphicsSceneMouseEvent* event) {
         game_->SetCursor(QString(":images/MamaGoose.png"));
         // Player buys the tower which takes money
         game_->SetMoney(game_->GetMoney() - price_);
-        game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
+        game_->UpdateMoneyText();
     }
 }

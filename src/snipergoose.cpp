@@ -21,7 +21,7 @@ SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
     setOffset(-tower_width_ / 2, -tower_height_ / 2); // Centering
 
     attack_area_ = nullptr;
-    UpdateAttackRadius(400); // SniperGoose has a very large radius
+    UpgradeAttackRadius(200); // SniperGoose has a very large radius
 
     // CONNECT TIMER TO ATTACK_TARGET
     QTimer* timer = new QTimer();

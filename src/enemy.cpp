@@ -62,7 +62,9 @@ void Enemy::MoveForward() {
             enemy_hp_ -= bullet->GetDamage();
             if(enemy_hp_ <= 0){ // If enemy dies
                 game_->SetMoney(game_->GetMoney() + price_);
-                game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
+                game_->UpdateMoneyText(
+                    
+                );
                 delete this;
                 return;
             }

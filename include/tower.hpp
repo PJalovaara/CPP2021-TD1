@@ -16,10 +16,12 @@ class Tower : public QObject, public QGraphicsPixmapItem {
 public:
     Tower(QGraphicsScene* scene, QGraphicsItem* parent = 0);
     unsigned int GetAttackRadius();
-    void UpdateAttackRadius(unsigned int new_radius);
+    void UpgradeAttackRadius(unsigned int new_radius);
     double DistanceTo(QGraphicsItem* item);
     virtual void AttackTarget() = 0;
-    void mousePressEvent(QGraphicsSceneMouseEvent* event);
+    int GetWidth();
+    int GetHeight();
+    void DeleteTower();
 
 public slots:
     virtual void AcquireTarget() = 0;

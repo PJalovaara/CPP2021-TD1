@@ -47,12 +47,17 @@ Game::Game() {
     blackPen.setWidth(1);
     scene_->addRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, blackPen, grayBrush);
 
-    // Create start and clear buttons
-    QPushButton* startButton = new QPushButton(QString("START"), this);
-    QPushButton* clearButton = new QPushButton(QString("CLEAR"), this);
+    // Initialize update and delete buttons and the red selection rectangle
+    upgrade_button_ = nullptr;
+    delete_button_ = nullptr;
+    selected_tower_rect_ = nullptr;
 
-    startButton->move(WINDOW_WIDTH / 2 - startButton->width() / 2, 10);
-    clearButton->move(WINDOW_WIDTH / 2 - startButton->width() / 2, 40);
+    // Create start and clear buttons
+    QPushButton* start_button = new QPushButton(QString("START"), this);
+    QPushButton* clear_button = new QPushButton(QString("CLEAR"), this);
+
+    start_button->move(WINDOW_WIDTH / 2 - start_button->width() / 2, 10);
+    clear_button->move(WINDOW_WIDTH / 2 - start_button->width() / 2, 40);
     
 
     // Create a health bar for the player
@@ -68,7 +73,7 @@ Game::Game() {
     money_ = 200;
     money_text_ = new QLineEdit(this);
     money_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height());
-    money_text_->setText(QString(" MONEY: ") + QString::number(money_));
+    money_text_->setText(QString(" MONEY: $") + QString::number(money_));
     money_text_->setReadOnly(true);
     money_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
 
@@ -83,7 +88,7 @@ Game::Game() {
     QLineEdit* mama_price_text = new QLineEdit(this);
     mama_price_text->setReadOnly(true);
     mama_price_text->setAlignment(Qt::AlignCenter);
-    mama_price_text->setText(QString::number(100));
+    mama_price_text->setText(QString("$") + QString::number(100));
     mama_price_text->move(0, 100);
     mama_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
@@ -93,7 +98,7 @@ Game::Game() {
     QLineEdit* sniper_price_text = new QLineEdit(this);
     sniper_price_text->setReadOnly(true);
     sniper_price_text->setAlignment(Qt::AlignCenter);
-    sniper_price_text->setText(QString::number(200));
+    sniper_price_text->setText(QString("$") + QString::number(200));
     sniper_price_text->move(0, 200);
     sniper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
@@ -105,10 +110,10 @@ Game::Game() {
     setMouseTracking(true);
 
     // Creates 5 enemies, one every second
-    connect(startButton, SIGNAL(clicked()), this, SLOT(CreateEnemies()));
+    connect(start_button, SIGNAL(clicked()), this, SLOT(CreateEnemies()));
 
     // Connect CLEAR button to the slot ClearTowers
-    connect(clearButton, SIGNAL(clicked()), this, SLOT(ClearTowers()));
+    connect(clear_button, SIGNAL(clicked()), this, SLOT(ClearTowers()));
     
  
 
@@ -175,6 +180,48 @@ void Game::mousePressEvent(QMouseEvent* event) {
         ResetCursor();
         build_ = nullptr;
     } else {
+        // Find the closet tower to the click position
+        QPointF clickPos = event->pos();
+        double closest_dist = 100;
+        closest_tower_ = nullptr;
+        for(auto tower : towers_) {
+            QLineF ln(tower->pos(), clickPos);
+            if(ln.length() < closest_dist) {
+                closest_dist = ln.length();
+                closest_tower_ = tower;
+            }
+        }
+        if(closest_tower_ && !upgrade_button_) {
+            // Create update and delete buttons here
+            selected_tower_rect_ = new QGraphicsRectItem(closest_tower_->x() - closest_tower_->GetWidth() / 2, closest_tower_->y() - closest_tower_->GetHeight() / 2, closest_tower_->GetWidth(), closest_tower_->GetHeight());
+            QPen redPen(Qt::red);
+            redPen.setWidth(2);
+            selected_tower_rect_->setPen(redPen);
+            scene_->addItem(selected_tower_rect_);
+
+            upgrade_button_ = new QPushButton(QString("UPGRADE ($50)"), this);
+            delete_button_ = new QPushButton(QString("DELETE"), this);
+            upgrade_button_->move(closest_tower_->x() + closest_tower_->GetWidth() / 2, closest_tower_->y() - closest_tower_->GetHeight() / 2);
+            delete_button_->move(closest_tower_->x() + closest_tower_->GetWidth() / 2, closest_tower_->y() + closest_tower_->GetHeight() / 2 - delete_button_->height());
+            upgrade_button_->show();
+            delete_button_->show();
+
+            connect(upgrade_button_, SIGNAL(clicked()), this, SLOT(UpgradeTower()));
+            connect(delete_button_, SIGNAL(clicked()), this, SLOT(RemoveTower()));
+        } else {
+            if(upgrade_button_) {
+                delete upgrade_button_;
+                upgrade_button_ = nullptr;
+            }
+            if(delete_button_) {
+                delete delete_button_;
+                delete_button_ = nullptr;
+            }
+            if(selected_tower_rect_) {
+                delete selected_tower_rect_;
+                selected_tower_rect_ = nullptr;
+            }
+        }
         QGraphicsView::mousePressEvent(event);
     }
 };
@@ -218,7 +265,8 @@ void Game::CreatePath() {
 
 void Game::ClearTowers() {
     for(auto i : towers_) {
-        delete i;
+        closest_tower_ = i;
+        RemoveTower();
     }
     towers_.clear();
 };
@@ -232,8 +280,8 @@ int Game::GetMoney() {
     return money_;
 };
 
-void Game::SetMoneyText(const QString& text) {
-    money_text_->setText(text);
+void Game::UpdateMoneyText() {
+    money_text_->setText(QString(" MONEY: $") + QString::number(GetMoney()));
 };
 
 
@@ -243,4 +291,23 @@ void Game::SetMoney(int new_money) {
 
 QList<QPointF> Game::GetPathPoints() {
     return path_points_;
+};
+
+void Game::UpgradeTower() {
+    if(money_ - 50 >= 0) {
+        closest_tower_->UpgradeAttackRadius(closest_tower_->GetAttackRadius() + 20);
+        money_ -= 50;
+        UpdateMoneyText();
+    }
+};
+
+void Game::RemoveTower() {
+    delete delete_button_;
+    delete upgrade_button_;
+    delete selected_tower_rect_;
+    delete_button_ = nullptr;
+    upgrade_button_ = nullptr;
+    selected_tower_rect_ = nullptr;
+    towers_.removeOne(closest_tower_);
+    closest_tower_->DeleteTower();
 };

@@ -16,6 +16,7 @@ Cruiseship::Cruiseship(QList<QPointF> pathPoints, Game* game, QGraphicsItem* par
 
     enemy_hp_ = 10; // Has higher hp than an average enemy
     damage_ = 50;
+    price_ = 100;
  };
 
 
@@ -36,8 +37,8 @@ void Cruiseship::MoveForward() {
             enemy_hp_ -= bullet->GetDamage();
             if(enemy_hp_ <= 0) { // If enemy dies
                 // Update the money system
-                game_->SetMoney(game_->GetMoney() + 10);
-                game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
+                game_->SetMoney(game_->GetMoney() + price_);
+                game_->UpdateMoneyText();
 
                 // Spawn new enemies where the cruiseship got destroyed
                 QList<QPointF> path_points_left(game_->GetPathPoints().mid(point_index_ - 1, game_->GetPathPoints().length()));

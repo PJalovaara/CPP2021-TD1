@@ -11,6 +11,7 @@
 #include <QTimer>
 #include <QLineEdit>
 #include <QProgressBar>
+#include <QPushButton>
 
 #include "tower.hpp"
 
@@ -26,7 +27,7 @@ public:
     QProgressBar* GetHealthBar();
     int GetMoney();
     void SetMoney(int new_money);
-    void SetMoneyText(const QString& text);
+    void UpdateMoneyText();
     Tower* GetBuild();
     void SetBuild(Tower* new_build);
     QGraphicsScene* GetScene();
@@ -41,6 +42,8 @@ public slots:
     void SpawnFyysikko();
     void CreateEnemies();
     void ClearTowers();
+    void UpgradeTower();
+    void RemoveTower();
 
 private:
     QGraphicsScene* scene_;
@@ -54,6 +57,10 @@ private:
     QProgressBar* health_bar_;
     int money_;
     QLineEdit* money_text_;
+    Tower* closest_tower_;
+    QPushButton* upgrade_button_;
+    QPushButton* delete_button_;
+    QGraphicsRectItem* selected_tower_rect_;
 };
 
 

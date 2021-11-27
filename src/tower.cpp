@@ -23,18 +23,8 @@ unsigned int Tower::GetAttackRadius(){
     return attack_radius_;
 }
 
-void Tower::mousePressEvent(QGraphicsSceneMouseEvent* event) {
-    // QPushButton* deleteButton = new QPushButton(QString("DELETE"));
-    // scene_->addItem(deleteButton);
-    QGraphicsRectItem* redRect = new QGraphicsRectItem(x() - tower_width_ / 2, y() - tower_height_ / 2, tower_width_, tower_height_);
-    QPen redPen(Qt::red);
-    redPen.setWidth(3);
-    redRect->setPen(redPen);
-    scene_->addItem(redRect);
 
-};
-
-void Tower::UpdateAttackRadius(unsigned int new_radius){
+void Tower::UpgradeAttackRadius(unsigned int new_radius){
     // Points for the "unit" polygon around the tower
     points_ = { QPointF(2.500000, 1.500000), QPointF(2.445817, 1.824699), QPointF(2.289141, 2.114213), QPointF(2.046948, 2.337166),
                 QPointF(1.745485, 2.469400), QPointF(1.417421, 2.496584), QPointF(1.098305, 2.415773), QPointF(0.822718, 2.235724),
@@ -66,3 +56,16 @@ double Tower::DistanceTo(QGraphicsItem* item) {
     return ln.length();
 };
 
+int Tower::GetWidth() {
+    return tower_width_;
+};
+
+int Tower::GetHeight() {
+    return tower_height_;
+};
+
+
+void Tower::DeleteTower() {
+    delete attack_area_;
+    delete this;
+};

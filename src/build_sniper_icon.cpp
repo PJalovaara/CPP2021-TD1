@@ -22,6 +22,6 @@ void BuildSniperIcon::mousePressEvent(QGraphicsSceneMouseEvent* event) {
 
         // Player buys the tower which takes money
         game_->SetMoney(game_->GetMoney() - price_);
-        game_->SetMoneyText(QString(" MONEY: ") + QString::number(game_->GetMoney()));
+        game_->UpdateMoneyText();
     }
 }
