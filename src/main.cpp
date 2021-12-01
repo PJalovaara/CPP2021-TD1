@@ -1,5 +1,6 @@
 #include <QApplication>
 #include "game.hpp"
+#include "editor.hpp"
 // This is an example of how to use doxygen
 /**
  * @brief Here we put a brief description, that will end on the first dot, newline etc.
@@ -19,6 +20,10 @@ int main(int argc, char *argv[])
     Game* game = new Game(); // inherits from QGraphicsView
     // Hence must call show method
     game->show();
+
+    // Level Editor
+    Editor* editor = new Editor();
+    editor->show();
 
     return a.exec();
 }
