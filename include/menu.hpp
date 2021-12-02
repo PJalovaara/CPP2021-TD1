@@ -19,6 +19,7 @@ public:
     Menu();
     void mousePressEvent(QMouseEvent* event);
     QGraphicsScene* GetScene();
+    QList<QList<QPointF>> ReadPathsFromFile(const QString& filename);
 
 public slots:
     void StartLevel1();
@@ -26,7 +27,7 @@ public slots:
 	void StartLevel3();
 	void StartLevel4();
 	void StartLevel5();
-    //void StartCustom();
+    void StartCustom();
     void StartEditor();
 
 private:

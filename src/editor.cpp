@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QDebug>
+#include <QFileDialog>
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -55,7 +56,7 @@ QGraphicsPixmapItem* Editor::GetCursor() {
 void Editor::TogglePathMode() {
     in_path_mode_ = !in_path_mode_;
     if(in_path_mode_) {
-        SetCursor(QString(":images/editorcursor.png"));
+        SetCursor(":images/editorcursor.png");
         ++path_index_;
         QList<QPointF> empty_list;
         paths_ << empty_list;
@@ -77,7 +78,7 @@ void Editor::SetCursor(QString filename) {
     }
     cursor_ = new QGraphicsPixmapItem();
     QPixmap p = QPixmap(filename);
-    p = p.scaled(200, 100, Qt::KeepAspectRatio);
+    p = p.scaled(50, 50, Qt::KeepAspectRatio);
     cursor_->setPixmap(p);
     cursor_->setOffset(-p.width() / 2, -p.height() / 2); // Centering
     scene_->addItem(cursor_);
@@ -116,5 +117,24 @@ void Editor::CreatePath() {
 };
 
 void Editor::SavePathToFile() {
-
+    QFile file("custom_level.dat");
+    file.open(QIODevice::WriteOnly);
+    QDataStream out(&file);   // we will serialize the data into the file
+    qint32 n_paths;
+    n_paths = paths_.size();
+    out << n_paths;
+    for (int i = 0; i < n_paths; i++) {
+		qint32 n_points;
+        n_points = paths_[i].size();
+        out << n_points;
+		for (int j = 0; j < n_points; j++) {
+            qint32 point_x;
+            qint32 point_y;
+            point_x = paths_[i][j].x();
+            point_y = paths_[i][j].y();
+			out << point_x << point_y;
+            //qDebug() << "added x and y:" << point_x << "," << point_y;
+		}
+	}
+    file.close();
 };

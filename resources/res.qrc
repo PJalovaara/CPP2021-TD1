@@ -16,5 +16,11 @@
 		<file>images/kylteri1.png</file>
 		<file>images/kylteri2.png</file>
 		<file>images/cruiseship.png</file>
+		<file>images/editorcursor.png</file>
+		<file>levels/level1.dat</file>
+		<file>levels/level2.dat</file>
+		<file>levels/level3.dat</file>
+		<file>levels/level4.dat</file>
+		<file>levels/level5.dat</file>
 	</qresource>
 </RCC>
