@@ -7,6 +7,55 @@ In each meeting, you are required to discuss:
 3. Plan for the next week for everyone
 4. Deviations and changes to the project plan, if any
 
+# Meeting 2.12.2021 09:15
+
+**Participants**: 
+1. Antti Haavikko
+2. Anna Huttunen
+3. Perttu Jalovaara
+4. Atte Tommiska 
+
+## Summary of works
+1. Antti Haavikko 
+   
+   Added the money earning principle. Added also Cruiseship to enemies. Made upgrading towers possible.
+
+2. Anna Huttunen
+
+   Did enemygraphics and started PooperGoose.
+
+3. Perttu Jalovaara
+
+   Made the alpha version of level editor.
+
+4. Atte Tommiska
+
+   Has worked hard on the main menu and brainstormed options for implementation. Valgrind memcheck.
+
+## Challenges
+
+1. Memory leaks and testing.
+2. Making levels.
+
+## Actions
+1. Antti is going to make enemy abstract. Adds parameter paths to game (QList(QList(QPointF))). Sound effects. Update LIBS directory.
+2. Anna is going to finish PooperGoose and study Doxygen to be able to do documentation on atleast enemies and towers.
+3. Perttu is going to make the enemies choose a path randomly or with some intelligence i.e. virtual function ChoosePath for enemies. Enemywave functionality. Sound effects. Abstract Projectiles class. 
+4. Atte is going to finish the main menu. Tests (memory leaks).
+
+> Please reflect these action decisions in your git commit messages so that 
+> your group members and advisor can follow the progress.
+
+## Project status 
+The biggest challenges are the main menu, running different levels and finding and fixing all memory leaks. The game is working, and now we are adding more functionalities to get more points and a more entertaining game. 
+
+### TODOs
+1. Antti: Enemy abstract. Parameter paths to game (QList(QList(QPointF))). Sound effects. LIBS directory.
+2. Anna: Finish PooperGoose (only hits some enemies, dynamic cast). Doxygen for enemy and tower classes.
+3. Perttu: Virtual function ChoosePath. Enemywaves. Sound effects. Abstract Projectiles class.
+4. Atte: Main menu. Tests.
+
+
 # Meeting 22.11.2021 10:15
 
 **Participants**: 
