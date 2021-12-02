@@ -31,11 +31,11 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
-Game::Game(QList<QPointF> points) {
+Game::Game(QList<QList<QPointF>> paths) {
     // Creating a scene and a timer to spawn enemies on the pathPoints path
     scene_ = new QGraphicsScene(this);
     enemy_spawn_timer_ = new QTimer(this);
-    path_points_ = points;
+    paths_ = paths;
 
     // Set the scene
     setScene(scene_); // Visualize this scene

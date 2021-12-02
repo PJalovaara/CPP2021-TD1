@@ -100,32 +100,47 @@ void Menu::mousePressEvent(QMouseEvent* event) {
 };
 
 void Menu::level1() {
+	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
+
 	points << QPoint(800, 0) << QPoint(400, 300) << QPoint(800, 600);
-    Game* game = new Game(points);
+	paths << points;
+    Game* game = new Game(paths);
 	game->show();
 }
 void Menu::level2() {
+	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
+	
 	points << QPoint(800, 0) << QPoint(400, 300) << QPoint(800, 600);
-    Game* game = new Game(points);
+	paths << points;
+    Game* game = new Game(paths);
 	game->show();
 }
 void Menu::level3() {
+	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
+	
 	points << QPoint(800, 0) << QPoint(400, 300) << QPoint(800, 600);
-    Game* game = new Game(points);
+	paths << points;
+    Game* game = new Game(paths);
 	game->show();
 }
 void Menu::level4() {
+	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
+	
 	points << QPoint(800, 0) << QPoint(400, 300) << QPoint(800, 600);
-    Game* game = new Game(points);
+	paths << points;
+    Game* game = new Game(paths);
 	game->show();
 }
 void Menu::level5() {
+	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
+	
 	points << QPoint(800, 0) << QPoint(400, 300) << QPoint(800, 600);
-    Game* game = new Game(points);
+	paths << points;
+    Game* game = new Game(paths);
 	game->show();
 }
