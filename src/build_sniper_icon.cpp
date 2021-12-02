@@ -10,12 +10,18 @@ BuildSniperIcon::BuildSniperIcon(Game* game, QGraphicsItem* parent) : QGraphicsP
     setPixmap(p); // Set size for the goose
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
     game_ = game;
+    price_ = 200; // Set prize
 };
 
 void BuildSniperIcon::mousePressEvent(QGraphicsSceneMouseEvent* event) {
-    if(!(game_->GetBuild())) {
+    if(!(game_->GetBuild()) && game_->GetMoney() >= price_) {
+        // Set the new tower to the build_ pointer
         SniperGoose* newGoose = new SniperGoose(game_->GetScene());
         game_->SetBuild(newGoose);
         game_->SetCursor(QString(":images/SniperGoose.png"));
+
+        // Player buys the tower which takes money
+        game_->SetMoney(game_->GetMoney() - price_);
+        game_->UpdateMoneyText();
     }
 }

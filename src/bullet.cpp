@@ -7,7 +7,9 @@
 Bullet::Bullet(QGraphicsItem* parent) {
     // set graphics
     QPixmap p = QPixmap(":/images/bulletblack.png");
-    setPixmap(p.scaled(50, 100, Qt::KeepAspectRatio)); // Set size for the bullet
+    p = p.scaled(50, 100, Qt::KeepAspectRatio);
+    setPixmap(p); // Set size for the bullet
+    setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
     // connect a timer to the move() slot
     QTimer* move_timer = new QTimer(this); // The timer dies when the bullet dies

@@ -12,6 +12,7 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
 private:
     Game* game_;
+    int price_;
 };
 
 
