@@ -43,6 +43,13 @@ Menu::Menu() {
 
     LoadButton->move(WINDOW_WIDTH / 2 - LoadButton->width() / 2, 160);
     
+	connect(Level1Button, SIGNAL(clicked()), this, SLOT(level1()));
+	connect(Level2Button, SIGNAL(clicked()), this, SLOT(level2()));
+	connect(Level3Button, SIGNAL(clicked()), this, SLOT(level3()));
+	connect(Level4Button, SIGNAL(clicked()), this, SLOT(level4()));
+	connect(Level5Button, SIGNAL(clicked()), this, SLOT(level5()));
+
+
     cursor_ = nullptr;
     setMouseTracking(true);
 
@@ -99,10 +106,26 @@ void Menu::level1() {
 	game->show();
 }
 void Menu::level2() {
+	QList<QPointF> points;
+	points << QPoint(800, 0) << QPoint(400, 300) << QPoint(800, 600);
+    Game* game = new Game(points);
+	game->show();
 }
 void Menu::level3() {
+	QList<QPointF> points;
+	points << QPoint(800, 0) << QPoint(400, 300) << QPoint(800, 600);
+    Game* game = new Game(points);
+	game->show();
 }
 void Menu::level4() {
+	QList<QPointF> points;
+	points << QPoint(800, 0) << QPoint(400, 300) << QPoint(800, 600);
+    Game* game = new Game(points);
+	game->show();
 }
 void Menu::level5() {
+	QList<QPointF> points;
+	points << QPoint(800, 0) << QPoint(400, 300) << QPoint(800, 600);
+    Game* game = new Game(points);
+	game->show();
 }
