@@ -12,9 +12,10 @@
 class Enemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
-    Enemy(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent = 0);
+    Enemy(Game* game, QGraphicsItem* parent = 0);
     void RotateToFacePoint(QPointF p);
     QPointF GetDest();
+    virtual QList<QPointF> ChoosePath(QList<QList<QPointF>> paths) = 0;
 public slots:
     virtual void MoveForward();
 protected:
