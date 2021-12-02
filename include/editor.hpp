@@ -31,7 +31,7 @@ public slots:
 
 private:
     QGraphicsScene* scene_;
-    QGraphicsPixmapItem* cursor_;
+    QGraphicsPixmapItem* cursor_ = nullptr;
     QList<QList<QPointF>> paths_;
     int path_index_ = -1;
     bool in_path_mode_ = false;

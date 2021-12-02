@@ -20,9 +20,5 @@ int main(int argc, char *argv[])
 	Menu* menu = new Menu();
 	menu->show();
 
-    // Level Editor
-    Editor* editor = new Editor();
-    editor->show();
-
     return a.exec();
 }

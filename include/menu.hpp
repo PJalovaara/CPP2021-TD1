@@ -21,11 +21,13 @@ public:
     QGraphicsScene* GetScene();
 
 public slots:
-    void level1();
-	void level2();
-	void level3();
-	void level4();
-	void level5();
+    void StartLevel1();
+	void StartLevel2();
+	void StartLevel3();
+	void StartLevel4();
+	void StartLevel5();
+    //void StartCustom();
+    void StartEditor();
 
 private:
     QGraphicsScene* scene_;

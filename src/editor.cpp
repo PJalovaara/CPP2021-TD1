@@ -41,6 +41,7 @@ Editor::Editor() {
     // No vertical nor horizontal scroll bars
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setMouseTracking(true);
 }
 
 QGraphicsScene* Editor::GetScene() {
@@ -54,20 +55,23 @@ QGraphicsPixmapItem* Editor::GetCursor() {
 void Editor::TogglePathMode() {
     in_path_mode_ = !in_path_mode_;
     if(in_path_mode_) {
+        SetCursor(QString(":images/editorcursor.png"));
         ++path_index_;
         QList<QPointF> empty_list;
         paths_ << empty_list;
+    } else {
+        ResetCursor();
     }
 };
 
 void Editor::mouseMoveEvent(QMouseEvent* event) {
-    /* if(cursor_) {
+    if(cursor_) {
         cursor_->setPos(event->pos());
-    } */
+    }
 };
 
 void Editor::SetCursor(QString filename) {
-    /* if(cursor_) {
+    if(cursor_) {
         scene_->removeItem(cursor_);
         delete cursor_;
     }
@@ -76,15 +80,15 @@ void Editor::SetCursor(QString filename) {
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     cursor_->setPixmap(p);
     cursor_->setOffset(-p.width() / 2, -p.height() / 2); // Centering
-    scene_->addItem(cursor_); */
+    scene_->addItem(cursor_);
 };
 
 void Editor::ResetCursor() {
-    /* if(cursor_) {
+    if(cursor_) {
         scene_->removeItem(cursor_);
         delete cursor_;
     }
-    cursor_ = nullptr; */
+    cursor_ = nullptr;
 };
 
 void Editor::mousePressEvent(QMouseEvent* event) {
@@ -103,7 +107,8 @@ void Editor::CreatePath() {
 
         QPen pen;
         pen.setWidth(50); // Width of the drawn path/line
-        pen.setColor(QColor(path_index_ * 132 % 255, path_index_ * 549 % 255, path_index_ * 941 % 255)); // "colors determined by path_index_"
+        int color_seed = path_index_+1; // "colors determined by path_index_+1"
+        pen.setColor(QColor(color_seed * 132 % 255, color_seed * 549 % 255, color_seed * 941 % 255)); 
         lineItem->setPen(pen);
 
         scene_->addItem(lineItem);

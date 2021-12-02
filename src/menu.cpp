@@ -1,5 +1,4 @@
 #include "menu.hpp"
-#include "game.hpp"
 
 #include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
@@ -12,6 +11,9 @@
 #include <QProgressBar>
 #include <QLineEdit>
 #include <QDebug>
+
+#include "game.hpp"
+#include "editor.hpp"
 
 #define WINDOW_WIDTH 400
 #define WINDOW_HEIGHT 300
@@ -34,6 +36,7 @@ Menu::Menu() {
 	QPushButton* Level4Button = new QPushButton(QString("LEVEL 4"), this);
 	QPushButton* Level5Button = new QPushButton(QString("LEVEL 5"), this);
     QPushButton* LoadButton = new QPushButton(QString("LOAD LEVEL"), this);
+	QPushButton* EditorButton = new QPushButton(QString("LEVEL EDITOR"), this);
 
     Level1Button->move(WINDOW_WIDTH / 2 - Level1Button->width() / 2, 10);
 	Level2Button->move(WINDOW_WIDTH / 2 - Level2Button->width() / 2, 40);
@@ -41,15 +44,16 @@ Menu::Menu() {
     Level4Button->move(WINDOW_WIDTH / 2 - Level4Button->width() / 2, 100);
     Level5Button->move(WINDOW_WIDTH / 2 - Level5Button->width() / 2, 130);
 
-    LoadButton->move(WINDOW_WIDTH / 2 - LoadButton->width() / 2 - 12, 160);
+    LoadButton->move(WINDOW_WIDTH / 2 - LoadButton->width() / 2 , 160);
+	EditorButton->move(WINDOW_WIDTH / 2 - Level5Button->width() / 2, 190);
     
-	connect(Level1Button, SIGNAL(clicked()), this, SLOT(level1()));
-	connect(Level2Button, SIGNAL(clicked()), this, SLOT(level2()));
-	connect(Level3Button, SIGNAL(clicked()), this, SLOT(level3()));
-	connect(Level4Button, SIGNAL(clicked()), this, SLOT(level4()));
-	connect(Level5Button, SIGNAL(clicked()), this, SLOT(level5()));
-
-
+	connect(Level1Button, SIGNAL(clicked()), this, SLOT(StartLevel1()));
+	connect(Level2Button, SIGNAL(clicked()), this, SLOT(StartLevel2()));
+	connect(Level3Button, SIGNAL(clicked()), this, SLOT(StartLevel3()));
+	connect(Level4Button, SIGNAL(clicked()), this, SLOT(StartLevel4()));
+	connect(Level5Button, SIGNAL(clicked()), this, SLOT(StartLevel5()));
+	//connect(LoadButton, SIGNAL(clicked()), this, SLOT(StartCustom()));
+	connect(EditorButton, SIGNAL(clicked()), this, SLOT(StartEditor()));
 
 
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -69,7 +73,7 @@ void Menu::mousePressEvent(QMouseEvent* event) {
         QGraphicsView::mousePressEvent(event);
 };
 
-void Menu::level1() {
+void Menu::StartLevel1() {
 	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
 
@@ -78,7 +82,7 @@ void Menu::level1() {
     Game* game = new Game(paths);
 	game->show();
 }
-void Menu::level2() {
+void Menu::StartLevel2() {
 	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
 	
@@ -87,7 +91,7 @@ void Menu::level2() {
     Game* game = new Game(paths);
 	game->show();
 }
-void Menu::level3() {
+void Menu::StartLevel3() {
 	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
 	
@@ -96,7 +100,7 @@ void Menu::level3() {
     Game* game = new Game(paths);
 	game->show();
 }
-void Menu::level4() {
+void Menu::StartLevel4() {
 	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
 	
@@ -105,7 +109,7 @@ void Menu::level4() {
     Game* game = new Game(paths);
 	game->show();
 }
-void Menu::level5() {
+void Menu::StartLevel5() {
 	QList<QList<QPointF>> paths;
 	QList<QPointF> points;
 	
@@ -113,4 +117,11 @@ void Menu::level5() {
 	paths << points;
     Game* game = new Game(paths);
 	game->show();
+}
+
+void Menu::StartEditor() {
+	// Level Editor
+	// THIS WILL CAUSE A MEMORY LEAK FOR SURE
+    Editor* editor = new Editor();
+    editor->show();
 }
