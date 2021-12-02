@@ -35,7 +35,9 @@ Game::Game() {
     // Creating a scene and a timer to spawn enemies on the pathPoints path
     scene_ = new QGraphicsScene(this);
     enemy_spawn_timer_ = new QTimer(this);
-    path_points_ << QPoint(800,0) << QPoint(400,300) << QPoint(800, 600);
+    QList<QPointF> path;
+    path << QPoint(800,0) << QPoint(400,300) << QPoint(800, 600);
+    paths_ << path;
 
     // Set the scene
     setScene(scene_); // Visualize this scene
@@ -79,7 +81,7 @@ Game::Game() {
 
 
     // Create a path for the enemies
-    CreatePath();
+    CreatePaths();
 
     // Add the build icons and their prices
     BuildMamaIcon* mama_icon = new BuildMamaIcon(this);
@@ -125,11 +127,11 @@ Game::Game() {
 
 
     // Test code: Create a cruiseship and dokaani
-    // Cruiseship* cruiseship = new Cruiseship(path_points_, this);
-    // scene_->addItem(cruiseship);
+    Cruiseship* cruiseship = new Cruiseship(paths_, this);
+    scene_->addItem(cruiseship);
 
-    Dokaani* dok = new Dokaani(path_points_, this);
-    scene_->addItem(dok);
+    // Dokaani* dok = new Dokaani(path_points_, this);
+    // scene_->addItem(dok);
 }
 
 
@@ -238,7 +240,7 @@ void Game::CreateEnemies() {
 };
 
 void Game::SpawnFyysikko() {
-    Enemy* enemy = new Fyysikko(path_points_, this);
+    Enemy* enemy = new Fyysikko(paths_, this);
     scene_->addItem(enemy);
     enemies_spawned_ += 1;
 
@@ -249,17 +251,19 @@ void Game::SpawnFyysikko() {
 }
 
 
-void Game::CreatePath() {
-    for(int i = 0; i < path_points_.size() - 1; i++){
-        QLineF line(path_points_[i], path_points_[i+1]);
-        QGraphicsLineItem* lineItem = new QGraphicsLineItem(line);
+void Game::CreatePaths() {
+    for(auto path_points : paths_){
+        for(int i = 0; i < path_points.size() - 1; i++){
+            QLineF line(path_points[i], path_points[i+1]);
+            QGraphicsLineItem* lineItem = new QGraphicsLineItem(line);
 
-        QPen pen;
-        pen.setWidth(50); // Width of the drawn path/line
-        pen.setColor(Qt::darkBlue); // Set the color of the path
-        lineItem->setPen(pen);
+            QPen pen;
+            pen.setWidth(50); // Width of the drawn path/line
+            pen.setColor(Qt::darkBlue); // Set the color of the path
+            lineItem->setPen(pen);
 
-        scene_->addItem(lineItem);
+            scene_->addItem(lineItem);
+        }
     }
 };
 
@@ -289,8 +293,8 @@ void Game::SetMoney(int new_money) {
     money_ = new_money;
 };
 
-QList<QPointF> Game::GetPathPoints() {
-    return path_points_;
+QList<QList<QPointF>> Game::GetPaths() {
+    return paths_;
 };
 
 void Game::UpgradeTower() {

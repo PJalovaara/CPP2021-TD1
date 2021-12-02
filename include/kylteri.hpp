@@ -6,7 +6,8 @@
 class Kylteri : public Enemy {
     Q_OBJECT
 public:
-    Kylteri(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent = 0);
+    Kylteri(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent = 0);
+    QList<QPointF> ChoosePath(QList<QList<QPointF>> paths);
 
 private:
 };
