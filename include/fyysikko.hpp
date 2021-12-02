@@ -6,8 +6,8 @@
 class Fyysikko : public Enemy {
     Q_OBJECT
 public:
-    Fyysikko(QList<QPointF> pathPoints, Game* game, QGraphicsItem* parent = 0);
-
+    Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent = 0);
+    QList<QPointF> ChoosePath(QList<QList<QPointF>> paths);
 private:
 };
 

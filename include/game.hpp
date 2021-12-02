@@ -34,8 +34,8 @@ public:
     QGraphicsPixmapItem* GetCursor();
     void ResetCursor();
 
-    QList<QPointF> GetPathPoints();
-    void CreatePath();
+    QList<QList<QPointF>> GetPaths();
+    void CreatePaths();
     
 
 public slots:
@@ -52,7 +52,7 @@ private:
     QTimer* enemy_spawn_timer_;
     int enemies_spawned_;
     int max_no_of_enemies_;
-    QList<QPointF> path_points_;
+    QList<QList<QPointF>> paths_;
     QList<Tower*> towers_;
     QProgressBar* health_bar_;
     int money_;
