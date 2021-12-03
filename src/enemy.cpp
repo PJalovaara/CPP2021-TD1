@@ -46,7 +46,6 @@ void Enemy::MoveForward() {
     
     // If enemy reaches final destination, the player loses hp and the memory is freed
     if(ln.length() < 30 && point_index_ >= path_points_.length() - 1) {
-        delete this;
         QProgressBar* health_bar = game_->GetHealthBar();
         int current_health = health_bar->value();
         if(current_health - damage_ >= 0) {
@@ -56,6 +55,7 @@ void Enemy::MoveForward() {
             health_bar->setValue(0);
             health_bar->setFormat(" HP: " + QString::number(0));
         }
+		delete this;
         return;
     }
 
