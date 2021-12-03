@@ -125,8 +125,8 @@ Game::Game(QList<QList<QPointF>> paths) {
 
 
     // Test code: Create a cruiseship and dokaani
-    Cruiseship* cruiseship = new Cruiseship(paths_, this);
-    scene_->addItem(cruiseship);
+    //Cruiseship* cruiseship = new Cruiseship(paths_, this);
+    //scene_->addItem(cruiseship);
 
     // Dokaani* dok = new Dokaani(path_points_, this);
     // scene_->addItem(dok);
@@ -311,5 +311,6 @@ void Game::RemoveTower() {
     upgrade_button_ = nullptr;
     selected_tower_rect_ = nullptr;
     towers_.removeOne(closest_tower_);
-    closest_tower_->DeleteTower();
+    delete closest_tower_;
+    closest_tower_ = nullptr;
 };

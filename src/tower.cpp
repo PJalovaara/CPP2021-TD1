@@ -19,12 +19,16 @@ Tower::Tower(QGraphicsScene* scene, QGraphicsItem* parent) : QObject(), QGraphic
     scene_ = scene;
 }
 
-unsigned int Tower::GetAttackRadius(){
+Tower::~Tower() {
+	delete attack_area_;
+}
+
+unsigned int Tower::GetAttackRadius() {
     return attack_radius_;
 }
 
 
-void Tower::UpgradeAttackRadius(unsigned int new_radius){
+void Tower::UpgradeAttackRadius(unsigned int new_radius) {
     // Points for the "unit" polygon around the tower
     points_ = { QPointF(2.500000, 1.500000), QPointF(2.445817, 1.824699), QPointF(2.289141, 2.114213), QPointF(2.046948, 2.337166),
                 QPointF(1.745485, 2.469400), QPointF(1.417421, 2.496584), QPointF(1.098305, 2.415773), QPointF(0.822718, 2.235724),
@@ -32,7 +36,7 @@ void Tower::UpgradeAttackRadius(unsigned int new_radius){
                 QPointF(0.822718, 0.764276), QPointF(1.098305, 0.584227), QPointF(1.417421, 0.503416), QPointF(1.745485, 0.530600),
                 QPointF(2.046948, 0.662834), QPointF(2.289141, 0.885787), QPointF(2.445817, 1.175301) 
     };
-    for(unsigned int i = 0; i < points_.size(); i++){
+    for(unsigned int i = 0; i < points_.size(); i++) {
         points_[i] *= new_radius;
     }
     if(attack_area_) {
@@ -62,10 +66,4 @@ int Tower::GetWidth() {
 
 int Tower::GetHeight() {
     return tower_height_;
-};
-
-
-void Tower::DeleteTower() {
-    delete attack_area_;
-    delete this;
 };
