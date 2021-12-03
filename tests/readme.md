@@ -8,9 +8,20 @@ In this folder, you can create your own unit test files to validate the operatio
 
 # Unit Tests
 
-## Test of MyClass
+## Test of class Game
 
-**Involved Classes:**
+We start the game with no towers nor enemies to check for memory leaks
+
+**Involved Classes:** None
+
+**Test File:** test1
+
+**Results:** Mem leak for sure
+
+
+## Test of class Enemy
+
+**Involved Classes:** 
 
 **Test File:**
 
