@@ -184,7 +184,7 @@ void Game::mousePressEvent(QMouseEvent* event) {
         ResetCursor();
         build_ = nullptr;
     } else {
-        // Find the closet tower to the click position
+        // Find the closest tower to the click position
         QPointF clickPos = event->pos();
         double closest_dist = 100;
         closest_tower_ = nullptr;
@@ -321,6 +321,6 @@ void Game::RemoveTower() {
     upgrade_button_ = nullptr;
     selected_tower_rect_ = nullptr;
     towers_.removeOne(closest_tower_);
-    delete closest_tower_;
+	scene_->removeItem(closest_tower_);
     closest_tower_ = nullptr;
 };

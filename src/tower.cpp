@@ -9,7 +9,6 @@
 #include <QGraphicsRectItem>
 #include <QBrush>
 #include <QPen>
-
 #include <QDebug>
 
 #include "bullet.hpp"
