@@ -20,6 +20,8 @@ class Game : public QGraphicsView{
 public:
     // member functions
     Game(QList<QList<QPointF>> paths);
+    ~Game();
+
     void SetCursor(QString filename);
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);

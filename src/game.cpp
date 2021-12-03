@@ -132,6 +132,10 @@ Game::Game(QList<QList<QPointF>> paths) {
     // scene_->addItem(dok);
 }
 
+Game::~Game() {
+    ClearTowers();
+};
+
 
 QGraphicsScene* Game::GetScene() {
     return scene_;
@@ -266,8 +270,8 @@ void Game::CreatePaths() {
 };
 
 void Game::ClearTowers() {
-    for(auto i : towers_) {
-        closest_tower_ = i;
+    for(auto tower : towers_) {
+        closest_tower_ = tower;
         RemoveTower();
     }
     towers_.clear();
@@ -304,9 +308,15 @@ void Game::UpgradeTower() {
 };
 
 void Game::RemoveTower() {
-    delete delete_button_;
-    delete upgrade_button_;
-    delete selected_tower_rect_;
+    if(delete_button_) {
+        delete delete_button_;
+    }
+    if(upgrade_button_) {
+        delete upgrade_button_;
+    }
+    if(selected_tower_rect_) {
+        delete selected_tower_rect_;
+    }
     delete_button_ = nullptr;
     upgrade_button_ = nullptr;
     selected_tower_rect_ = nullptr;
