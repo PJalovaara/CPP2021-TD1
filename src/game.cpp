@@ -197,7 +197,12 @@ void Game::mousePressEvent(QMouseEvent* event) {
         }
         if(closest_tower_ && !upgrade_button_) {
             // Create update and delete buttons here
-            selected_tower_rect_ = new QGraphicsRectItem(closest_tower_->x() - closest_tower_->GetWidth() / 2, closest_tower_->y() - closest_tower_->GetHeight() / 2, closest_tower_->GetWidth(), closest_tower_->GetHeight());
+
+            // Top left corner coordinates
+            int x_coord = closest_tower_->x() - closest_tower_->GetWidth() / 2;
+            int y_coord = closest_tower_->y() - closest_tower_->GetHeight() / 2;
+
+            selected_tower_rect_ = new QGraphicsRectItem(x_coord, y_coord, closest_tower_->GetWidth(), closest_tower_->GetHeight());
             QPen redPen(Qt::red);
             redPen.setWidth(2);
             selected_tower_rect_->setPen(redPen);
@@ -205,8 +210,11 @@ void Game::mousePressEvent(QMouseEvent* event) {
 
             upgrade_button_ = new QPushButton(QString("UPGRADE ($50)"), this);
             delete_button_ = new QPushButton(QString("DELETE"), this);
-            upgrade_button_->move(closest_tower_->x() + closest_tower_->GetWidth() / 2, closest_tower_->y() - closest_tower_->GetHeight() / 2);
-            delete_button_->move(closest_tower_->x() + closest_tower_->GetWidth() / 2, closest_tower_->y() + closest_tower_->GetHeight() / 2 - delete_button_->height());
+            int upgrade_x = x_coord + closest_tower_->GetWidth() > WINDOW_WIDTH ? x_coord - upgrade_button_->width() : x_coord + closest_tower_->GetWidth();
+            int upgrade_y = y_coord < 0 ? 0 : y_coord;
+            int delete_y = y_coord + closest_tower_->GetHeight() > WINDOW_HEIGHT ? WINDOW_HEIGHT - delete_button_->height() : y_coord + closest_tower_->GetHeight() - delete_button_->height();
+            upgrade_button_->move(upgrade_x, upgrade_y);
+            delete_button_->move(upgrade_x, delete_y);
             upgrade_button_->show();
             delete_button_->show();
 
