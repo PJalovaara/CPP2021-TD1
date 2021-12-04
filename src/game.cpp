@@ -133,7 +133,8 @@ Game::Game(QList<QList<QPointF>> paths) {
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-
+    // connect enemy spawning
+    connect(enemy_spawn_timer_, SIGNAL(timeout()), this, SLOT(SpawnEnemy()));
 
     // Test code: Create a cruiseship and dokaani
     Cruiseship* cruiseship = new Cruiseship(paths_, this);
@@ -154,6 +155,10 @@ QGraphicsScene* Game::GetScene() {
     
 QGraphicsPixmapItem* Game::GetCursor() {
     return cursor_;
+};
+
+QList<Tower*> Game::GetTowers() {
+    return towers_;
 };
 
 void Game::mouseMoveEvent(QMouseEvent* event) {
@@ -256,32 +261,34 @@ Tower* Game::GetBuild() {
 void Game::StartWave() {
     wave_++;
     UpdateWaveText();
-    
-    
-    for(int i = 0; i < wave_; i++) {
-        SpawnFyysikko();
-    }
-
-
-}
-
-void Game::CreateEnemies() {
-    enemies_spawned_ = 0;
-    max_no_of_enemies_ = 5;
-    connect(enemy_spawn_timer_, SIGNAL(timeout()), this, SLOT(SpawnFyysikko()));
+    no_of_enemies_ = 0;
     enemy_spawn_timer_->start(1000); // spawn an enemy every 1000 ms
-};
-
-void Game::SpawnFyysikko() {
-    Enemy* enemy = new Fyysikko(paths_, this);
-    scene_->addItem(enemy);
-    enemies_spawned_ += 1;
-
-    // Have we spawned enough enemies?
-    if(enemies_spawned_ >= max_no_of_enemies_) {
-        enemy_spawn_timer_->disconnect();
-    }
 }
+
+void Game::SpawnEnemy() {
+    if(no_of_enemies_ < 3*wave_) { // 3*wave for now, can change to something more dynamic :)
+        switch(no_of_enemies_ %5) {
+            case 0 :
+                scene_->addItem(new Fyysikko(paths_, this));
+                break;
+            case 1 :
+                scene_->addItem(new Koneteekkari(paths_, this));
+                break;
+            case 2 :
+                scene_->addItem(new Kylteri(paths_, this));
+                break;
+            case 3 :
+                scene_->addItem(new Cruiseship(paths_, this));
+                break;
+            case 4 :
+                scene_->addItem(new Dokaani(paths_, this));
+                break;
+        }
+    } else {
+        enemy_spawn_timer_->stop();
+    }
+    no_of_enemies_ += 1;
+};
 
 
 void Game::CreatePaths() {

@@ -33,6 +33,7 @@ public:
     void UpdateMoneyText();
     void UpdateWaveText();
     Tower* GetBuild();
+    QList<Tower*> GetTowers();
     void SetBuild(Tower* new_build);
     QGraphicsScene* GetScene();
     QGraphicsPixmapItem* GetCursor();
@@ -43,11 +44,9 @@ public:
 
     void PlayEnemyDiesSfx();
     void PlayCruiseshipDiesSfx();
-    
 
 public slots:
-    void SpawnFyysikko();
-    void CreateEnemies();
+    void SpawnEnemy();
     void ClearTowers();
     void UpgradeTower();
     void RemoveTower();
@@ -58,8 +57,7 @@ private:
     Tower* build_;
     QGraphicsPixmapItem* cursor_;
     QTimer* enemy_spawn_timer_;
-    int enemies_spawned_;
-    int max_no_of_enemies_;
+    int no_of_enemies_;
     QList<QList<QPointF>> paths_;
     QList<Tower*> towers_;
     QProgressBar* health_bar_;
