@@ -1,6 +1,6 @@
 #include "fyysikko.hpp"
 
-#include <QRandomGenerator> //delete later
+#include <QDebug>
 
 Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/fyssa1.png");
@@ -32,8 +32,25 @@ Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* paren
     timer->start(40);
 };
 
+
+// Chooses the shortest path
 QList<QPointF> Fyysikko::ChoosePath(QList<QList<QPointF>> paths) {
-    //change later
-    int rand_idx = QRandomGenerator::global()->bounded((int)paths.size());
-    return paths[rand_idx];
+    int min_path_length = 0;
+    int min_path_length_index = 0;
+    for(int path_index = 0; path_index < paths.size(); path_index++) {
+        QList<QPointF> path = paths[path_index];
+        int path_length = 0;
+        for(int i = 0; i < path.size() - 1; i++) {
+            QLineF ln(path[i], path[i+1]);
+            path_length += ln.length();
+        }
+        if(path_index == 0) {
+            min_path_length = path_length;
+        }
+        if(path_length < min_path_length) {
+            min_path_length = path_length;
+            min_path_length_index = path_index;
+        }
+    }
+    return paths[min_path_length_index];
 };

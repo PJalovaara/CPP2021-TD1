@@ -32,6 +32,7 @@ Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsIte
     timer->start(40);
 };
 
+// Chooses the path at random
 QList<QPointF> Koneteekkari::ChoosePath(QList<QList<QPointF>> paths) {
     int rand_idx = QRandomGenerator::global()->bounded((int)paths.size());
     return paths[rand_idx];
