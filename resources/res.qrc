@@ -24,5 +24,9 @@
 		<file>levels/level5.dat</file>
 		<file>sfx/antinblop.wav</file>
 		<file>sfx/aadanblop.wav</file>
+		<file>sfx/cha-ching.wav</file>
+		<file>sfx/dokaani_dies.wav</file>
+		<file>sfx/game_over.wav</file>
+		<file>sfx/honk.wav</file>
 	</qresource>
 </RCC>
