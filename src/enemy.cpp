@@ -35,28 +35,16 @@ void Enemy::MoveForward() {
             enemy_hp_ -= bullet->GetDamage();
             delete bullet;
             if(enemy_hp_ <= 0){ // If enemy dies
-                game_->SetMoney(game_->GetMoney() + price_);
-                game_->UpdateMoneyText();
-                game_->PlayEnemyDiesSfx();
+                Death();
                 delete this;
                 return;
             }
         }
     }
-    
+
     // If enemy reaches final destination, the player loses hp and the memory is freed
     if(ln.length() < 30 && point_index_ >= path_points_.length() - 1) {
-        QProgressBar* health_bar = game_->GetHealthBar();
-        int current_health = health_bar->value();
-        if(current_health - damage_ >= 0) {
-            health_bar->setValue(current_health - damage_);
-            health_bar->setFormat(" HP: " + QString::number(current_health - damage_));
-        } else {
-            health_bar->setValue(0);
-            health_bar->setFormat(" HP: " + QString::number(0));
-        }
-		delete this;
-        return;
+        ReachDest();
     }
 
     // Rotate to face the next point
@@ -71,6 +59,26 @@ void Enemy::MoveForward() {
     double dy = speed_ * qSin(qDegreesToRadians(theta));
     double dx = speed_ * qCos(qDegreesToRadians(theta));
     setPos(x() + dx, y() + dy);
+};
+
+void Enemy::Death() {
+    game_->SetMoney(game_->GetMoney() + price_);
+    game_->UpdateMoneyText();
+    game_->PlayEnemyDiesSfx();
+};
+
+void Enemy::ReachDest() {
+    QProgressBar* health_bar = game_->GetHealthBar();
+    int current_health = health_bar->value();
+    if(current_health - damage_ >= 0) {
+        health_bar->setValue(current_health - damage_);
+        health_bar->setFormat(" HP: " + QString::number(current_health - damage_));
+    } else {
+        health_bar->setValue(0);
+        health_bar->setFormat(" HP: " + QString::number(0));
+    }
+    delete this;
+    return;
 };
 
 QPointF Enemy::GetDest() {

@@ -17,8 +17,11 @@ public:
     void RotateToFacePoint(QPointF p);
     QPointF GetDest();
     virtual QList<QPointF> ChoosePath(QList<QList<QPointF>> paths) = 0;
+    void ReachDest();
+    virtual void Death();
 public slots:
-    virtual void MoveForward();
+    void MoveForward();
+
 protected:
     QList<QPointF> path_points_;
     QPointF dest_;

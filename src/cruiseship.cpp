@@ -38,78 +38,31 @@ Cruiseship::Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* p
     timer->start(40);
 };
 
+void Cruiseship::Death() {
+    // Update the money system
+    game_->SetMoney(game_->GetMoney() + price_);
+    game_->UpdateMoneyText();
+    // Play "blop" by Aada
+    game_->PlayCruiseshipDiesSfx();
 
-void Cruiseship::MoveForward() {
-    // If close to dest, rotate towards the next dest
-    // TO DO: If enemy reaches final destination, player loses HP
-    QLineF ln(pos(), dest_);
+    // Spawn new enemies where the cruiseship got destroyed
+    QList<QPointF> path_points_left(path_points_.mid(point_index_ - 1, path_points_.length()));
+    path_points_left[0] = pos();
+    QList<QList<QPointF>> path_left;
+    path_left << path_points_left;
 
-    // Getting hit by a bullet destroys the enemy
-    // List of items within the attack_area
-    QList<QGraphicsItem*> colliding_items = this->collidingItems();
+    Fyysikko* f = new Fyysikko(path_left, game_);
+    f->setPos(f->pos().x() + 10, f->pos().y()); // Some offset
+    f->RotateToFacePoint(f->GetDest());
+    Kylteri* kyl = new Kylteri(path_left, game_);
+    f->setPos(f->pos().x(), f->pos().y() + 12); // Some offset
+    f->RotateToFacePoint(f->GetDest());
 
-    for(auto item : colliding_items) {
-        // Do dynamic casting to deduce whether we have a tower or an enemy
-        Bullet* bullet = dynamic_cast<Bullet*>(item);
-        if(bullet) { // If cast is successful
-            // Decrease the enemy hp by the bullet damage 
-            enemy_hp_ -= bullet->GetDamage();
-            if(enemy_hp_ <= 0) { // If enemy dies
-                // Update the money system
-                game_->SetMoney(game_->GetMoney() + price_);
-                game_->UpdateMoneyText();
-                // Play "blop" by Aada
-                game_->PlayCruiseshipDiesSfx();
+    Koneteekkari* k = new Koneteekkari(path_left, game_);
 
-                // Spawn new enemies where the cruiseship got destroyed
-                QList<QPointF> path_points_left(path_points_.mid(point_index_ - 1, path_points_.length()));
-                path_points_left[0] = pos();
-                QList<QList<QPointF>> path_left;
-                path_left << path_points_left;
-
-                Fyysikko* f = new Fyysikko(path_left, game_);
-                f->setPos(f->pos().x() + 10, f->pos().y()); // Some offset
-                f->RotateToFacePoint(f->GetDest());
-                Kylteri* kyl = new Kylteri(path_left, game_);
-                f->setPos(f->pos().x(), f->pos().y() + 12); // Some offset
-                f->RotateToFacePoint(f->GetDest());
-
-                Koneteekkari* k = new Koneteekkari(path_left, game_);
-
-                game_->GetScene()->addItem(k);
-                game_->GetScene()->addItem(f);
-                game_->GetScene()->addItem(kyl);
-
-                // Free the memory
-                delete this;
-                return;
-            }
-            delete bullet;
-        }
-    }
-    
-    // If enemy reaches final destination, the player loses hp and the memory is freed
-    if(ln.length() < 50 && point_index_ >= path_points_.length() - 1) {
-        delete this;
-        QProgressBar* health_bar = game_->GetHealthBar();
-        int current_health = health_bar->value();
-        health_bar->setValue(current_health - damage_);
-        health_bar->setFormat(" HP: " + QString::number(current_health - damage_));
-        return;
-    }
-
-    // Rotate to face the next point
-    if(ln.length() < 10 && point_index_ < path_points_.length() - 1){ // Check the size of the radius
-        point_index_++;
-        dest_ = path_points_[point_index_];
-        RotateToFacePoint(dest_);
-    }
-    
-    // Move enemy forwards with its current angle
-    double theta = rotation(); // return the angle in degrees
-    double dy = speed_ * qSin(qDegreesToRadians(theta));
-    double dx = speed_ * qCos(qDegreesToRadians(theta));
-    setPos(x() + dx, y() + dy);
+    game_->GetScene()->addItem(k);
+    game_->GetScene()->addItem(f);
+    game_->GetScene()->addItem(kyl);
 };
 
 

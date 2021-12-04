@@ -11,8 +11,7 @@ class Cruiseship : public Enemy {
 public:
     Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent = 0);
     QList<QPointF> ChoosePath(QList<QList<QPointF>> paths);
-public slots:
-    virtual void MoveForward();
+    void Death();
 private:
 };
 
