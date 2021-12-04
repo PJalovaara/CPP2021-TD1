@@ -112,7 +112,6 @@ Game::Game(QList<QList<QPointF>> paths) {
     sniper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
 
-
     // Set cursor and build ptr to nullptr and turn on mouse tracking
     cursor_ = nullptr;
     build_ = nullptr;
@@ -124,7 +123,10 @@ Game::Game(QList<QList<QPointF>> paths) {
     // Connect CLEAR button to the slot ClearTowers
     connect(clear_button, SIGNAL(clicked()), this, SLOT(ClearTowers()));
     
- 
+    // Initialize sound effects
+    enemy_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/antinblop.wav"));
+    cruiseship_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/aadanblop.wav"));
+
 
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     // No vertical nor horizontal scroll bars
@@ -134,8 +136,8 @@ Game::Game(QList<QList<QPointF>> paths) {
 
 
     // Test code: Create a cruiseship and dokaani
-    //Cruiseship* cruiseship = new Cruiseship(paths_, this);
-    //scene_->addItem(cruiseship);
+    Cruiseship* cruiseship = new Cruiseship(paths_, this);
+    scene_->addItem(cruiseship);
 
     // Dokaani* dok = new Dokaani(path_points_, this);
     // scene_->addItem(dok);
@@ -345,4 +347,12 @@ void Game::RemoveTower() {
     towers_.removeOne(closest_tower_);
 	scene_->removeItem(closest_tower_);
     closest_tower_ = nullptr;
+};
+
+void Game::PlayEnemyDiesSfx() {
+    enemy_dies_sfx_.play();
+};
+
+void Game::PlayCruiseshipDiesSfx() {
+    cruiseship_dies_sfx_.play();
 };

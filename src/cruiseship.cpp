@@ -36,7 +36,7 @@ Cruiseship::Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* p
 
     // Call the MoveForward function every 40 ms (approx 25 fps)
     timer->start(40);
- };
+};
 
 
 void Cruiseship::MoveForward() {
@@ -58,6 +58,8 @@ void Cruiseship::MoveForward() {
                 // Update the money system
                 game_->SetMoney(game_->GetMoney() + price_);
                 game_->UpdateMoneyText();
+                // Play "blop" by Aada
+                game_->PlayCruiseshipDiesSfx();
 
                 // Spawn new enemies where the cruiseship got destroyed
                 QList<QPointF> path_points_left(path_points_.mid(point_index_ - 1, path_points_.length()));
@@ -82,8 +84,6 @@ void Cruiseship::MoveForward() {
                 delete this;
                 return;
             }
-            
-
             delete bullet;
         }
     }

@@ -30,7 +30,7 @@ SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
 };
 
 void SniperGoose::AttackTarget(){
-    GoldenBullet* bullet = new GoldenBullet();
+    GoldenBullet* bullet = new GoldenBullet(this);
     bullet->SetMaxRange(attack_radius_);
     bullet->setPos(pos()); // Center the bullet position w.r.t the goose
 

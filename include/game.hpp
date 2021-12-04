@@ -12,6 +12,7 @@
 #include <QLineEdit>
 #include <QProgressBar>
 #include <QPushButton>
+#include <QSoundEffect>
 
 #include "tower.hpp"
 
@@ -38,6 +39,9 @@ public:
 
     QList<QList<QPointF>> GetPaths();
     void CreatePaths();
+
+    void PlayEnemyDiesSfx();
+    void PlayCruiseshipDiesSfx();
     
 
 public slots:
@@ -67,6 +71,8 @@ private:
     QPushButton* upgrade_button_;
     QPushButton* delete_button_;
     QGraphicsRectItem* selected_tower_rect_;
+    QSoundEffect enemy_dies_sfx_;
+    QSoundEffect cruiseship_dies_sfx_;
 };
 
 
