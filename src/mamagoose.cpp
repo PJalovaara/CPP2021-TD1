@@ -29,7 +29,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
 };
 
 void MamaGoose::AttackTarget(){
-    Bullet* bullet = new Bullet();
+    Bullet* bullet = new Bullet(this);
     bullet->SetMaxRange(attack_radius_); // Set max range for the bullet to equal the range of the tower
     bullet->setPos(pos()); // Center the bullet position w.r.t the goose
 

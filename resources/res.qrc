@@ -22,5 +22,7 @@
 		<file>levels/level3.dat</file>
 		<file>levels/level4.dat</file>
 		<file>levels/level5.dat</file>
+		<file>sfx/antinblop.wav</file>
+		<file>sfx/aadanblop.wav</file>
 	</qresource>
 </RCC>

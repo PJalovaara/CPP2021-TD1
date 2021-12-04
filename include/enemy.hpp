@@ -7,6 +7,7 @@
 #include <QPointF>
 #include <QProgressBar>
 
+
 #include "game.hpp"
 
 class Enemy : public QObject, public QGraphicsPixmapItem {

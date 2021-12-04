@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QString>
 #include <qmath.h>
+
 #include <QDebug>
 
 #include <bullet.hpp>
@@ -32,15 +33,14 @@ void Enemy::MoveForward() {
         Bullet* bullet = dynamic_cast<Bullet*>(item);
         if(bullet) { // If cast is successful
             enemy_hp_ -= bullet->GetDamage();
+            delete bullet;
             if(enemy_hp_ <= 0){ // If enemy dies
                 game_->SetMoney(game_->GetMoney() + price_);
-                game_->UpdateMoneyText(
-                    
-                );
+                game_->UpdateMoneyText();
+                game_->PlayEnemyDiesSfx();
                 delete this;
                 return;
             }
-            delete bullet;
         }
     }
     
