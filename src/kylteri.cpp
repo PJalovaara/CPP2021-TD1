@@ -31,6 +31,20 @@ Kylteri::Kylteri(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
     timer->start(40);
 };
 
+
+// Chooses the path with the nearest tower
 QList<QPointF> Kylteri::ChoosePath(QList<QList<QPointF>> paths) {
+    QList<QPointF> path_with_nearest_tower;
+    int shortest_dist = 1000;
+    if(game_>GetTowers().isEmpty)()) {
+        return paths[0];
+    }
+    for(auto path : paths) {
+        QPointF first_point = path[0];
+        for(auto tower : game_->GetTowers()) {
+            QLineF ln(tower->pos(), first_point);
+
+        }
+    }
     return paths[0];
 };

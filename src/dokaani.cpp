@@ -33,5 +33,20 @@ Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
 };
 
 QList<QPointF> Dokaani::ChoosePath(QList<QList<QPointF>> paths) {
-    return paths[0];
+    // Chooses the longest path
+    int max_path_length = 0;
+    int max_path_length_index = 0;
+    for(int path_index = 0; path_index < paths.size(); path_index++) {
+        QList<QPointF> path = paths[path_index];
+        int path_length = 0;
+        for(int i = 0; i < path.size() - 1; i++) {
+            QLineF ln(path[i], path[i+1]);
+            path_length += ln.length();
+        }
+        if(path_length > max_path_length) {
+            max_path_length = path_length;
+            max_path_length_index = path_index;
+        }
+    }
+    return paths[max_path_length_index];
 };
