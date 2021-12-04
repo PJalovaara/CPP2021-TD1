@@ -31,6 +31,8 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
+// TODO: GameOver text etc, GameOver prohibits you from building more towers, Unlimited waves?
+
 Game::Game(QList<QList<QPointF>> paths) {
     // Creating a scene and a timer to spawn enemies on the pathPoints path
     scene_ = new QGraphicsScene(this);
@@ -129,7 +131,7 @@ Game::Game(QList<QList<QPointF>> paths) {
     dokaani_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/dokaani_dies.wav"));
     honk_sfx_.setSource(QUrl::fromLocalFile(":/sfx/honk.wav"));
     chaching_sfx_.setSource(QUrl::fromLocalFile(":/sfx/cha-ching.wav"));
-
+    game_over_sfx_.setSource(QUrl::fromLocalFile(":/sfx/game_over.wav"));
 
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     // No vertical nor horizontal scroll bars
@@ -192,6 +194,7 @@ void Game::ResetCursor() {
 };
 
 void Game::SetBuild(Tower* newBuild) {
+    chaching_sfx_.play();
     build_ = newBuild;
 };
 
@@ -383,4 +386,8 @@ void Game::PlayDokaaniDiesSfx() {
 
 void Game::PlayHonkSfx() {
     honk_sfx_.play();
+};
+
+void Game::GameOver() {
+    game_over_sfx_.play();  
 };

@@ -46,6 +46,7 @@ public:
     void PlayDokaaniDiesSfx();
     void PlayCruiseshipDiesSfx();
     void PlayHonkSfx();
+    void GameOver();
 
 public slots:
     void SpawnEnemy();
@@ -78,6 +79,7 @@ private:
     QSoundEffect dokaani_dies_sfx_;
     QSoundEffect honk_sfx_;
     QSoundEffect chaching_sfx_;
+    QSoundEffect game_over_sfx_;
 };
 
 

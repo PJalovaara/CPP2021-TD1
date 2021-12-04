@@ -67,13 +67,16 @@ void Enemy::Death() {
     game_->PlayEnemyDiesSfx();
 };
 
-void Enemy::ReachDest() {
+void Enemy::ReachDest() {    
     QProgressBar* health_bar = game_->GetHealthBar();
     int current_health = health_bar->value();
     if(current_health - damage_ >= 0) {
+        // Play honk because the geese are scared
+        game_->PlayHonkSfx();
         health_bar->setValue(current_health - damage_);
         health_bar->setFormat(" HP: " + QString::number(current_health - damage_));
     } else {
+        game_->GameOver();
         health_bar->setValue(0);
         health_bar->setFormat(" HP: " + QString::number(0));
     }
