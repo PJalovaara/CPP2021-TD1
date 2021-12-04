@@ -43,7 +43,9 @@ public:
     void CreatePaths();
 
     void PlayEnemyDiesSfx();
+    void PlayDokaaniDiesSfx();
     void PlayCruiseshipDiesSfx();
+    void PlayHonkSfx();
 
 public slots:
     void SpawnEnemy();
@@ -70,8 +72,12 @@ private:
     QPushButton* upgrade_button_;
     QPushButton* delete_button_;
     QGraphicsRectItem* selected_tower_rect_;
+
     QSoundEffect enemy_dies_sfx_;
     QSoundEffect cruiseship_dies_sfx_;
+    QSoundEffect dokaani_dies_sfx_;
+    QSoundEffect honk_sfx_;
+    QSoundEffect chaching_sfx_;
 };
 
 

@@ -8,6 +8,7 @@ class Dokaani : public Enemy {
 public:
     Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent = 0);
     QList<QPointF> ChoosePath(QList<QList<QPointF>> paths);
+    void MoveForward();
 private:
 };
 

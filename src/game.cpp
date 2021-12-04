@@ -126,6 +126,9 @@ Game::Game(QList<QList<QPointF>> paths) {
     // Initialize sound effects
     enemy_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/antinblop.wav"));
     cruiseship_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/aadanblop.wav"));
+    dokaani_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/dokaani_dies.wav"));
+    honk_sfx_.setSource(QUrl::fromLocalFile(":/sfx/honk.wav"));
+    chaching_sfx_.setSource(QUrl::fromLocalFile(":/sfx/cha-ching.wav"));
 
 
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -372,4 +375,12 @@ void Game::PlayEnemyDiesSfx() {
 
 void Game::PlayCruiseshipDiesSfx() {
     cruiseship_dies_sfx_.play();
+};
+
+void Game::PlayDokaaniDiesSfx() {
+    dokaani_dies_sfx_.play();
+};
+
+void Game::PlayHonkSfx() {
+    honk_sfx_.play();
 };
