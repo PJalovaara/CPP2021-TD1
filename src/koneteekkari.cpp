@@ -1,5 +1,6 @@
 #include "koneteekkari.hpp"
 
+#include <QRandomGenerator>
 
 Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/kone1.png");
@@ -32,5 +33,6 @@ Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsIte
 };
 
 QList<QPointF> Koneteekkari::ChoosePath(QList<QList<QPointF>> paths) {
-    return paths[0];
+    int rand_idx = QRandomGenerator::global()->bounded((int)paths.size());
+    return paths[rand_idx];
 };

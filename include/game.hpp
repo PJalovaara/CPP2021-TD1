@@ -31,6 +31,7 @@ public:
     int GetMoney();
     void SetMoney(int new_money);
     void UpdateMoneyText();
+    void UpdateWaveText();
     Tower* GetBuild();
     void SetBuild(Tower* new_build);
     QGraphicsScene* GetScene();

@@ -73,7 +73,7 @@ Game::Game(QList<QList<QPointF>> paths) {
     money_ = 200;
     money_text_ = new QLineEdit(this);
     money_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height());
-    money_text_->setText(QString(" MONEY: $") + QString::number(money_));
+    UpdateMoneyText();
     money_text_->setReadOnly(true);
     money_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
 
@@ -82,7 +82,7 @@ Game::Game(QList<QList<QPointF>> paths) {
     last_wave_ = 50;
     wave_text_ = new QLineEdit(this);
     wave_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height() - wave_text_->height());
-    wave_text_->setText(QString(" WAVE: ") + QString::number(wave_) + QString("/") + QString::number(last_wave_));
+    UpdateWaveText();
     wave_text_->setReadOnly(true);
     wave_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
 
@@ -255,7 +255,14 @@ Tower* Game::GetBuild() {
 
 void Game::StartWave() {
     wave_++;
-    CreateEnemies();
+    UpdateWaveText();
+    
+    
+    for(int i = 0; i < wave_; i++) {
+        SpawnFyysikko();
+    }
+
+
 }
 
 void Game::CreateEnemies() {
@@ -314,6 +321,9 @@ void Game::UpdateMoneyText() {
     money_text_->setText(QString(" MONEY: $") + QString::number(GetMoney()));
 };
 
+void Game::UpdateWaveText() {
+    wave_text_->setText(QString(" WAVE: ") + QString::number(wave_) + QString("/") + QString::number(last_wave_));
+};
 
 void Game::SetMoney(int new_money) {
     money_ = new_money;

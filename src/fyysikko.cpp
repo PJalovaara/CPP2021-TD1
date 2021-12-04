@@ -1,5 +1,6 @@
 #include "fyysikko.hpp"
 
+#include <QRandomGenerator> //delete later
 
 Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/fyssa1.png");
@@ -32,5 +33,7 @@ Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* paren
 };
 
 QList<QPointF> Fyysikko::ChoosePath(QList<QList<QPointF>> paths) {
-    return paths[0];
+    //change later
+    int rand_idx = QRandomGenerator::global()->bounded((int)paths.size());
+    return paths[rand_idx];
 };
