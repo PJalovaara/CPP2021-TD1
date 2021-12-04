@@ -46,6 +46,7 @@ public slots:
     void ClearTowers();
     void UpgradeTower();
     void RemoveTower();
+    void StartWave();
 
 private:
     QGraphicsScene* scene_;
@@ -58,7 +59,10 @@ private:
     QList<Tower*> towers_;
     QProgressBar* health_bar_;
     int money_;
+    int wave_;
+    int last_wave_;
     QLineEdit* money_text_;
+    QLineEdit* wave_text_;
     Tower* closest_tower_;
     QPushButton* upgrade_button_;
     QPushButton* delete_button_;

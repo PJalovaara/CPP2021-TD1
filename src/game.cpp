@@ -77,6 +77,15 @@ Game::Game(QList<QList<QPointF>> paths) {
     money_text_->setReadOnly(true);
     money_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
 
+     // Initialize the wave and last_wave and create text
+    wave_ = 0;
+    last_wave_ = 50;
+    wave_text_ = new QLineEdit(this);
+    wave_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height() - wave_text_->height());
+    wave_text_->setText(QString(" WAVE: ") + QString::number(wave_) + QString("/") + QString::number(last_wave_));
+    wave_text_->setReadOnly(true);
+    wave_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
+
 
     // Create a path for the enemies
     CreatePaths();
@@ -110,7 +119,7 @@ Game::Game(QList<QList<QPointF>> paths) {
     setMouseTracking(true);
 
     // Creates 5 enemies, one every second
-    connect(start_button, SIGNAL(clicked()), this, SLOT(CreateEnemies()));
+    connect(start_button, SIGNAL(clicked()), this, SLOT(StartWave()));
 
     // Connect CLEAR button to the slot ClearTowers
     connect(clear_button, SIGNAL(clicked()), this, SLOT(ClearTowers()));
@@ -241,6 +250,11 @@ void Game::mousePressEvent(QMouseEvent* event) {
 Tower* Game::GetBuild() {
     return build_;
 };
+
+void Game::StartWave() {
+    wave_++;
+    CreateEnemies();
+}
 
 void Game::CreateEnemies() {
     enemies_spawned_ = 0;
