@@ -1,16 +1,15 @@
 <!DOCTYPE RCC><RCC version="1.0">
 	<qresource>
-   		<file>images/tower.png</file>
-		<file>images/arrow.png</file>
-		<file>images/MamaGoose.png</file>
-		<file>images/SniperGoose.png</file>
-		<file>images/PooperGoose.png</file>
+		<file>images/mamagoose.png</file>
+		<file>images/snipergoose.png</file>
+		<file>images/basicgoose.png</file>
+		<file>images/poopergoose.png</file>
+		<file>images/shotgungoose.png</file>
 		<file>images/bulletblack.png</file>
 		<file>images/bulletgold.png</file>
 		<file>images/poop.png</file>
-		<file>images/dokaani1.png</file>
-		<file>images/dokaani2.png</file>
-		<file>images/dokaani3.png</file>
+		<file>images/plasmaball.png</file>
+		<file>images/dokaani.png</file>
 		<file>images/fyssa1.png</file>
 		<file>images/fyssa2.png</file>
 		<file>images/fyssa3.png</file>
@@ -21,7 +20,6 @@
 		<file>images/cruiseship.png</file>
 		<file>images/editorcursor.png</file>
 		<file>images/logo.png</file>
-		<file>images/logo2.png</file>
 		<file>levels/level1.dat</file>
 		<file>levels/level2.dat</file>
 		<file>levels/level3.dat</file>

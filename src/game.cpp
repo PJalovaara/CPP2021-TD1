@@ -21,6 +21,7 @@
 #include "buildicon.hpp"
 #include "mamagoose.hpp"
 #include "snipergoose.hpp"
+#include "basicgoose.hpp"
 #include "poopergoose.hpp"
 #include "shotgungoose.hpp"
 #include "cruiseship.hpp"
@@ -100,7 +101,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     CreatePaths();
 
     // Add the build icons and their prices
-    BuildIcon<MamaGoose>* basic_icon = new BuildIcon<MamaGoose>(":/images/MamaGoose.png", 100, this); // change to basic goose
+    BuildIcon<BasicGoose>* basic_icon = new BuildIcon<BasicGoose>(":/images/basicgoose.png", 100, this);
     basic_icon->setPos(50,50);
     scene_->addItem(basic_icon);
     QLineEdit* basic_price_text = new QLineEdit(this);
@@ -110,7 +111,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     basic_price_text->move(0, basic_icon->pixmap().height());
     basic_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
-    BuildIcon<PooperGoose>* pooper_icon = new BuildIcon<PooperGoose>(":/images/PooperGoose.png", 200, this);
+    BuildIcon<PooperGoose>* pooper_icon = new BuildIcon<PooperGoose>(":/images/poopergoose.png", 200, this);
     pooper_icon->setPos(basic_icon->pos().x() + basic_icon->pixmap().width() + 10, 50);
     scene_->addItem(pooper_icon);
     QLineEdit* pooper_price_text = new QLineEdit(this);
@@ -120,7 +121,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     pooper_price_text->move(pooper_icon->pos().x() - pooper_price_text->width() / 2, pooper_icon->pixmap().height());
     pooper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
-    BuildIcon<ShotgunGoose>* shotgun_icon = new BuildIcon<ShotgunGoose>(":/images/PooperGoose.png", 300, this); // change to Shotgun image
+    BuildIcon<ShotgunGoose>* shotgun_icon = new BuildIcon<ShotgunGoose>(":/images/shotgungoose.png", 300, this);
     shotgun_icon->setPos(pooper_icon->pos().x() + pooper_icon->pixmap().width() + 10, 50);
     scene_->addItem(shotgun_icon);
     QLineEdit* shotgun_price_text = new QLineEdit(this);
@@ -130,7 +131,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     shotgun_price_text->move(shotgun_icon->pos().x() - shotgun_price_text->width() / 2, shotgun_icon->pixmap().height());
     shotgun_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
-    BuildIcon<SniperGoose>* sniper_icon = new BuildIcon<SniperGoose>(":/images/SniperGoose.png", 500, this);
+    BuildIcon<SniperGoose>* sniper_icon = new BuildIcon<SniperGoose>(":/images/snipergoose.png", 500, this);
     sniper_icon->setPos(shotgun_icon->pos().x() + shotgun_icon->pixmap().width() + 10, 50);
     scene_->addItem(sniper_icon);
     QLineEdit* sniper_price_text = new QLineEdit(this);
@@ -140,7 +141,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     sniper_price_text->move(sniper_icon->pos().x() - sniper_price_text->width() / 2, sniper_icon->pixmap().height());
     sniper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
-    BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/MamaGoose.png", 1000, this);
+    BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/mamagoose.png", 1000, this);
     mama_icon->setPos(sniper_icon->pos().x() + sniper_icon->pixmap().width() + 10, 50);
     scene_->addItem(mama_icon);
     QLineEdit* mama_price_text = new QLineEdit(this);
