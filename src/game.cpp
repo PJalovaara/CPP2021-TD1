@@ -27,8 +27,8 @@
 #include "koneteekkari.hpp"
 #include "dokaani.hpp"
 
-#define WINDOW_WIDTH 1200
-#define WINDOW_HEIGHT 900
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 700
 
 // TODO: GameOver text etc, GameOver prohibits you from building more towers, Unlimited waves?
 
