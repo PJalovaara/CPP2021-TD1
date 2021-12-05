@@ -20,6 +20,7 @@ public:
     virtual QList<QPointF> ChoosePath(QList<QList<QPointF>> paths) = 0;
     void ReachDest();
     virtual void Death();
+    virtual void CheckPoop();
 public slots:
     void MoveForward();
 
