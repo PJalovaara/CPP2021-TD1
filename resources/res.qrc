@@ -4,23 +4,34 @@
 		<file>images/arrow.png</file>
 		<file>images/MamaGoose.png</file>
 		<file>images/SniperGoose.png</file>
+		<file>images/PooperGoose.png</file>
 		<file>images/bulletblack.png</file>
 		<file>images/bulletgold.png</file>
+		<file>images/poop.png</file>
 		<file>images/dokaani1.png</file>
 		<file>images/dokaani2.png</file>
 		<file>images/dokaani3.png</file>
 		<file>images/fyssa1.png</file>
 		<file>images/fyssa2.png</file>
+		<file>images/fyssa3.png</file>
 		<file>images/kone1.png</file>
 		<file>images/kone2.png</file>
 		<file>images/kylteri1.png</file>
 		<file>images/kylteri2.png</file>
 		<file>images/cruiseship.png</file>
 		<file>images/editorcursor.png</file>
+		<file>images/logo.png</file>
+		<file>images/logo2.png</file>
 		<file>levels/level1.dat</file>
 		<file>levels/level2.dat</file>
 		<file>levels/level3.dat</file>
 		<file>levels/level4.dat</file>
 		<file>levels/level5.dat</file>
+		<file>sfx/antinblop.wav</file>
+		<file>sfx/aadanblop.wav</file>
+		<file>sfx/cha-ching.wav</file>
+		<file>sfx/dokaani_dies.wav</file>
+		<file>sfx/game_over.wav</file>
+		<file>sfx/honk.wav</file>
 	</qresource>
 </RCC>

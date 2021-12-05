@@ -1,16 +1,16 @@
-#include "mamagoose.hpp"
-#include "bullet.hpp"
+#include "poopergoose.hpp"
+#include "poop.hpp"
 #include "enemy.hpp"
 #include <QTimer>
 #include <QList>
 #include <QDebug>
 
-MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {    
+PooperGoose::PooperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) { 
     // Set the graphics
-    QPixmap p = QPixmap(":/images/MamaGoose.png");
-    p = p.scaled(200, 100, Qt::KeepAspectRatio);
+    QPixmap p = QPixmap(":/images/PooperGoose.png");
+    p = p.scaled(100, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
-    attack_speed_ = 3; // Attack 3 times a second
+    attack_speed_ = 1; // Attack 3 times a second
 
     // Set attack_radius and tower width, height and center
     tower_width_ = p.width();
@@ -28,18 +28,18 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
     timer->start(1000 / attack_speed_);
 };
 
-void MamaGoose::AttackTarget(){
-    Bullet* bullet = new Bullet(this);
-    bullet->SetMaxRange(attack_radius_); // Set max range for the bullet to equal the range of the tower
-    bullet->setPos(pos()); // Center the bullet position w.r.t the goose
+void PooperGoose::AttackTarget(){
+    Poop* poop = new Poop(this);
+    poop->SetMaxRange(attack_radius_); // Set max range for the bullet to equal the range of the tower
+    poop->setPos(pos()); // Center the bullet position w.r.t the goose
 
     QLineF ln(pos(), attack_dest_);
     int angle = -ln.angle(); // ln.angle() is the angle of the ln counterclockwise,  NOTE: rotation will rotate clockwise
-    bullet->setRotation(angle); // Rotate the bullet
-    scene_->addItem(bullet); // Add the bullet into the scene
+    poop->setRotation(angle); // Rotate the bullet
+    scene_->addItem(poop); // Add the bullet into the scene
 };
 
-void MamaGoose::AcquireTarget() {
+void PooperGoose::AcquireTarget() {
     // List of items within the attack_area
     QList<QGraphicsItem*> colliding_items = attack_area_->collidingItems();
 

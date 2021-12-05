@@ -1,16 +1,16 @@
-#include "mamagoose.hpp"
+#include "basicgoose.hpp"
 #include "bullet.hpp"
 #include "enemy.hpp"
 #include <QTimer>
 #include <QList>
 #include <QDebug>
 
-MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {    
+BasicGoose::BasicGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {    
     // Set the graphics
-    QPixmap p = QPixmap(":/images/MamaGoose.png");
-    p = p.scaled(200, 100, Qt::KeepAspectRatio);
+    QPixmap p = QPixmap(":/images/MamaGoose.png"); // TODO: Change graphics
+    p = p.scaled(100, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
-    attack_speed_ = 3; // Attack 3 times a second
+    attack_speed_ = 2; // Attack 2 times a second
 
     // Set attack_radius and tower width, height and center
     tower_width_ = p.width();
@@ -20,7 +20,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
 
     // Set the attack area to nullptr and then create it with the UpdateAttackRadius function
     attack_area_ = nullptr;
-    UpgradeAttackRadius(120); // MamaGoose has attackRadius of 120
+    UpgradeAttackRadius(100); // BasicGoose has attackRadius of 100
     
     // Connect timer to AcquireTarget
     QTimer* timer = new QTimer();
@@ -28,7 +28,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
     timer->start(1000 / attack_speed_);
 };
 
-void MamaGoose::AttackTarget(){
+void BasicGoose::AttackTarget(){
     Bullet* bullet = new Bullet(this);
     bullet->SetMaxRange(attack_radius_); // Set max range for the bullet to equal the range of the tower
     bullet->setPos(pos()); // Center the bullet position w.r.t the goose
@@ -39,7 +39,7 @@ void MamaGoose::AttackTarget(){
     scene_->addItem(bullet); // Add the bullet into the scene
 };
 
-void MamaGoose::AcquireTarget() {
+void BasicGoose::AcquireTarget() {
     // List of items within the attack_area
     QList<QGraphicsItem*> colliding_items = attack_area_->collidingItems();
 

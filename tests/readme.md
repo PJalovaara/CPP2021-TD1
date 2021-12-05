@@ -14,7 +14,7 @@ We start the game with no towers nor enemies to check for memory leaks. We open 
 
 **Involved Classes:** Game
 
-**Test File:** test1
+**Test run:** test1
 
 **Results:** A ton of memory leaks which are probably not possible to fix by us. The errors regard the Qt library functionality
 
@@ -26,9 +26,9 @@ We let enemies pass through and get destroyed.
 
 **Involved Classes:** Game
 
-**Test File:** test2
+**Test run:** test2
 
-**Results:** Valgrind error: we deleted the enemy too early in the MoveForward function (FIXED)
+**Results:** Valgrind error: we deleted the enemy too early in the MoveForward function. Fixed by writing the delete this later on in the code.
 
 
 ## Test nro 1 of class Tower
@@ -37,8 +37,8 @@ We put up a tower and use the remove functionality
 
 **Involved Classes:** Game
 
-**Test File:** test3
+**Test run:** test3
 
-**Results:** Valgrind error: Memory was lost (Possible fix: Implement the destructor for the tower)
+**Results:** Valgrind error: Memory was lost. Possible fix: Implement the destructor for the tower. Fixed by calling the removeItem of the parent.
 
 

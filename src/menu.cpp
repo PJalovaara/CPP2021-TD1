@@ -38,14 +38,13 @@ Menu::Menu() {
     QPushButton* CustomButton = new QPushButton(QString("CUSTOM LEVEL"), this);
 	QPushButton* EditorButton = new QPushButton(QString("LEVEL EDITOR"), this);
 
-    Level1Button->move(WINDOW_WIDTH / 2 - Level1Button->width() / 2, 10);
-	Level2Button->move(WINDOW_WIDTH / 2 - Level2Button->width() / 2, 40);
-    Level3Button->move(WINDOW_WIDTH / 2 - Level3Button->width() / 2, 70);
-    Level4Button->move(WINDOW_WIDTH / 2 - Level4Button->width() / 2, 100);
-    Level5Button->move(WINDOW_WIDTH / 2 - Level5Button->width() / 2, 130);
-
-    CustomButton->move(WINDOW_WIDTH / 2 - CustomButton->width() / 2 , 160);
-	EditorButton->move(WINDOW_WIDTH / 2 - Level5Button->width() / 2, 190);
+    Level1Button->move(10, WINDOW_HEIGHT - 230);
+	Level2Button->move(10, WINDOW_HEIGHT - 200);
+    Level3Button->move(10, WINDOW_HEIGHT - 170);
+    Level4Button->move(10, WINDOW_HEIGHT - 140);
+    Level5Button->move(10, WINDOW_HEIGHT - 110);
+    CustomButton->move(10, WINDOW_HEIGHT - 80);
+	EditorButton->move(10, WINDOW_HEIGHT - 50);
     
 	connect(Level1Button, SIGNAL(clicked()), this, SLOT(StartLevel1()));
 	connect(Level2Button, SIGNAL(clicked()), this, SLOT(StartLevel2()));
@@ -55,11 +54,33 @@ Menu::Menu() {
 	connect(CustomButton, SIGNAL(clicked()), this, SLOT(StartCustom()));
 	connect(EditorButton, SIGNAL(clicked()), this, SLOT(StartEditor()));
 
+	QLineEdit* td_title = new QLineEdit(this);
+    td_title->setReadOnly(true);
+    td_title->setAlignment(Qt::AlignRight);
+    td_title->setText("ELEC-A7151 Course Project: Tower Defense Game");
+    td_title->move(0, WINDOW_HEIGHT - 20);
+    td_title->setStyleSheet("QLineEdit {color: black; font: 10px; background: rgba(0, 0, 0, 0); width: 400 px}");
+
+	QPixmap logo_p = QPixmap(":/images/logo2.png");
+    logo_p = logo_p.scaled(400, 300, Qt::KeepAspectRatio);
+	QGraphicsPixmapItem* td_logo = new QGraphicsPixmapItem(logo_p);
+	td_logo->setPos(0, 0);
+    scene_->addItem(td_logo);
+
 
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     // No vertical nor horizontal scroll bars
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+}
+
+Menu::~Menu() {
+	for(auto game : active_games_) {
+		delete game;
+	}
+	for(auto editor : active_editors_) {
+		delete editor;
+	}
 }
 
 QGraphicsScene* Menu::GetScene() {
@@ -98,26 +119,31 @@ void Menu::StartLevel1() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level1.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 void Menu::StartLevel2() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level2.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 void Menu::StartLevel3() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level3.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 void Menu::StartLevel4() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level4.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 void Menu::StartLevel5() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level5.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 
 void Menu::StartCustom() {
@@ -135,5 +161,6 @@ void Menu::StartEditor() {
 	// THIS WILL CAUSE A MEMORY LEAK FOR SURE
     Editor* editor = new Editor();
     editor->show();
+	active_editors_.push_back(editor);
 }
 

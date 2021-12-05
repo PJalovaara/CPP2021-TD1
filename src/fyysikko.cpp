@@ -1,5 +1,6 @@
 #include "fyysikko.hpp"
 
+#include <QDebug>
 
 Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/fyssa1.png");
@@ -8,11 +9,11 @@ Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* paren
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
     enemy_hp_ = 20;
-    damage_ = 30;
+    damage_ = 10;
     price_ = 30;
-    speed_ = 2;
+    speed_ = 4;
 
-        // Set the points in the path
+    // Set the points in the path
     path_points_ = ChoosePath(paths);
 
     // Set initial pos and initial destination
@@ -21,16 +22,27 @@ Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* paren
     dest_ = path_points_[point_index_];
 
     RotateToFacePoint(dest_);
-    speed_ = 3;
-
-    // Connect a timer to the move forward
-    QTimer* timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(MoveForward()));
-
-    // Call the MoveForward function every 40 ms (approx 25 fps)
-    timer->start(40);
 };
 
+
+// Chooses the shortest path
 QList<QPointF> Fyysikko::ChoosePath(QList<QList<QPointF>> paths) {
-    return paths[0];
+    int min_path_length = 0;
+    int min_path_length_index = 0;
+    for(int path_index = 0; path_index < paths.size(); path_index++) {
+        QList<QPointF> path = paths[path_index];
+        int path_length = 0;
+        for(int i = 0; i < path.size() - 1; i++) {
+            QLineF ln(path[i], path[i+1]);
+            path_length += ln.length();
+        }
+        if(path_index == 0) {
+            min_path_length = path_length;
+        }
+        if(path_length < min_path_length) {
+            min_path_length = path_length;
+            min_path_length_index = path_index;
+        }
+    }
+    return paths[min_path_length_index];
 };

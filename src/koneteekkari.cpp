@@ -1,5 +1,6 @@
 #include "koneteekkari.hpp"
 
+#include <QRandomGenerator>
 
 Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/kone1.png");
@@ -8,9 +9,9 @@ Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsIte
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
     enemy_hp_ = 10;
-    damage_ = 70;
+    damage_ = 15;
     price_ = 50;
-    speed_ = 1;
+    speed_ = 4;
 
         // Set the points in the path
     path_points_ = ChoosePath(paths);
@@ -21,16 +22,10 @@ Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsIte
     dest_ = path_points_[point_index_];
 
     RotateToFacePoint(dest_);
-    speed_ = 3;
-
-    // Connect a timer to the move forward
-    QTimer* timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(MoveForward()));
-
-    // Call the MoveForward function every 40 ms (approx 25 fps)
-    timer->start(40);
 };
 
+// Chooses the path at random
 QList<QPointF> Koneteekkari::ChoosePath(QList<QList<QPointF>> paths) {
-    return paths[0];
+    int rand_idx = QRandomGenerator::global()->bounded((int)paths.size());
+    return paths[rand_idx];
 };

@@ -10,7 +10,7 @@ Kylteri::Kylteri(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
     enemy_hp_ = 5;
     price_ = 40;
     damage_ = 10;
-    speed_ = 2;
+    speed_ = 5;
 
     // Set the points in the path
     path_points_ = ChoosePath(paths);
@@ -21,16 +21,25 @@ Kylteri::Kylteri(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
     dest_ = path_points_[point_index_];
 
     RotateToFacePoint(dest_);
-    speed_ = 3;
-
-    // Connect a timer to the move forward
-    QTimer* timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(MoveForward()));
-
-    // Call the MoveForward function every 40 ms (approx 25 fps)
-    timer->start(40);
 };
 
+
+// Chooses the path with the nearest tower
 QList<QPointF> Kylteri::ChoosePath(QList<QList<QPointF>> paths) {
-    return paths[0];
+    QList<QPointF> path_with_nearest_tower;
+    int shortest_dist = 1000;
+    if(game_->GetTowers().isEmpty()) {
+        return paths[0];
+    }
+    for(auto path : paths) {
+        QPointF first_point = path[0];
+        for(auto tower : game_->GetTowers()) {
+            QLineF ln(tower->pos(), first_point);
+            if(ln.length() < shortest_dist) {
+                path_with_nearest_tower = path;
+                shortest_dist = ln.length();
+            }
+        }
+    }
+    return path_with_nearest_tower;
 };

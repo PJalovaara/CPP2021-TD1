@@ -12,11 +12,15 @@
 #include <QLineEdit>
 #include <QProgressBar>
 
+#include "game.hpp"
+#include "editor.hpp"
+
 class Menu : public QGraphicsView{
     Q_OBJECT
 public:
     // member functions
     Menu();
+    ~Menu();
     void mousePressEvent(QMouseEvent* event);
     QGraphicsScene* GetScene();
     QList<QList<QPointF>> ReadPathsFromFile(const QString& filename);
@@ -32,5 +36,7 @@ public slots:
 
 private:
     QGraphicsScene* scene_;
+    QList<Game*> active_games_;
+    QList<Editor*> active_editors_;
 };
 #endif

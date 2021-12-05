@@ -12,10 +12,10 @@
 #include <QDebug>
 #include <QFileDialog>
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 700
 
-Editor::Editor() {
+Editor::Editor(QWidget* parent) : QGraphicsView(parent) {
     // create and set scene
     scene_ = new QGraphicsScene(this);
     setScene(scene_); // Visualize this scene
