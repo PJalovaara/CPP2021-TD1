@@ -4,7 +4,7 @@
 
 
 Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
-    QPixmap p = QPixmap(":/images/dokaani3.png");
+    QPixmap p = QPixmap(":/images/dokaani.png");
     p = p.scaled(180, 180, Qt::KeepAspectRatio); // Set size for the enemy
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2); // Centering

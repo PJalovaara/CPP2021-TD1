@@ -7,7 +7,7 @@
 
 MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {    
     // Set the graphics
-    QPixmap p = QPixmap(":/images/MamaGoose.png");
+    QPixmap p = QPixmap(":/images/mamagoose.png");
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
     attack_speed_ = 3; // Attack 3 times a second

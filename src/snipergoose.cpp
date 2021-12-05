@@ -9,7 +9,7 @@
 
 SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
-    QPixmap p = QPixmap(":/images/SniperGoose.png");
+    QPixmap p = QPixmap(":/images/snipergoose.png");
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
     attack_speed_ = 1; // And a slow attack speed
