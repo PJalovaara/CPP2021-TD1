@@ -9,7 +9,7 @@ Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* paren
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
     enemy_hp_ = 20;
-    damage_ = 30;
+    damage_ = 10;
     price_ = 30;
     speed_ = 4;
 

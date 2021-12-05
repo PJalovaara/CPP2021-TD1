@@ -62,6 +62,22 @@ void Cruiseship::CheckPoop() {
 };
 
 
+// Chooses the path with the furthest tower
 QList<QPointF> Cruiseship::ChoosePath(QList<QList<QPointF>> paths) {
-    return paths[0];
+    QList<QPointF> path_with_furthest_tower;
+    int furthest_dist = 0;
+    if(game_->GetTowers().isEmpty()) {
+        return paths[0];
+    }
+    for(auto path : paths) {
+        QPointF first_point = path[0];
+        for(auto tower : game_->GetTowers()) {
+            QLineF ln(tower->pos(), first_point);
+            if(ln.length() > furthest_dist) {
+                path_with_furthest_tower = path;
+                furthest_dist = ln.length();
+            }
+        }
+    }
+    return path_with_furthest_tower;
 };

@@ -100,7 +100,7 @@ void Enemy::Death() {
 void Enemy::ReachDest() {    
     QProgressBar* health_bar = game_->GetHealthBar();
     int current_health = health_bar->value();
-    if(current_health - damage_ >= 0) {
+    if(current_health - damage_ > 0) {
         // Play honk because the geese are scared
         game_->PlayHonkSfx();
         health_bar->setValue(current_health - damage_);

@@ -11,7 +11,7 @@ Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
 
     // Destroying a dokaani is difficult and dokaani getting to destination damages the goose a lot
     enemy_hp_ = 30;
-    damage_ = 70;
+    damage_ = 30;
     price_ = 75;
     speed_ = 3;
 

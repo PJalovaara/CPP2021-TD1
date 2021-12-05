@@ -9,7 +9,7 @@ Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsIte
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
     enemy_hp_ = 10;
-    damage_ = 70;
+    damage_ = 15;
     price_ = 50;
     speed_ = 4;
 
