@@ -18,8 +18,7 @@
 #include "tower.hpp"
 #include "bullet.hpp"
 #include "enemy.hpp"
-#include "build_mama_icon.hpp"
-#include "build_sniper_icon.hpp"
+#include "buildicon.hpp"
 #include "mamagoose.hpp"
 #include "snipergoose.hpp"
 #include "cruiseship.hpp"
@@ -93,7 +92,7 @@ Game::Game(QList<QList<QPointF>> paths) {
     CreatePaths();
 
     // Add the build icons and their prices
-    BuildMamaIcon* mama_icon = new BuildMamaIcon(this);
+    BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/MamaGoose.png",100,this);
     mama_icon->setPos(50,50);
     scene_->addItem(mama_icon);
     QLineEdit* mama_price_text = new QLineEdit(this);
@@ -103,7 +102,7 @@ Game::Game(QList<QList<QPointF>> paths) {
     mama_price_text->move(0, 100);
     mama_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
-    BuildSniperIcon* sniper_icon = new BuildSniperIcon(this);
+    BuildIcon<SniperGoose>* sniper_icon = new BuildIcon<SniperGoose>(":/images/SniperGoose.png",200,this);
     sniper_icon->setPos(50, 170);
     scene_->addItem(sniper_icon);
     QLineEdit* sniper_price_text = new QLineEdit(this);
@@ -112,7 +111,6 @@ Game::Game(QList<QList<QPointF>> paths) {
     sniper_price_text->setText(QString("$") + QString::number(200));
     sniper_price_text->move(0, 200);
     sniper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
-
 
     // Set cursor and build ptr to nullptr and turn on mouse tracking
     cursor_ = nullptr;

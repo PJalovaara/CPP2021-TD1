@@ -14,6 +14,7 @@ class Enemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     Enemy(Game* game, QGraphicsItem* parent = 0);
+    ~Enemy();
     void RotateToFacePoint(QPointF p);
     QPointF GetDest();
     virtual QList<QPointF> ChoosePath(QList<QList<QPointF>> paths) = 0;
@@ -23,6 +24,7 @@ public slots:
     void MoveForward();
 
 protected:
+    QTimer* timer_;
     QList<QPointF> path_points_;
     QPointF dest_;
     QPointF enemy_center_;

@@ -11,6 +11,17 @@
 
 Enemy::Enemy(Game* game, QGraphicsItem* parent) {
     game_ = game;
+
+    // Connect a timer to the move forward
+    timer_ = new QTimer(this);
+    connect(timer_, SIGNAL(timeout()), this, SLOT(MoveForward()));
+
+    // Call the MoveForward function every 40 ms (approx 25 fps)
+    timer_->start(40);
+};
+
+Enemy::~Enemy() {
+    delete timer_;
 };
     
 void Enemy::RotateToFacePoint(QPointF p) {
@@ -45,6 +56,7 @@ void Enemy::MoveForward() {
     // If enemy reaches final destination, the player loses hp and the memory is freed
     if(ln.length() < 30 && point_index_ >= path_points_.length() - 1) {
         ReachDest();
+        return;
     }
 
     // Rotate to face the next point
@@ -81,7 +93,6 @@ void Enemy::ReachDest() {
         health_bar->setFormat(" HP: " + QString::number(0));
     }
     delete this;
-    return;
 };
 
 QPointF Enemy::GetDest() {

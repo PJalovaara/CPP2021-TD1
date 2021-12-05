@@ -21,14 +21,6 @@ Kylteri::Kylteri(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
     dest_ = path_points_[point_index_];
 
     RotateToFacePoint(dest_);
-    speed_ = 3;
-
-    // Connect a timer to the move forward
-    QTimer* timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(MoveForward()));
-
-    // Call the MoveForward function every 40 ms (approx 25 fps)
-    timer->start(40);
 };
 
 
