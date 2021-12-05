@@ -21,14 +21,15 @@
 #include "buildicon.hpp"
 #include "mamagoose.hpp"
 #include "snipergoose.hpp"
+#include "poopergoose.hpp"
 #include "cruiseship.hpp"
 #include "fyysikko.hpp"
 #include "kylteri.hpp"
 #include "koneteekkari.hpp"
 #include "dokaani.hpp"
 
-#define WINDOW_WIDTH 1200
-#define WINDOW_HEIGHT 900
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 700
 
 // TODO: GameOver text etc, GameOver prohibits you from building more towers, Unlimited waves?
 
@@ -44,7 +45,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
 
     // Set the scene
     setScene(scene_); // Visualize this scene
-    scene_->setSceneRect(0,0,WINDOW_WIDTH, WINDOW_HEIGHT);
+    scene_->setSceneRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     // Add a grey background for better visibility
     QBrush grayBrush(Qt::gray);
@@ -98,25 +99,35 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     CreatePaths();
 
     // Add the build icons and their prices
-    BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/MamaGoose.png",100,this);
+    BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/MamaGoose.png", 100, this);
     mama_icon->setPos(50,50);
     scene_->addItem(mama_icon);
     QLineEdit* mama_price_text = new QLineEdit(this);
     mama_price_text->setReadOnly(true);
     mama_price_text->setAlignment(Qt::AlignCenter);
     mama_price_text->setText(QString("$") + QString::number(100));
-    mama_price_text->move(0, 100);
+    mama_price_text->move(0, mama_icon->pixmap().height());
     mama_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
-    BuildIcon<SniperGoose>* sniper_icon = new BuildIcon<SniperGoose>(":/images/SniperGoose.png",200,this);
-    sniper_icon->setPos(50, 170);
+    BuildIcon<SniperGoose>* sniper_icon = new BuildIcon<SniperGoose>(":/images/SniperGoose.png", 200, this);
+    sniper_icon->setPos(mama_icon->pos().x() + mama_icon->pixmap().width(), 50);
     scene_->addItem(sniper_icon);
     QLineEdit* sniper_price_text = new QLineEdit(this);
     sniper_price_text->setReadOnly(true);
     sniper_price_text->setAlignment(Qt::AlignCenter);
     sniper_price_text->setText(QString("$") + QString::number(200));
-    sniper_price_text->move(0, 200);
+    sniper_price_text->move(sniper_icon->pos().x() - sniper_icon->pixmap().width() / 2, sniper_icon->pixmap().height());
     sniper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
+
+    BuildIcon<PooperGoose>* pooper_icon = new BuildIcon<PooperGoose>(":/images/PooperGoose.png", 100, this);
+    pooper_icon->setPos(sniper_icon->pos().x() + 3 * sniper_icon->pixmap().width() / 2, 50);
+    scene_->addItem(pooper_icon);
+    QLineEdit* pooper_price_text = new QLineEdit(this);
+    pooper_price_text->setReadOnly(true);
+    pooper_price_text->setAlignment(Qt::AlignCenter);
+    pooper_price_text->setText(QString("$") + QString::number(100));
+    pooper_price_text->move(pooper_icon->pos().x() - pooper_icon->pixmap().width() / 2, pooper_icon->pixmap().height());
+    pooper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
     // Set cursor and build ptr to nullptr and turn on mouse tracking
     cursor_ = nullptr;

@@ -8,6 +8,7 @@
 #include <QDebug>
 
 #include <bullet.hpp>
+#include <poop.hpp>
 
 Enemy::Enemy(Game* game, QGraphicsItem* parent) {
     game_ = game;
@@ -30,10 +31,27 @@ void Enemy::RotateToFacePoint(QPointF p) {
     setRotation(-ln.angle()); //-ln.angle()
 };
 
+void Enemy::CheckPoop() {
+    QList<QGraphicsItem*> colliding_items = this->collidingItems();
+
+    for(auto item : colliding_items) {
+        // Do dynamic casting to deduce whether we have a tower or an enemy
+        Poop* poop = dynamic_cast<Poop*>(item);
+        if(poop && speed_ > 1) { // If cast is successful
+            speed_ -= 1;
+            delete poop;
+        }
+    }
+    return;
+};
+
 
 void Enemy::MoveForward() {
     // If close to dest, rotate towards the next dest
     QLineF ln(pos(), dest_);
+
+    // Getting hit by poop slows enemies down
+    CheckPoop();
 
     // Getting hit by a bullet destroys the enemy
     // List of items within the attack_area

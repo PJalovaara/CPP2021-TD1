@@ -12,12 +12,8 @@ public:
     Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent = 0);
     QList<QPointF> ChoosePath(QList<QList<QPointF>> paths);
     void Death();
+    void CheckPoop();
 private:
 };
-
-
-
-
-
 
 #endif

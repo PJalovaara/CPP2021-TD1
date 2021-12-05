@@ -57,6 +57,10 @@ void Cruiseship::Death() {
     game_->GetScene()->addItem(kyl);
 };
 
+void Cruiseship::CheckPoop() {
+    return;
+};
+
 
 QList<QPointF> Cruiseship::ChoosePath(QList<QList<QPointF>> paths) {
     return paths[0];
