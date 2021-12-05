@@ -74,6 +74,15 @@ Menu::Menu() {
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
+Menu::~Menu() {
+	for(auto game : active_games_) {
+		delete game;
+	}
+	for(auto editor : active_editors_) {
+		delete editor;
+	}
+}
+
 QGraphicsScene* Menu::GetScene() {
     return scene_;
 }
@@ -110,26 +119,31 @@ void Menu::StartLevel1() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level1.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 void Menu::StartLevel2() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level2.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 void Menu::StartLevel3() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level3.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 void Menu::StartLevel4() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level4.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 void Menu::StartLevel5() {
 	QList<QList<QPointF>> paths = ReadPathsFromFile(":levels/level5.dat");
     Game* game = new Game(paths);
 	game->show();
+	active_games_.push_back(game);
 }
 
 void Menu::StartCustom() {
@@ -147,5 +161,6 @@ void Menu::StartEditor() {
 	// THIS WILL CAUSE A MEMORY LEAK FOR SURE
     Editor* editor = new Editor();
     editor->show();
+	active_editors_.push_back(editor);
 }
 

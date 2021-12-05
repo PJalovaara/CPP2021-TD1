@@ -90,6 +90,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     wave_text_->setReadOnly(true);
     wave_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
 
+
     // Create a path for the enemies
     CreatePaths();
 
@@ -407,7 +408,32 @@ void Game::GameOver() {
         scene_->addRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, blackPen, grayBrush);
 
         // TODO: game over text
+        
+        // TEST CODE FOR GAME OVER TEXT
+        QLineEdit* game_over_text = new QLineEdit(this);
+        game_over_text->setReadOnly(true);
+        game_over_text->setAlignment(Qt::AlignCenter);
+        game_over_text->setText(QString("GAME OVER"));
+        game_over_text->setStyleSheet("QLineEdit {color: white; font: bold; background: rgba(0, 0, 0, 0)}");
+        QFont font = game_over_text->font();
+        font.setPointSize(50);
+        game_over_text->setFont(font);
+        game_over_text->setFixedSize(300, 100);
+        game_over_text->move(WINDOW_WIDTH / 2 - game_over_text->width() / 2,  WINDOW_HEIGHT / 2 - game_over_text->height() / 2);
+        game_over_text->show();
 
+        QLineEdit* stats_text = new QLineEdit(this);
+        stats_text->setAlignment(Qt::AlignCenter);
+        stats_text->setReadOnly(true);
+        stats_text->setStyleSheet("QLineEdit {color: white; font: bold; background: rgba(0, 0, 0, 0)}");
+        font = stats_text->font();
+        font.setPointSize(30);
+        stats_text->setFont(font);
+        stats_text->setText(QString("You made it to wave number ") + QString::number(wave_));
+        stats_text->move(WINDOW_WIDTH / 2 - stats_text->width() / 2,  WINDOW_HEIGHT / 2 - stats_text->height() / 2 + 50);
+        stats_text->show();
+
+        // Release memory
         delete start_button_;
         delete clear_button_;
         delete upgrade_button_;
