@@ -3,7 +3,7 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
-#include <QList> // List << element 
+#include <QList>
 #include <QPointF>
 #include <QProgressBar>
 

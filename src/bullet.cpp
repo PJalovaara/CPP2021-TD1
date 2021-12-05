@@ -8,14 +8,14 @@ Bullet::Bullet(QGraphicsItem* parent) {
     // set graphics
     QPixmap p = QPixmap(":/images/bulletblack.png");
     p = p.scaled(50, 100, Qt::KeepAspectRatio);
-    setPixmap(p); // Set size for the bullet
-    setOffset(-p.width() / 2, -p.height() / 2); // Centering
+    setPixmap(p);  // Set size for the bullet
+    setOffset(-p.width() / 2, -p.height() / 2);  // Centering
 
     // connect a timer to the move() slot
-    QTimer* move_timer = new QTimer(this); // The timer dies when the bullet dies
+    QTimer* move_timer = new QTimer(this);  // The timer dies when the bullet dies
 
     // Connect a signal to a slot
-    connect(move_timer, SIGNAL(timeout()), this, SLOT(Move())); 
+    connect(move_timer, SIGNAL(timeout()), this, SLOT(Move()));
 
     // Initialize the speed, max_range_, bullet_damage_ and distance_traveled of the bullet
     speed_ = 30;
@@ -29,34 +29,34 @@ Bullet::Bullet(QGraphicsItem* parent) {
 
 
 void Bullet::Move() {
-    double theta = rotation(); // return the angle in degrees
+    double theta = rotation();  // return the angle in degrees
     double dy = speed_ * qSin(qDegreesToRadians(theta));
     double dx = speed_ * qCos(qDegreesToRadians(theta));
     setPos(x() + dx, y() + dy);
 
-    // Update the distance traveled and delete the bullet after traversing max_range_ 
+    // Update the distance traveled and delete the bullet after traversing max_range_
     distance_traveled_ += qSqrt(dx*dx + dy*dy);
-    if(distance_traveled_ >= max_range_) {
+    if (distance_traveled_ >= max_range_) {
         delete this;
     }
 }
 
 double Bullet::GetMaxRange() {
     return max_range_;
-};
+}
 
 void Bullet::SetMaxRange(double range) {
     max_range_ = range;
-};
+}
 
 double Bullet::GetDistanceTraveled() {
     return distance_traveled_;
-};
+}
 
 void Bullet::SetDistanceTraveled(double dist) {
     distance_traveled_ = dist;
-};
+}
 
 int Bullet::GetDamage() {
     return bullet_damage_;
-};
+}

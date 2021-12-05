@@ -14,7 +14,6 @@
 
 #include <QDebug>
 
-
 #include "tower.hpp"
 #include "bullet.hpp"
 #include "enemy.hpp"
@@ -45,7 +44,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     wave_in_progress_ = false;
 
     // Set the scene
-    setScene(scene_); // Visualize this scene
+    setScene(scene_);  // Visualize this scene
     scene_->setSceneRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     // Add a grey background for better visibility
@@ -84,7 +83,6 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     wave_text_->setReadOnly(true);
     wave_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
 
-    
     // Create start and clear buttons
     start_button_ = new QPushButton(QString("START"), this);
     clear_button_ = new QPushButton(QString("CLEAR"), this);
@@ -100,8 +98,8 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     CreatePaths();
 
     // Add the build icons and their prices
-    BuildIcon<MamaGoose>* basic_icon = new BuildIcon<MamaGoose>(":/images/MamaGoose.png", 100, this); // change to basic goose
-    basic_icon->setPos(50,50);
+    BuildIcon<MamaGoose>* basic_icon = new BuildIcon<MamaGoose>(":/images/MamaGoose.png", 100, this);  // change to basic goose
+    basic_icon->setPos(50, 50);
     scene_->addItem(basic_icon);
     QLineEdit* basic_price_text = new QLineEdit(this);
     basic_price_text->setReadOnly(true);
@@ -120,7 +118,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     pooper_price_text->move(pooper_icon->pos().x() - pooper_price_text->width() / 2, pooper_icon->pixmap().height());
     pooper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
-    BuildIcon<ShotgunGoose>* shotgun_icon = new BuildIcon<ShotgunGoose>(":/images/PooperGoose.png", 300, this); // change to Shotgun image
+    BuildIcon<ShotgunGoose>* shotgun_icon = new BuildIcon<ShotgunGoose>(":/images/PooperGoose.png", 300, this);  // change to Shotgun image
     shotgun_icon->setPos(pooper_icon->pos().x() + pooper_icon->pixmap().width() + 10, 50);
     scene_->addItem(shotgun_icon);
     QLineEdit* shotgun_price_text = new QLineEdit(this);
@@ -154,7 +152,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     cursor_ = nullptr;
     build_ = nullptr;
     setMouseTracking(true);
-    
+
     // Initialize sound effects
     enemy_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/antinblop.wav"));
     cruiseship_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/aadanblop.wav"));
@@ -181,33 +179,32 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
 
 Game::~Game() {
     ClearTowers();
-};
-
+}
 
 QGraphicsScene* Game::GetScene() {
     return scene_;
-};
-    
+}
+
 QGraphicsPixmapItem* Game::GetCursor() {
     return cursor_;
-};
+}
 
 QList<Tower*> Game::GetTowers() {
     return towers_;
-};
+}
 
 bool Game::IsGameOver() {
     return game_over_;
-};
+}
 
 void Game::mouseMoveEvent(QMouseEvent* event) {
-    if(cursor_) {
+    if (cursor_) {
         cursor_->setPos(event->pos());
     }
-};
+}
 
 void Game::SetCursor(QString filename) {
-    if(cursor_) {
+    if (cursor_) {
         scene_->removeItem(cursor_);
         delete cursor_;
     }
@@ -215,28 +212,28 @@ void Game::SetCursor(QString filename) {
     QPixmap p = QPixmap(filename);
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     cursor_->setPixmap(p);
-    cursor_->setOffset(-p.width() / 2, -p.height() / 2); // Centering
+    cursor_->setOffset(-p.width() / 2, -p.height() / 2);  // Centering
     scene_->addItem(cursor_);
-};
+}
 
 void Game::ResetCursor() {
-    if(cursor_) {
+    if (cursor_) {
         scene_->removeItem(cursor_);
         delete cursor_;
     }
     cursor_ = nullptr;
-};
+}
 
 void Game::SetBuild(Tower* newBuild) {
     chaching_sfx_.play();
     build_ = newBuild;
-};
+}
 
 void Game::mousePressEvent(QMouseEvent* event) {
-    if(!game_over_) {
-        if(build_){
+    if (!game_over_) {
+        if (build_) {
             scene_->addItem(build_);
-            towers_ << build_; // Add the new tower to the list of towers
+            towers_ << build_;  // Add the new tower to the list of towers
             build_->setPos(event->pos());
             ResetCursor();
             build_ = nullptr;
@@ -245,14 +242,14 @@ void Game::mousePressEvent(QMouseEvent* event) {
             QPointF clickPos = event->pos();
             double closest_dist = 100;
             closest_tower_ = nullptr;
-            for(auto tower : towers_) {
+            for (auto tower : towers_) {
                 QLineF ln(tower->pos(), clickPos);
-                if(ln.length() < closest_dist) {
+                if (ln.length() < closest_dist) {
                     closest_dist = ln.length();
                     closest_tower_ = tower;
                 }
             }
-            if(closest_tower_ && !upgrade_button_) {
+            if (closest_tower_ && !upgrade_button_) {
                 // Create update and delete buttons here
 
                 // Top left corner coordinates
@@ -288,25 +285,25 @@ void Game::mousePressEvent(QMouseEvent* event) {
             QGraphicsView::mousePressEvent(event);
         }
     }
-};
+}
 
 Tower* Game::GetBuild() {
     return build_;
-};
+}
 
 void Game::StartWave() {
-    if(!wave_in_progress_) {
+    if (!wave_in_progress_) {
         wave_++;
         UpdateWaveText();
         wave_in_progress_ = true;
         no_of_enemies_ = 0;
-        enemy_spawn_timer_->start(1000); // spawn an enemy every 1000 ms
+        enemy_spawn_timer_->start(1000);  // spawn an enemy every 1000 ms
     }
 }
 
 void Game::SpawnEnemy() {
-    if(no_of_enemies_ < 3*wave_) { // 3*wave for now, can change to something more dynamic :)
-        switch(no_of_enemies_ %5) {
+    if (no_of_enemies_ < 3*wave_) {  // 3*wave for now, can change to something more dynamic :)
+        switch (no_of_enemies_ %5) {
             case 0 :
                 scene_->addItem(new Fyysikko(paths_, this));
                 break;
@@ -329,65 +326,63 @@ void Game::SpawnEnemy() {
         wave_in_progress_ = false;
     }
     no_of_enemies_ += 1;
-};
-
+}
 
 void Game::CreatePaths() {
-    for(auto path_points : paths_){
-        for(int i = 0; i < path_points.size() - 1; i++){
+    for (auto path_points : paths_) {
+        for (int i = 0; i < path_points.size() - 1; i++) {
             QLineF line(path_points[i], path_points[i+1]);
             QGraphicsLineItem* lineItem = new QGraphicsLineItem(line);
 
             QPen pen;
-            pen.setWidth(50); // Width of the drawn path/line
-            pen.setColor(Qt::darkBlue); // Set the color of the path
+            pen.setWidth(50);  // Width of the drawn path/line
+            pen.setColor(Qt::darkBlue);  // Set the color of the path
             lineItem->setPen(pen);
 
             scene_->addItem(lineItem);
         }
     }
-};
+}
 
 void Game::ClearTowers() {
-    for(auto tower : towers_) {
+    for (auto tower : towers_) {
         closest_tower_ = tower;
         RemoveTower();
     }
     towers_.clear();
-};
+}
 
 QProgressBar* Game::GetHealthBar() {
     return health_bar_;
-};
-
+}
 
 int Game::GetMoney() {
     return money_;
-};
+}
 
 void Game::UpdateMoneyText() {
     money_text_->setText(QString(" MONEY: $") + QString::number(GetMoney()));
-};
+}
 
 void Game::UpdateWaveText() {
     wave_text_->setText(QString(" WAVE: ") + QString::number(wave_));
-};
+}
 
 void Game::SetMoney(int new_money) {
     money_ = new_money;
-};
+}
 
 QList<QList<QPointF>> Game::GetPaths() {
     return paths_;
-};
+}
 
 void Game::UpgradeTower() {
-    if(money_ - 50 >= 0) {
+    if (money_ - 50 >= 0) {
         closest_tower_->UpgradeAttackRadius(closest_tower_->GetAttackRadius() + 20);
         money_ -= 50;
         UpdateMoneyText();
     }
-};
+}
 
 void Game::RemoveTower() {
     delete delete_button_;
@@ -397,30 +392,30 @@ void Game::RemoveTower() {
     upgrade_button_ = nullptr;
     selected_tower_rect_ = nullptr;
     towers_.removeOne(closest_tower_);
-	scene_->removeItem(closest_tower_);
+    scene_->removeItem(closest_tower_);
     closest_tower_ = nullptr;
-};
+}
 
 void Game::PlayEnemyDiesSfx() {
     enemy_dies_sfx_.play();
-};
+}
 
 void Game::PlayCruiseshipDiesSfx() {
     cruiseship_dies_sfx_.play();
-};
+}
 
 void Game::PlayDokaaniDiesSfx() {
     dokaani_dies_sfx_.play();
-};
+}
 
 void Game::PlayHonkSfx() {
     honk_sfx_.play();
-};
+}
 
 void Game::GameOver() {
-    if(!game_over_) {
+    if (!game_over_) {
         game_over_ = true;
-        game_over_sfx_.play(); 
+        game_over_sfx_.play();
 
         // Add a grey rectangle over everything
         QColor alphaBlack = Qt::black;
@@ -429,7 +424,7 @@ void Game::GameOver() {
         QPen blackPen(alphaBlack);
         blackPen.setWidth(1);
         scene_->addRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, blackPen, grayBrush);
-        
+
         // Game over text
         QLineEdit* game_over_text = new QLineEdit(this);
         game_over_text->setReadOnly(true);
@@ -467,4 +462,4 @@ void Game::GameOver() {
         delete_button_ = nullptr;
         selected_tower_rect_ = nullptr;
     }
-};
+}

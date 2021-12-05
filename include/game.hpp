@@ -26,7 +26,7 @@ public:
     void SetCursor(QString filename);
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
-    
+
     bool IsGameOver();
     QProgressBar* GetHealthBar();
     int GetMoney();
