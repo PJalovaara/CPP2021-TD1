@@ -26,7 +26,7 @@ template <typename T>
 inline BuildIcon<T>::BuildIcon(QString imagepath, int price, Game* game, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     imagepath_ = imagepath;
     QPixmap p = QPixmap(imagepath_);
-    p = p.scaled(200, 100, Qt::KeepAspectRatio);
+    p = p.scaled(100, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
     game_ = game;

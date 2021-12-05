@@ -45,17 +45,19 @@ void SniperGoose::AcquireTarget() {
     QList<QGraphicsItem*> colliding_items = attack_area_->collidingItems();
 
     has_target_ = false; // Initialize to no target
-    double closest_dist = 1000;
+    double dist_to_end = 10000;
     QPointF closest_point = QPointF(0,0);
+    Enemy* closest_enemy = nullptr;
     
     for(auto item : colliding_items) {
         // Do dynamic casting to deduce whether we have a tower or an enemy
         Enemy* enemy = dynamic_cast<Enemy*>(item);
         if(enemy) { // If cast is successful
-            double this_dist = DistanceTo(enemy);
-            if(this_dist < closest_dist) {
-                closest_dist = this_dist;
+            double this_dist = enemy->DistanceLeft();
+            if(this_dist < dist_to_end) {
+                dist_to_end = this_dist;
                 closest_point = enemy->pos();
+                closest_enemy = enemy;
                 has_target_ = true;
             }
         }
@@ -63,6 +65,8 @@ void SniperGoose::AcquireTarget() {
     if(!has_target_) {
         return;
     }
+
+
     attack_dest_ = closest_point;
     AttackTarget();
 };

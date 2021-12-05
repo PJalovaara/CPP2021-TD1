@@ -19,8 +19,10 @@ public:
     QPointF GetDest();
     virtual QList<QPointF> ChoosePath(QList<QList<QPointF>> paths) = 0;
     void ReachDest();
+    int GetSpeed();
     virtual void Death();
     virtual void CheckPoop();
+    double DistanceLeft();
 public slots:
     void MoveForward();
 
@@ -35,6 +37,8 @@ protected:
     Game* game_;
     int price_;
     int enemy_hp_;
+    double distance_traveled_;
+    double distance_left_;
 };
 
 #endif

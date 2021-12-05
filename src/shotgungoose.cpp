@@ -9,10 +9,10 @@
 
 ShotgunGoose::ShotgunGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {    
     // Set the graphics
-    QPixmap p = QPixmap(":/images/ShotgunGoose.png");
-    p = p.scaled(200, 100, Qt::KeepAspectRatio);
+    QPixmap p = QPixmap(":/images/MamaGoose.png"); // TODO: Change graphics
+    p = p.scaled(100, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
-    attack_speed_ = 3; // Attack 3 times a second
+    attack_speed_ = 1; // Attack 3 times a second
 
     // Set attack_radius and tower width, height and center
     tower_width_ = p.width();
@@ -31,14 +31,15 @@ ShotgunGoose::ShotgunGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower
 };
 
 void ShotgunGoose::AttackTarget(){
-    Bullet* bullet = new Bullet(this);
-    bullet->SetMaxRange(attack_radius_); // Set max range for the bullet to equal the range of the tower
-    bullet->setPos(pos()); // Center the bullet position w.r.t the goose
-
-    QLineF ln(pos(), attack_dest_);
-    int angle = -ln.angle(); // ln.angle() is the angle of the ln counterclockwise,  NOTE: rotation will rotate clockwise
-    bullet->setRotation(angle); // Rotate the bullet
-    scene_->addItem(bullet); // Add the bullet into the scene
+    for(int i = 0; i < 5; i++) {
+        Bullet* bullet = new Bullet(this);
+        bullet->SetMaxRange(attack_radius_); // Set max range for the bullet to equal the range of the tower
+        bullet->setPos(pos()); // Center the bullet position w.r.t the goose
+        QLineF ln(pos(), attack_dest_);
+        int angle = -ln.angle(); // ln.angle() is the angle of the ln counterclockwise,  NOTE: rotation will rotate clockwise
+        bullet->setRotation(angle + 10 - 4*i); // Rotate the bullet
+        scene_->addItem(bullet); // Add the bullet into the scene
+    }
 }
 
 void ShotgunGoose::AcquireTarget() {

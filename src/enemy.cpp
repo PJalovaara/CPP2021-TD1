@@ -19,10 +19,17 @@ Enemy::Enemy(Game* game, QGraphicsItem* parent) {
 
     // Call the MoveForward function every 40 ms (approx 25 fps)
     timer_->start(40);
+
+    // Distance traveled initialized to zero
+    distance_traveled_ = 0;
 };
 
 Enemy::~Enemy() {
     delete timer_;
+};
+
+int Enemy::GetSpeed() {
+    return speed_;
 };
     
 void Enemy::RotateToFacePoint(QPointF p) {
@@ -45,6 +52,14 @@ void Enemy::CheckPoop() {
     return;
 };
 
+double Enemy::DistanceLeft() {
+    double total_distance = 0;
+    for(int i = 0; i < path_points_.length() - 1; i++) {
+        QLineF ln(path_points_[i], path_points_[i+1]);
+        total_distance += ln.length();
+    }
+    return total_distance - distance_traveled_;
+}
 
 void Enemy::MoveForward() {
     // If close to dest, rotate towards the next dest
@@ -89,6 +104,7 @@ void Enemy::MoveForward() {
     double dy = speed_ * qSin(qDegreesToRadians(theta));
     double dx = speed_ * qCos(qDegreesToRadians(theta));
     setPos(x() + dx, y() + dy);
+    distance_traveled_ += qSqrt(dx*dx + dy*dy);
 };
 
 void Enemy::Death() {

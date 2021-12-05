@@ -69,7 +69,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     health_bar_->setStyleSheet(style_sheet);
 
     // Initialize the amount of money to 200 and create a text for the player money
-    money_ = 200;
+    money_ = 2000;
     money_text_ = new QLineEdit(this);
     money_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height());
     UpdateMoneyText();
@@ -111,43 +111,43 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     basic_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
     BuildIcon<PooperGoose>* pooper_icon = new BuildIcon<PooperGoose>(":/images/PooperGoose.png", 200, this);
-    pooper_icon->setPos(basic_icon->pos().x() + 3 * basic_icon->pixmap().width() / 2, 50);
+    pooper_icon->setPos(basic_icon->pos().x() + basic_icon->pixmap().width() + 10, 50);
     scene_->addItem(pooper_icon);
     QLineEdit* pooper_price_text = new QLineEdit(this);
     pooper_price_text->setReadOnly(true);
     pooper_price_text->setAlignment(Qt::AlignCenter);
     pooper_price_text->setText(QString("$") + QString::number(200));
-    pooper_price_text->move(pooper_icon->pos().x() - pooper_icon->pixmap().width() / 2, pooper_icon->pixmap().height());
+    pooper_price_text->move(pooper_icon->pos().x() - pooper_price_text->width() / 2, pooper_icon->pixmap().height());
     pooper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
     BuildIcon<ShotgunGoose>* shotgun_icon = new BuildIcon<ShotgunGoose>(":/images/PooperGoose.png", 300, this); // change to Shotgun image
-    shotgun_icon->setPos(pooper_icon->pos().x() + 3 * pooper_icon->pixmap().width() / 2, 50);
+    shotgun_icon->setPos(pooper_icon->pos().x() + pooper_icon->pixmap().width() + 10, 50);
     scene_->addItem(shotgun_icon);
     QLineEdit* shotgun_price_text = new QLineEdit(this);
     shotgun_price_text->setReadOnly(true);
     shotgun_price_text->setAlignment(Qt::AlignCenter);
     shotgun_price_text->setText(QString("$") + QString::number(300));
-    shotgun_price_text->move(shotgun_icon->pos().x() - shotgun_icon->pixmap().width() / 2, shotgun_icon->pixmap().height());
+    shotgun_price_text->move(shotgun_icon->pos().x() - shotgun_price_text->width() / 2, shotgun_icon->pixmap().height());
     shotgun_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
     BuildIcon<SniperGoose>* sniper_icon = new BuildIcon<SniperGoose>(":/images/SniperGoose.png", 500, this);
-    sniper_icon->setPos(shotgun_icon->pos().x() + shotgun_icon->pixmap().width(), 50);
+    sniper_icon->setPos(shotgun_icon->pos().x() + shotgun_icon->pixmap().width() + 10, 50);
     scene_->addItem(sniper_icon);
     QLineEdit* sniper_price_text = new QLineEdit(this);
     sniper_price_text->setReadOnly(true);
     sniper_price_text->setAlignment(Qt::AlignCenter);
     sniper_price_text->setText(QString("$") + QString::number(500));
-    sniper_price_text->move(sniper_icon->pos().x() - sniper_icon->pixmap().width() / 2, sniper_icon->pixmap().height());
+    sniper_price_text->move(sniper_icon->pos().x() - sniper_price_text->width() / 2, sniper_icon->pixmap().height());
     sniper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
     BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/MamaGoose.png", 1000, this);
-    mama_icon->setPos(sniper_icon->pos().x() + sniper_icon->pixmap().width(), 50);
+    mama_icon->setPos(sniper_icon->pos().x() + sniper_icon->pixmap().width() + 10, 50);
     scene_->addItem(mama_icon);
     QLineEdit* mama_price_text = new QLineEdit(this);
     mama_price_text->setReadOnly(true);
     mama_price_text->setAlignment(Qt::AlignCenter);
     mama_price_text->setText(QString("$") + QString::number(1000));
-    mama_price_text->move(mama_icon->pos().x() - mama_icon->pixmap().width() / 2, mama_icon->pixmap().height());
+    mama_price_text->move(mama_icon->pos().x() - mama_price_text->width() / 2, mama_icon->pixmap().height());
     mama_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
     // Set cursor and build ptr to nullptr and turn on mouse tracking
