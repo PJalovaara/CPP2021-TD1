@@ -35,7 +35,7 @@ inline BuildIcon<T>::BuildIcon(QString imagepath, int price, Game* game, QGraphi
 
 template <class T>
 inline void BuildIcon<T>::mousePressEvent(QGraphicsSceneMouseEvent* event) {
-    if(!(game_->GetBuild()) && game_->GetMoney() >= price_) {
+    if(!(game_->GetBuild()) && game_->GetMoney() >= price_ && !(game_->IsGameOver())) {
         // Create a new tower to the build_ pointer
         T* newGoose = new T(game_->GetScene());
         game_->SetBuild(newGoose);

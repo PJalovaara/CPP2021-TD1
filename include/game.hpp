@@ -16,17 +16,18 @@
 
 #include "tower.hpp"
 
-class Game : public QGraphicsView{
+class Game : public QGraphicsView {
     Q_OBJECT
 public:
     // member functions
-    Game(QList<QList<QPointF>> paths);
+    Game(QList<QList<QPointF>> paths, QWidget* parent = 0);
     ~Game();
 
     void SetCursor(QString filename);
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     
+    bool IsGameOver();
     QProgressBar* GetHealthBar();
     int GetMoney();
     void SetMoney(int new_money);
@@ -66,13 +67,16 @@ private:
     QProgressBar* health_bar_;
     int money_;
     int wave_;
-    int last_wave_;
     QLineEdit* money_text_;
     QLineEdit* wave_text_;
     Tower* closest_tower_;
     QPushButton* upgrade_button_;
     QPushButton* delete_button_;
+    QPushButton* start_button_;
+    QPushButton* clear_button_;
     QGraphicsRectItem* selected_tower_rect_;
+    bool game_over_;
+    bool wave_in_progress_;
 
     QSoundEffect enemy_dies_sfx_;
     QSoundEffect cruiseship_dies_sfx_;

@@ -32,11 +32,15 @@
 
 // TODO: GameOver text etc, GameOver prohibits you from building more towers, Unlimited waves?
 
-Game::Game(QList<QList<QPointF>> paths) {
+Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent) {
     // Creating a scene and a timer to spawn enemies on the pathPoints path
     scene_ = new QGraphicsScene(this);
     enemy_spawn_timer_ = new QTimer(this);
     paths_ = paths;
+
+    // Init booleans
+    game_over_ = false;
+    wave_in_progress_ = false;
 
     // Set the scene
     setScene(scene_); // Visualize this scene
@@ -54,11 +58,11 @@ Game::Game(QList<QList<QPointF>> paths) {
     selected_tower_rect_ = nullptr;
 
     // Create start and clear buttons
-    QPushButton* start_button = new QPushButton(QString("START"), this);
-    QPushButton* clear_button = new QPushButton(QString("CLEAR"), this);
+    start_button_ = new QPushButton(QString("START"), this);
+    clear_button_ = new QPushButton(QString("CLEAR"), this);
 
-    start_button->move(WINDOW_WIDTH / 2 - start_button->width() / 2, 10);
-    clear_button->move(WINDOW_WIDTH / 2 - start_button->width() / 2, 40);
+    start_button_->move(WINDOW_WIDTH / 2 - start_button_->width() / 2, 10);
+    clear_button_->move(WINDOW_WIDTH / 2 - clear_button_->width() / 2, 40);
     
 
     // Create a health bar for the player
@@ -80,13 +84,11 @@ Game::Game(QList<QList<QPointF>> paths) {
 
      // Initialize the wave and last_wave and create text
     wave_ = 0;
-    last_wave_ = 50;
     wave_text_ = new QLineEdit(this);
     wave_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height() - wave_text_->height());
     UpdateWaveText();
     wave_text_->setReadOnly(true);
     wave_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
-
 
     // Create a path for the enemies
     CreatePaths();
@@ -118,10 +120,10 @@ Game::Game(QList<QList<QPointF>> paths) {
     setMouseTracking(true);
 
     // Creates 5 enemies, one every second
-    connect(start_button, SIGNAL(clicked()), this, SLOT(StartWave()));
+    connect(start_button_, SIGNAL(clicked()), this, SLOT(StartWave()));
 
     // Connect CLEAR button to the slot ClearTowers
-    connect(clear_button, SIGNAL(clicked()), this, SLOT(ClearTowers()));
+    connect(clear_button_, SIGNAL(clicked()), this, SLOT(ClearTowers()));
     
     // Initialize sound effects
     enemy_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/antinblop.wav"));
@@ -164,6 +166,10 @@ QList<Tower*> Game::GetTowers() {
     return towers_;
 };
 
+bool Game::IsGameOver() {
+    return game_over_;
+};
+
 void Game::mouseMoveEvent(QMouseEvent* event) {
     if(cursor_) {
         cursor_->setPos(event->pos());
@@ -197,64 +203,60 @@ void Game::SetBuild(Tower* newBuild) {
 };
 
 void Game::mousePressEvent(QMouseEvent* event) {
-    if(build_){
-        scene_->addItem(build_);
-        towers_ << build_; // Add the new tower to the list of towers
-        build_->setPos(event->pos());
-        ResetCursor();
-        build_ = nullptr;
-    } else {
-        // Find the closest tower to the click position
-        QPointF clickPos = event->pos();
-        double closest_dist = 100;
-        closest_tower_ = nullptr;
-        for(auto tower : towers_) {
-            QLineF ln(tower->pos(), clickPos);
-            if(ln.length() < closest_dist) {
-                closest_dist = ln.length();
-                closest_tower_ = tower;
-            }
-        }
-        if(closest_tower_ && !upgrade_button_) {
-            // Create update and delete buttons here
-
-            // Top left corner coordinates
-            int x_coord = closest_tower_->x() - closest_tower_->GetWidth() / 2;
-            int y_coord = closest_tower_->y() - closest_tower_->GetHeight() / 2;
-
-            selected_tower_rect_ = new QGraphicsRectItem(x_coord, y_coord, closest_tower_->GetWidth(), closest_tower_->GetHeight());
-            QPen redPen(Qt::red);
-            redPen.setWidth(2);
-            selected_tower_rect_->setPen(redPen);
-            scene_->addItem(selected_tower_rect_);
-
-            upgrade_button_ = new QPushButton(QString("UPGRADE ($50)"), this);
-            delete_button_ = new QPushButton(QString("DELETE"), this);
-            int upgrade_x = x_coord + closest_tower_->GetWidth() > WINDOW_WIDTH ? x_coord - upgrade_button_->width() : x_coord + closest_tower_->GetWidth();
-            int upgrade_y = y_coord < 0 ? 0 : y_coord;
-            int delete_y = y_coord + closest_tower_->GetHeight() > WINDOW_HEIGHT ? WINDOW_HEIGHT - delete_button_->height() : y_coord + closest_tower_->GetHeight() - delete_button_->height();
-            upgrade_button_->move(upgrade_x, upgrade_y);
-            delete_button_->move(upgrade_x, delete_y);
-            upgrade_button_->show();
-            delete_button_->show();
-
-            connect(upgrade_button_, SIGNAL(clicked()), this, SLOT(UpgradeTower()));
-            connect(delete_button_, SIGNAL(clicked()), this, SLOT(RemoveTower()));
+    if(!game_over_) {
+        if(build_){
+            scene_->addItem(build_);
+            towers_ << build_; // Add the new tower to the list of towers
+            build_->setPos(event->pos());
+            ResetCursor();
+            build_ = nullptr;
         } else {
-            if(upgrade_button_) {
+            // Find the closest tower to the click position
+            QPointF clickPos = event->pos();
+            double closest_dist = 100;
+            closest_tower_ = nullptr;
+            for(auto tower : towers_) {
+                QLineF ln(tower->pos(), clickPos);
+                if(ln.length() < closest_dist) {
+                    closest_dist = ln.length();
+                    closest_tower_ = tower;
+                }
+            }
+            if(closest_tower_ && !upgrade_button_) {
+                // Create update and delete buttons here
+
+                // Top left corner coordinates
+                int x_coord = closest_tower_->x() - closest_tower_->GetWidth() / 2;
+                int y_coord = closest_tower_->y() - closest_tower_->GetHeight() / 2;
+
+                selected_tower_rect_ = new QGraphicsRectItem(x_coord, y_coord, closest_tower_->GetWidth(), closest_tower_->GetHeight());
+                QPen redPen(Qt::red);
+                redPen.setWidth(2);
+                selected_tower_rect_->setPen(redPen);
+                scene_->addItem(selected_tower_rect_);
+
+                upgrade_button_ = new QPushButton(QString("UPGRADE ($50)"), this);
+                delete_button_ = new QPushButton(QString("DELETE"), this);
+                int upgrade_x = x_coord + closest_tower_->GetWidth() > WINDOW_WIDTH ? x_coord - upgrade_button_->width() : x_coord + closest_tower_->GetWidth();
+                int upgrade_y = y_coord < 0 ? 0 : y_coord;
+                int delete_y = y_coord + closest_tower_->GetHeight() > WINDOW_HEIGHT ? WINDOW_HEIGHT - delete_button_->height() : y_coord + closest_tower_->GetHeight() - delete_button_->height();
+                upgrade_button_->move(upgrade_x, upgrade_y);
+                delete_button_->move(upgrade_x, delete_y);
+                upgrade_button_->show();
+                delete_button_->show();
+
+                connect(upgrade_button_, SIGNAL(clicked()), this, SLOT(UpgradeTower()));
+                connect(delete_button_, SIGNAL(clicked()), this, SLOT(RemoveTower()));
+            } else {
                 delete upgrade_button_;
                 upgrade_button_ = nullptr;
-            }
-            if(delete_button_) {
                 delete delete_button_;
                 delete_button_ = nullptr;
-            }
-            if(selected_tower_rect_) {
                 delete selected_tower_rect_;
                 selected_tower_rect_ = nullptr;
             }
+            QGraphicsView::mousePressEvent(event);
         }
-        QGraphicsView::mousePressEvent(event);
     }
 };
 
@@ -263,10 +265,13 @@ Tower* Game::GetBuild() {
 };
 
 void Game::StartWave() {
-    wave_++;
-    UpdateWaveText();
-    no_of_enemies_ = 0;
-    enemy_spawn_timer_->start(1000); // spawn an enemy every 1000 ms
+    if(!wave_in_progress_) {
+        wave_++;
+        UpdateWaveText();
+        wave_in_progress_ = true;
+        no_of_enemies_ = 0;
+        enemy_spawn_timer_->start(1000); // spawn an enemy every 1000 ms
+    }
 }
 
 void Game::SpawnEnemy() {
@@ -289,7 +294,9 @@ void Game::SpawnEnemy() {
                 break;
         }
     } else {
+        // last enemy of the wave
         enemy_spawn_timer_->stop();
+        wave_in_progress_ = false;
     }
     no_of_enemies_ += 1;
 };
@@ -333,7 +340,7 @@ void Game::UpdateMoneyText() {
 };
 
 void Game::UpdateWaveText() {
-    wave_text_->setText(QString(" WAVE: ") + QString::number(wave_) + QString("/") + QString::number(last_wave_));
+    wave_text_->setText(QString(" WAVE: ") + QString::number(wave_));
 };
 
 void Game::SetMoney(int new_money) {
@@ -387,5 +394,29 @@ void Game::PlayHonkSfx() {
 };
 
 void Game::GameOver() {
-    game_over_sfx_.play();  
+    if(!game_over_) {
+        game_over_ = true;
+        game_over_sfx_.play(); 
+
+        // Add a grey rectangle over everything
+        QColor alphaBlack = Qt::black;
+        alphaBlack.setAlphaF(0.5);
+        QBrush grayBrush(alphaBlack);
+        QPen blackPen(alphaBlack);
+        blackPen.setWidth(1);
+        scene_->addRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, blackPen, grayBrush);
+
+        // TODO: game over text
+
+        delete start_button_;
+        delete clear_button_;
+        delete upgrade_button_;
+        delete delete_button_;
+        delete selected_tower_rect_;
+        start_button_ = nullptr;
+        clear_button_ = nullptr;
+        upgrade_button_ = nullptr;
+        delete_button_ = nullptr;
+        selected_tower_rect_ = nullptr;
+    }
 };

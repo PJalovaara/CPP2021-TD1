@@ -5,7 +5,7 @@
 
 Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/dokaani3.png");
-    p = p.scaled(90, 150, Qt::KeepAspectRatio); // Set size for the enemy
+    p = p.scaled(180, 180, Qt::KeepAspectRatio); // Set size for the enemy
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
@@ -13,7 +13,7 @@ Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
     enemy_hp_ = 30;
     damage_ = 70;
     price_ = 75;
-    speed_ = 1;
+    speed_ = 3;
 
         // Set the points in the path
     path_points_ = ChoosePath(paths);

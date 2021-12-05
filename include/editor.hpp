@@ -15,7 +15,7 @@ class Editor : public QGraphicsView {
     Q_OBJECT
 public:
     // member functions
-    Editor();
+    Editor(QWidget* parent = 0);
     void SetCursor(QString filename);
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);

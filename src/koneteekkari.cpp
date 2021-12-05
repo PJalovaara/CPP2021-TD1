@@ -11,7 +11,7 @@ Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsIte
     enemy_hp_ = 10;
     damage_ = 70;
     price_ = 50;
-    speed_ = 1;
+    speed_ = 4;
 
         // Set the points in the path
     path_points_ = ChoosePath(paths);

@@ -11,7 +11,7 @@ Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* paren
     enemy_hp_ = 20;
     damage_ = 30;
     price_ = 30;
-    speed_ = 2;
+    speed_ = 4;
 
     // Set the points in the path
     path_points_ = ChoosePath(paths);

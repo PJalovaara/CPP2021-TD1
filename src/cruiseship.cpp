@@ -10,16 +10,16 @@
 
 Cruiseship::Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/cruiseship.png");
-    p = p.scaled(50, 100, Qt::KeepAspectRatio); // Set size for the enemy
+    p = p.scaled(200, 200, Qt::KeepAspectRatio); // Set size for the enemy
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
     enemy_hp_ = 50; // Has higher hp than an average enemy
-    speed_ = 1;
+    speed_ = 2;
     damage_ = 50;
     price_ = 100;
 
-        // Set the points in the path
+    // Set the points in the path
     path_points_ = ChoosePath(paths);
 
     // Set initial pos and initial destination

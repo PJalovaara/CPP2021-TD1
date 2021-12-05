@@ -15,7 +15,7 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
-Editor::Editor() {
+Editor::Editor(QWidget* parent) : QGraphicsView(parent) {
     // create and set scene
     scene_ = new QGraphicsScene(this);
     setScene(scene_); // Visualize this scene
