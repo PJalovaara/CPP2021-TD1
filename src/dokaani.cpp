@@ -5,8 +5,13 @@
 #include "bullet.hpp"
 
 Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
+<<<<<<< HEAD
     QPixmap p = QPixmap(":/images/dokaani3.png");
     p = p.scaled(180, 180, Qt::KeepAspectRatio);  // Set size for the enemy
+=======
+    QPixmap p = QPixmap(":/images/dokaani.png");
+    p = p.scaled(180, 180, Qt::KeepAspectRatio); // Set size for the enemy
+>>>>>>> ee0727990735f22f93acc96f1c2095dbf03761c9
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2);  // Centering
 

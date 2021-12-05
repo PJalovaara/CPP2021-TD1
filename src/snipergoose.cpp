@@ -6,10 +6,16 @@
 #include "mamagoose.hpp"
 #include "goldenbullet.hpp"
 #include "enemy.hpp"
+<<<<<<< HEAD
+=======
+#include <QTimer>
+#include <QList>
+#include <qmath.h>
+>>>>>>> ee0727990735f22f93acc96f1c2095dbf03761c9
 
 SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
-    QPixmap p = QPixmap(":/images/SniperGoose.png");
+    QPixmap p = QPixmap(":/images/snipergoose.png");
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     setPixmap(p);  // Set size for the goose
     attack_speed_ = 1;  // And a slow attack speed
@@ -66,6 +72,7 @@ void SniperGoose::AcquireTarget() {
         return;
     }
 
-    attack_dest_ = closest_point;
+    attack_dest_ = closest_enemy->pos();
+
     AttackTarget();
 }

@@ -9,7 +9,7 @@
 
 PooperGoose::PooperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
-    QPixmap p = QPixmap(":/images/PooperGoose.png");
+    QPixmap p = QPixmap(":/images/poopergoose.png");
     p = p.scaled(100, 100, Qt::KeepAspectRatio);
     setPixmap(p);  // Set size for the goose
     attack_speed_ = 1;  // Attack 3 times a second

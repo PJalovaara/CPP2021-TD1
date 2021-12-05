@@ -9,7 +9,7 @@
 
 ShotgunGoose::ShotgunGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
-    QPixmap p = QPixmap(":/images/MamaGoose.png");  // TODO: Change graphics
+    QPixmap p = QPixmap(":/images/shotgungoose.png"); // TODO: Change graphics
     p = p.scaled(100, 100, Qt::KeepAspectRatio);
     setPixmap(p);  // Set size for the goose
     attack_speed_ = 1;  // Attack 3 times a second
