@@ -1,5 +1,5 @@
 #include "mamagoose.hpp"
-#include "bullet.hpp"
+#include "plasmaball.hpp"
 #include "enemy.hpp"
 #include <QTimer>
 #include <QList>
@@ -10,7 +10,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
     QPixmap p = QPixmap(":/images/mamagoose.png");
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     setPixmap(p); // Set size for the goose
-    attack_speed_ = 3; // Attack 3 times a second
+    attack_speed_ = 10; // Attack 3 times a second
 
     // Set attack_radius and tower width, height and center
     tower_width_ = p.width();
@@ -29,7 +29,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
 };
 
 void MamaGoose::AttackTarget(){
-    Bullet* bullet = new Bullet(this);
+    PlasmaBall* bullet = new PlasmaBall(this);
     bullet->SetMaxRange(attack_radius_); // Set max range for the bullet to equal the range of the tower
     bullet->setPos(pos()); // Center the bullet position w.r.t the goose
 
