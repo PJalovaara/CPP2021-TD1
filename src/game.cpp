@@ -27,8 +27,8 @@
 #include "koneteekkari.hpp"
 #include "dokaani.hpp"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1200
+#define WINDOW_HEIGHT 900
 
 // TODO: GameOver text etc, GameOver prohibits you from building more towers, Unlimited waves?
 
@@ -57,14 +57,6 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     delete_button_ = nullptr;
     selected_tower_rect_ = nullptr;
 
-    // Create start and clear buttons
-    start_button_ = new QPushButton(QString("START"), this);
-    clear_button_ = new QPushButton(QString("CLEAR"), this);
-
-    start_button_->move(WINDOW_WIDTH / 2 - start_button_->width() / 2, 10);
-    clear_button_->move(WINDOW_WIDTH / 2 - clear_button_->width() / 2, 40);
-    
-
     // Create a health bar for the player
     health_bar_ = new QProgressBar(this);
     health_bar_->move(10, WINDOW_HEIGHT - health_bar_->height());
@@ -89,6 +81,17 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     UpdateWaveText();
     wave_text_->setReadOnly(true);
     wave_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
+
+    
+    // Create start and clear buttons
+    start_button_ = new QPushButton(QString("START"), this);
+    clear_button_ = new QPushButton(QString("CLEAR"), this);
+
+    start_button_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height() - wave_text_->height() - start_button_->height());
+    clear_button_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height() - wave_text_->height() - start_button_->height() - clear_button_->height());
+
+    connect(start_button_, SIGNAL(clicked()), this, SLOT(StartWave()));
+    connect(clear_button_, SIGNAL(clicked()), this, SLOT(ClearTowers()));
 
 
     // Create a path for the enemies
@@ -119,12 +122,6 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     cursor_ = nullptr;
     build_ = nullptr;
     setMouseTracking(true);
-
-    // Creates 5 enemies, one every second
-    connect(start_button_, SIGNAL(clicked()), this, SLOT(StartWave()));
-
-    // Connect CLEAR button to the slot ClearTowers
-    connect(clear_button_, SIGNAL(clicked()), this, SLOT(ClearTowers()));
     
     // Initialize sound effects
     enemy_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/antinblop.wav"));
@@ -361,15 +358,9 @@ void Game::UpgradeTower() {
 };
 
 void Game::RemoveTower() {
-    if(delete_button_) {
-        delete delete_button_;
-    }
-    if(upgrade_button_) {
-        delete upgrade_button_;
-    }
-    if(selected_tower_rect_) {
-        delete selected_tower_rect_;
-    }
+    delete delete_button_;
+    delete upgrade_button_;
+    delete selected_tower_rect_;
     delete_button_ = nullptr;
     upgrade_button_ = nullptr;
     selected_tower_rect_ = nullptr;
@@ -406,10 +397,8 @@ void Game::GameOver() {
         QPen blackPen(alphaBlack);
         blackPen.setWidth(1);
         scene_->addRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, blackPen, grayBrush);
-
-        // TODO: game over text
         
-        // TEST CODE FOR GAME OVER TEXT
+        // Game over text
         QLineEdit* game_over_text = new QLineEdit(this);
         game_over_text->setReadOnly(true);
         game_over_text->setAlignment(Qt::AlignCenter);
@@ -418,7 +407,7 @@ void Game::GameOver() {
         QFont font = game_over_text->font();
         font.setPointSize(50);
         game_over_text->setFont(font);
-        game_over_text->setFixedSize(300, 100);
+        game_over_text->setFixedSize(600, 100);
         game_over_text->move(WINDOW_WIDTH / 2 - game_over_text->width() / 2,  WINDOW_HEIGHT / 2 - game_over_text->height() / 2);
         game_over_text->show();
 
@@ -427,10 +416,11 @@ void Game::GameOver() {
         stats_text->setReadOnly(true);
         stats_text->setStyleSheet("QLineEdit {color: white; font: bold; background: rgba(0, 0, 0, 0)}");
         font = stats_text->font();
-        font.setPointSize(30);
+        font.setPointSize(20);
         stats_text->setFont(font);
+        stats_text->setFixedSize(600, 100);
         stats_text->setText(QString("You made it to wave number ") + QString::number(wave_));
-        stats_text->move(WINDOW_WIDTH / 2 - stats_text->width() / 2,  WINDOW_HEIGHT / 2 - stats_text->height() / 2 + 50);
+        stats_text->move(WINDOW_WIDTH / 2 - stats_text->width() / 2,  WINDOW_HEIGHT / 2 - stats_text->height() / 2 + 80);
         stats_text->show();
 
         // Release memory
