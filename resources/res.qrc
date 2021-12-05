@@ -11,12 +11,15 @@
 		<file>images/dokaani3.png</file>
 		<file>images/fyssa1.png</file>
 		<file>images/fyssa2.png</file>
+		<file>images/fyssa3.png</file>
 		<file>images/kone1.png</file>
 		<file>images/kone2.png</file>
 		<file>images/kylteri1.png</file>
 		<file>images/kylteri2.png</file>
 		<file>images/cruiseship.png</file>
 		<file>images/editorcursor.png</file>
+		<file>images/logo.png</file>
+		<file>images/logo2.png</file>
 		<file>levels/level1.dat</file>
 		<file>levels/level2.dat</file>
 		<file>levels/level3.dat</file>
