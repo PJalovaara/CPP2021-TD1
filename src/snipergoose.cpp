@@ -6,6 +6,7 @@
 #include "enemy.hpp"
 #include <QTimer>
 #include <QList>
+#include <qmath.h>
 
 SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
@@ -66,7 +67,7 @@ void SniperGoose::AcquireTarget() {
         return;
     }
 
+    attack_dest_ = closest_enemy->pos();
 
-    attack_dest_ = closest_point;
     AttackTarget();
 };
