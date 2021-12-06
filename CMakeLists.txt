@@ -18,12 +18,11 @@ endif()
 include_directories(include)
 
 # Set the prefix path for the configuration file Qt5Config.cmake provided by Qt5 (otherwise find_package might fail)
-# On Antti's macbook it is /usr/local/Cellar/qt@5/5.15.2_1/lib/cmake/Qt5
-set(CMAKE_PREFIX_PATH /usr/local/Cellar/qt@5/5.15.2_1/lib/cmake)
-
+# For example on Antti's macbook it is /usr/local/Cellar/qt@5/5.15.2_1/lib/cmake/Qt5
+set(CMAKE_PREFIX_PATH /usr/local/Cellar/qt@5/5.15.2_1/lib/cmake) # CHANGE THIS LINE ONLY
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
-set(CMAKE_PREFIX_PATH /usr/local/Cellar/qt@5/5.15.2_1/lib/cmake/Qt5Multimedia)
 
+# We also need Qt5Multimedia for sound effects
 find_package(Qt5Multimedia REQUIRED)
 
 # file(GLOB...) allows for wildcard additions
@@ -31,6 +30,7 @@ file(GLOB SOURCES "src/*.cpp")
 file(GLOB HEADERS "include/*.hpp")
 
 # remember to add the resources/res.qrc in the executable
-add_executable(game ${SOURCES} resources/res.qrc ${HEADERS}) # We also seem to need the headers for the AUTOMOC to run properly
+# We also seem to need the headers for the AUTOMOC to run properly
+add_executable(game ${SOURCES} resources/res.qrc ${HEADERS}) 
 
 target_link_libraries(game Qt5::Widgets Qt5::Multimedia)

@@ -16,8 +16,8 @@ Enemy::Enemy(Game* game, QGraphicsItem* parent) {
     timer_ = new QTimer(this);
     connect(timer_, SIGNAL(timeout()), this, SLOT(MoveForward()));
 
-    // Call the MoveForward function every 40 ms (approx 25 fps)
-    timer_->start(40);
+    // Call the MoveForward function every 20 ms (approx 50 fps)
+    timer_->start(20);
 
     // Distance traveled initialized to zero
     distance_traveled_ = 0;
@@ -27,7 +27,7 @@ Enemy::~Enemy() {
     delete timer_;
 }
 
-int Enemy::GetSpeed() {
+double Enemy::GetSpeed() {
     return speed_;
 }
 
