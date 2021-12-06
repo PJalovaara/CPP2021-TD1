@@ -17,7 +17,7 @@ A short summary of files in this directory.
 `mamagoose.hpp`     (Inherits `Tower`)
 
 **Build Icon for Towers** \
-`buildicon.hpp`
+`buildicon.hpp`     (*Template class*)
 
 **Enemies** \
 `enemy.hpp`         (*Abstract base class* `Enemy`) \
