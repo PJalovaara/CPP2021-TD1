@@ -7,6 +7,55 @@ In each meeting, you are required to discuss:
 3. Plan for the next week for everyone
 4. Deviations and changes to the project plan, if any
 
+# Meeting 06.12.2021 10:15
+
+**Participants**: 
+1. Antti Haavikko
+2. Anna Huttunen
+3. Perttu Jalovaara
+4. Atte Tommiska 
+
+## Summary of works
+1. Antti Haavikko 
+   
+   Worked on multiple features over the weekend with Perttu.
+
+2. Anna Huttunen
+
+   Implemented a beta version of PooperGoose.
+
+3. Perttu Jalovaara
+
+   Worked on multiple features over the weekend with Antti.
+
+4. Atte Tommiska
+
+   Improved the code to fit the Google C++ style standards.
+
+## Challenges
+
+1. Documenting the code rigorously.
+2. Fixing the final memory leaks.
+3. Writing the project documentation.
+
+## Actions (Code)
+1. Antti is going to improve and unify the tick/frame rate of the game.
+2. Anna is going to document (Doxygen) the source code with Atte.
+3. Perttu is going to change deletes to sells. And improve wave generation logic.
+4. Atte is going to document (Doxygen) the source code and improve code quality.
+
+> Please reflect these action decisions in your git commit messages so that 
+> your group members and advisor can follow the progress.
+
+## Project status 
+Short summary of current project status. 
+
+### TODOs (Writing)
+1. Antti: Project overview
+2. Anna: How to use the software and Work Log
+3. Perttu: Software structure
+4. Atte: Testing
+
 # Meeting 2.12.2021 09:15
 
 **Participants**: 
@@ -248,51 +297,3 @@ We have decided on the topic of the game and designed a tentative class hierarch
 2. Anna: Finish the project plan!
 3. Perttu: Help Anna finish the project plan!
 4. Atte: Study Qt!
-
-# Meeting 22.11.2021 09:15 (TBD)
-
-**Participants**: 
-1. Antti Haavikko
-2. Anna Huttunen (NOT PRESENT)
-3. Perttu Jalovaara
-4. Atte Tommiska 
-
-## Summary of works
-1. Antti Haavikko 
-   
-   ...
-
-2. Anna Huttunen
-
-   ...
-
-3. Perttu Jalovaara
-
-   ...
-
-4. Atte Tommiska
-
-   ...
-
-## Challenges
-
-1. ...
-2. ...
-
-## Actions
-1. Antti is going to ...
-2. Anna is going to ...
-3. Perttu is going to ...
-4. Atte is going to ...
-
-> Please reflect these action decisions in your git commit messages so that 
-> your group members and advisor can follow the progress.
-
-## Project status 
-Short summary of current project status. 
-
-### TODOs
-1. Antti:
-2. Anna:
-3. Perttu:
-4. Atte:
