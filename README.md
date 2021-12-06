@@ -48,9 +48,3 @@ preferably at a regular weekly time. In the meeting the group updates:
 # Source code documentation
 It is strongly recommended to use Doxygen to document your source code.
 Please go over the *Project Guidelines* for details.
-
-# TODOs (Date)
-You can create a list of TODOs in this file.
-The recommended format is:
-- Complete class implementation **foo**. Assigned to \<Member 1\>
-- Test ...
