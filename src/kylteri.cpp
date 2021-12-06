@@ -7,8 +7,8 @@ Kylteri::Kylteri(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
     setOffset(-p.width() / 2, -p.height() / 2);  // Centering
 
     // Destroying a kylteri gives you more money
-    enemy_hp_ = 5;
-    price_ = 40;
+    enemy_hp_ = 30;
+    price_ = 20;
     damage_ = 10;
     speed_ = 2.5;
 

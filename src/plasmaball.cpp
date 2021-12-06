@@ -7,6 +7,6 @@ PlasmaBall::PlasmaBall(QGraphicsItem* parent) : Bullet(parent) {
     setPixmap(p); // Set size for the bullet
     setOffset(-p.width() / 2, -p.height() / 2); // Centering
 
-    bullet_damage_ = 5;
+    bullet_damage_ = 3;
     speed_ = 20;
 };

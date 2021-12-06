@@ -69,7 +69,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     health_bar_->setStyleSheet(style_sheet);
 
     // Initialize the amount of money to 200 and create a text for the player money
-    money_ = 2000;
+    money_ = 500;
     money_text_ = new QLineEdit(this);
     money_text_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height());
     UpdateMoneyText();
@@ -119,13 +119,13 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     pooper_price_text->move(pooper_icon->pos().x() - pooper_price_text->width() / 2, pooper_icon->pixmap().height());
     pooper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
-    BuildIcon<ShotgunGoose>* shotgun_icon = new BuildIcon<ShotgunGoose>(":/images/shotgungoose.png", 300, this);
+    BuildIcon<ShotgunGoose>* shotgun_icon = new BuildIcon<ShotgunGoose>(":/images/shotgungoose.png", 400, this);
     shotgun_icon->setPos(pooper_icon->pos().x() + pooper_icon->pixmap().width() + 10, 50);
     scene_->addItem(shotgun_icon);
     QLineEdit* shotgun_price_text = new QLineEdit(this);
     shotgun_price_text->setReadOnly(true);
     shotgun_price_text->setAlignment(Qt::AlignCenter);
-    shotgun_price_text->setText(QString("$") + QString::number(300));
+    shotgun_price_text->setText(QString("$") + QString::number(400));
     shotgun_price_text->move(shotgun_icon->pos().x() - shotgun_price_text->width() / 2, shotgun_icon->pixmap().height());
     shotgun_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
@@ -139,13 +139,13 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     sniper_price_text->move(sniper_icon->pos().x() - sniper_price_text->width() / 2, sniper_icon->pixmap().height());
     sniper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
-    BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/mamagoose.png", 1000, this);
+    BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/mamagoose.png", 5000, this);
     mama_icon->setPos(sniper_icon->pos().x() + sniper_icon->pixmap().width() + 10, 50);
     scene_->addItem(mama_icon);
     QLineEdit* mama_price_text = new QLineEdit(this);
     mama_price_text->setReadOnly(true);
     mama_price_text->setAlignment(Qt::AlignCenter);
-    mama_price_text->setText(QString("$") + QString::number(1000));
+    mama_price_text->setText(QString("$") + QString::number(5000));
     mama_price_text->move(mama_icon->pos().x() - mama_price_text->width() / 2, mama_icon->pixmap().height());
     mama_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 
@@ -156,10 +156,13 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
 
     // Initialize sound effects
     enemy_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/antinblop.wav"));
+    enemy_dies_sfx_.setVolume(0.3f);
     cruiseship_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/aadanblop.wav"));
     dokaani_dies_sfx_.setSource(QUrl::fromLocalFile(":/sfx/dokaani_dies.wav"));
+    dokaani_dies_sfx_.setVolume(0.2f);
     honk_sfx_.setSource(QUrl::fromLocalFile(":/sfx/honk.wav"));
     chaching_sfx_.setSource(QUrl::fromLocalFile(":/sfx/cha-ching.wav"));
+    chaching_sfx_.setVolume(0.3f);
     game_over_sfx_.setSource(QUrl::fromLocalFile(":/sfx/game_over.wav"));
 
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -291,22 +294,27 @@ void Game::StartWave() {
         UpdateWaveText();
         wave_in_progress_ = true;
         no_of_enemies_ = 0;
-        int spawn_period = std::max(1000 - (wave_/5)*100,100);
+        int spawn_period = std::max(1000 - wave_*30, 10);
         enemy_spawn_timer_->start(spawn_period); 
     }
 }
 
+// The following piece of code is only for the intellectually gifted
 void Game::SpawnEnemy() {
     no_of_enemies_ += 1;
-    switch (wave_%5) {
+    switch (wave_ % 5) {
         case 1:  // student wave
             if (no_of_enemies_ <= 3*wave_) {
-                switch (no_of_enemies_ %3) {
+                switch (no_of_enemies_ % 3) {
                     case 1 :
                         scene_->addItem(new Fyysikko(paths_, this));
                         break;
                     case 2 :
-                        scene_->addItem(new Koneteekkari(paths_, this));
+                        if (wave_ >= 10) {
+                            scene_->addItem(new Dokaani(paths_, this));
+                        } else {
+                            scene_->addItem(new Koneteekkari(paths_, this));
+                        }
                         break;
                     case 0 :
                         scene_->addItem(new Kylteri(paths_, this));
@@ -318,27 +326,40 @@ void Game::SpawnEnemy() {
             }
             break;
         case 2:  // kone wave
-            if (no_of_enemies_ <= 4*wave_) {
-                scene_->addItem(new Koneteekkari(paths_, this));
+            if (no_of_enemies_ <= wave_) {
+                if (wave_ >= 10) {
+                    scene_->addItem(new Cruiseship(paths_, this));
+                    no_of_enemies_ += 1;
+                } else {
+                    scene_->addItem(new Koneteekkari(paths_, this));
+                }
             } else {  // last enemy of the wave
                 enemy_spawn_timer_->stop();
                 wave_in_progress_ = false;
             }
             break;
         case 3: 
-            if (no_of_enemies_ <= 3*wave_) {
-                switch (no_of_enemies_ %9) {
+            if (no_of_enemies_ <= 2*wave_) {
+                switch (no_of_enemies_ % 9) {
                     case 1 :
                         scene_->addItem(new Koneteekkari(paths_, this));
                         break;
                     case 2 :
-                        scene_->addItem(new Koneteekkari(paths_, this));
+                        if (wave_ >= 10) {
+                            scene_->addItem(new Dokaani(paths_, this));
+                        } else {
+                            scene_->addItem(new Koneteekkari(paths_, this));
+                        }
                         break;
                     case 3 :
                         scene_->addItem(new Fyysikko(paths_, this));
                         break;
                     case 4 :
-                        scene_->addItem(new Fyysikko(paths_, this));
+                        if (wave_ >= 10) {
+                            scene_->addItem(new Cruiseship(paths_, this));
+                        } else {
+                            scene_->addItem(new Fyysikko(paths_, this));
+                        }
                         break;
                     case 5 :
                         scene_->addItem(new Fyysikko(paths_, this));
@@ -347,7 +368,11 @@ void Game::SpawnEnemy() {
                         scene_->addItem(new Kylteri(paths_, this));
                         break;
                     case 7 :
-                        scene_->addItem(new Kylteri(paths_, this));
+                        if (wave_ >= 10) {
+                            scene_->addItem(new Cruiseship(paths_, this));
+                        } else {
+                            scene_->addItem(new Kylteri(paths_, this));
+                        }
                         break;
                     case 8 :
                         scene_->addItem(new Kylteri(paths_, this));
@@ -362,8 +387,8 @@ void Game::SpawnEnemy() {
             }
             break;
         case 4:  // student couples wave
-            if (no_of_enemies_ <= 3*wave_) {
-                switch (no_of_enemies_ %6) {
+            if (no_of_enemies_ <= 2*wave_) {
+                switch (no_of_enemies_ % 6) {
                     case 1 :
                         scene_->addItem(new Fyysikko(paths_, this));
                         break;
@@ -371,13 +396,21 @@ void Game::SpawnEnemy() {
                         scene_->addItem(new Fyysikko(paths_, this));
                         break;
                     case 3 :
-                        scene_->addItem(new Koneteekkari(paths_, this));
+                        if (wave_ >= 10) {
+                            scene_->addItem(new Dokaani(paths_, this));
+                        } else {
+                            scene_->addItem(new Koneteekkari(paths_, this));
+                        }
                         break;
                     case 4 :
                         scene_->addItem(new Koneteekkari(paths_, this));
                         break;
                     case 5 :
-                        scene_->addItem(new Kylteri(paths_, this));
+                        if (wave_ >= 10) {
+                            scene_->addItem(new Cruiseship(paths_, this));
+                        } else {
+                            scene_->addItem(new Kylteri(paths_, this));
+                        }
                         break;
                     case 0 :
                         scene_->addItem(new Kylteri(paths_, this));

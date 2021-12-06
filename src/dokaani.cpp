@@ -6,15 +6,15 @@
 
 Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/dokaani.png");
-    p = p.scaled(100, 100, Qt::KeepAspectRatio); // Set size for the enemy
+    p = p.scaled(80, 80, Qt::KeepAspectRatio); // Set size for the enemy
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2);  // Centering
 
     // Destroying a dokaani is difficult and dokaani getting to destination damages the goose a lot
-    enemy_hp_ = 30;
+    enemy_hp_ = 150;
     damage_ = 30;
-    price_ = 75;
-    speed_ = 3.0/2;
+    price_ = 50;
+    speed_ = 1.5;
 
     // Set the points in the path
     path_points_ = ChoosePath(paths);

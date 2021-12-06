@@ -24,7 +24,7 @@ SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
     setOffset(-tower_width_ / 2, -tower_height_ / 2);  // Centering
 
     attack_area_ = nullptr;
-    UpgradeAttackRadius(200);  // SniperGoose has a very large radius
+    UpgradeAttackRadius(300);  // SniperGoose has a very large radius
 
     // CONNECT TIMER TO ATTACK_TARGET
     QTimer* timer = new QTimer();
@@ -43,6 +43,8 @@ void SniperGoose::AttackTarget(){
     scene_->addItem(bullet);  // Add the bullet into the scene
 }
 
+
+// Choose the target that is closest to the end of their path
 void SniperGoose::AcquireTarget() {
     // List of items within the attack_area
     QList<QGraphicsItem*> colliding_items = attack_area_->collidingItems();

@@ -7,5 +7,6 @@ Poop::Poop(QGraphicsItem* parent) : Bullet(parent) {
     setPixmap(p);  // Set size for the bullet
     setOffset(-p.width() / 2, -p.height() / 2);  // Centering
 
+    speed_ = 10;
     bullet_damage_ = 0;
 }

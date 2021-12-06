@@ -8,9 +8,9 @@ Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* paren
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2);  // Centering
 
-    enemy_hp_ = 20;
+    enemy_hp_ = 30;
     damage_ = 10;
-    price_ = 30;
+    price_ = 20;
     speed_ = 2;
 
     // Set the points in the path

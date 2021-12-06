@@ -44,7 +44,7 @@ void Enemy::CheckPoop() {
         // Do dynamic casting to deduce whether we have a tower or an enemy
         Poop* poop = dynamic_cast<Poop*>(item);
         if (poop && speed_ > 1) {  // If cast is successful
-            speed_ -= 1;
+            speed_ -= 0.5;
             delete poop;
         }
     }

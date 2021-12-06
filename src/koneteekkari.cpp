@@ -8,9 +8,9 @@ Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsIte
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2);  // Centering
 
-    enemy_hp_ = 10;
+    enemy_hp_ = 20;
     damage_ = 15;
-    price_ = 50;
+    price_ = 10;
     speed_ = 2;
 
         // Set the points in the path

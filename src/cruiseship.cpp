@@ -15,7 +15,7 @@ Cruiseship::Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* p
     setPixmap(p);
     setOffset(-p.width() / 2, -p.height() / 2);  // Centering
 
-    enemy_hp_ = 50;  // Has higher hp than an average enemy
+    enemy_hp_ = 400;  // Has higher hp than an average enemy
     speed_ = 1;
     damage_ = 50;
     price_ = 100;
