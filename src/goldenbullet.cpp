@@ -9,5 +9,5 @@ GoldenBullet::GoldenBullet(QGraphicsItem* parent) : Bullet(parent) {
     setOffset(-p.width() / 2, -p.height() / 2);  // Centering
 
     bullet_damage_ = 20;
-    speed_ = 80;
+    speed_ = 50;
 }

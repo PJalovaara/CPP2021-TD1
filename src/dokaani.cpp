@@ -14,7 +14,7 @@ Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
     enemy_hp_ = 30;
     damage_ = 30;
     price_ = 75;
-    speed_ = 3;
+    speed_ = 3.0/2;
 
     // Set the points in the path
     path_points_ = ChoosePath(paths);

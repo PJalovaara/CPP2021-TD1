@@ -18,7 +18,7 @@ public slots:
     void Move();
 
 protected:
-    unsigned int speed_;
+    double speed_;
     double max_range_;
     double distance_traveled_;
     int bullet_damage_;

@@ -10,7 +10,7 @@ Kylteri::Kylteri(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
     enemy_hp_ = 5;
     price_ = 40;
     damage_ = 10;
-    speed_ = 5;
+    speed_ = 2.5;
 
     // Set the points in the path
     path_points_ = ChoosePath(paths);
