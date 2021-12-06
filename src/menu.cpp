@@ -61,11 +61,7 @@ Menu::Menu() {
     td_title->move(0, WINDOW_HEIGHT - 20);
     td_title->setStyleSheet("QLineEdit {color: black; font: 10px; background: rgba(0, 0, 0, 0); width: 400 px}");
 
-<<<<<<< HEAD
-    QPixmap logo_p = QPixmap(":/images/logo2.png");
-=======
 	QPixmap logo_p = QPixmap(":/images/logo.png");
->>>>>>> ee0727990735f22f93acc96f1c2095dbf03761c9
     logo_p = logo_p.scaled(400, 300, Qt::KeepAspectRatio);
     QGraphicsPixmapItem* td_logo = new QGraphicsPixmapItem(logo_p);
     td_logo->setPos(0, 0);

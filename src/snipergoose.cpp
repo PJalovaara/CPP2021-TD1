@@ -6,12 +6,9 @@
 #include "mamagoose.hpp"
 #include "goldenbullet.hpp"
 #include "enemy.hpp"
-<<<<<<< HEAD
-=======
 #include <QTimer>
 #include <QList>
 #include <qmath.h>
->>>>>>> ee0727990735f22f93acc96f1c2095dbf03761c9
 
 SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics

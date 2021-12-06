@@ -8,11 +8,7 @@
 #include "enemy.hpp"
 BasicGoose::BasicGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
-<<<<<<< HEAD
-    QPixmap p = QPixmap(":/images/MamaGoose.png");
-=======
-    QPixmap p = QPixmap(":/images/basicgoose.png"); // TODO: Change graphics
->>>>>>> ee0727990735f22f93acc96f1c2095dbf03761c9
+    QPixmap p = QPixmap(":/images/basicgoose.png");
     p = p.scaled(100, 100, Qt::KeepAspectRatio);
     setPixmap(p);  // Set size for the goose
     attack_speed_ = 2;  // Attack 2 times a second
