@@ -85,8 +85,8 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     wave_text_->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50);}");
 
     // Create start and clear buttons
-    start_button_ = new QPushButton(QString("START"), this);
-    clear_button_ = new QPushButton(QString("CLEAR"), this);
+    start_button_ = new QPushButton(QString("START WAVE"), this);
+    clear_button_ = new QPushButton(QString("CLEAR TOWERS"), this);
 
     start_button_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height() - wave_text_->height() - start_button_->height());
     clear_button_->move(10, WINDOW_HEIGHT - health_bar_->height() - money_text_->height() - wave_text_->height() - start_button_->height() - clear_button_->height());
@@ -169,13 +169,6 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
 
     // connect enemy spawning
     connect(enemy_spawn_timer_, SIGNAL(timeout()), this, SLOT(SpawnEnemy()));
-
-    // Test code: Create a cruiseship and dokaani
-    Cruiseship* cruiseship = new Cruiseship(paths_, this);
-    scene_->addItem(cruiseship);
-
-    // Dokaani* dok = new Dokaani(path_points_, this);
-    // scene_->addItem(dok);
 }
 
 Game::~Game() {
@@ -298,35 +291,131 @@ void Game::StartWave() {
         UpdateWaveText();
         wave_in_progress_ = true;
         no_of_enemies_ = 0;
-        enemy_spawn_timer_->start(1000);  // spawn an enemy every 1000 ms
+        int spawn_period = std::max(1000 - (wave_/5)*100,100);
+        enemy_spawn_timer_->start(spawn_period); 
     }
 }
 
 void Game::SpawnEnemy() {
-    if (no_of_enemies_ < 3*wave_) {  // 3*wave for now, can change to something more dynamic :)
-        switch (no_of_enemies_ %5) {
-            case 0 :
-                scene_->addItem(new Fyysikko(paths_, this));
-                break;
-            case 1 :
-                scene_->addItem(new Koneteekkari(paths_, this));
-                break;
-            case 2 :
-                scene_->addItem(new Kylteri(paths_, this));
-                break;
-            case 3 :
-                scene_->addItem(new Cruiseship(paths_, this));
-                break;
-            case 4 :
-                scene_->addItem(new Dokaani(paths_, this));
-                break;
-        }
-    } else {
-        // last enemy of the wave
-        enemy_spawn_timer_->stop();
-        wave_in_progress_ = false;
-    }
     no_of_enemies_ += 1;
+    switch (wave_%5) {
+        case 1:  // student wave
+            if (no_of_enemies_ <= 3*wave_) {
+                switch (no_of_enemies_ %3) {
+                    case 1 :
+                        scene_->addItem(new Fyysikko(paths_, this));
+                        break;
+                    case 2 :
+                        scene_->addItem(new Koneteekkari(paths_, this));
+                        break;
+                    case 0 :
+                        scene_->addItem(new Kylteri(paths_, this));
+                        break;
+                }
+            } else {  // last enemy of the wave
+                enemy_spawn_timer_->stop();
+                wave_in_progress_ = false;
+            }
+            break;
+        case 2:  // kone wave
+            if (no_of_enemies_ <= 4*wave_) {
+                scene_->addItem(new Koneteekkari(paths_, this));
+            } else {  // last enemy of the wave
+                enemy_spawn_timer_->stop();
+                wave_in_progress_ = false;
+            }
+            break;
+        case 3: 
+            if (no_of_enemies_ <= 3*wave_) {
+                switch (no_of_enemies_ %9) {
+                    case 1 :
+                        scene_->addItem(new Koneteekkari(paths_, this));
+                        break;
+                    case 2 :
+                        scene_->addItem(new Koneteekkari(paths_, this));
+                        break;
+                    case 3 :
+                        scene_->addItem(new Fyysikko(paths_, this));
+                        break;
+                    case 4 :
+                        scene_->addItem(new Fyysikko(paths_, this));
+                        break;
+                    case 5 :
+                        scene_->addItem(new Fyysikko(paths_, this));
+                        break;
+                    case 6 :
+                        scene_->addItem(new Kylteri(paths_, this));
+                        break;
+                    case 7 :
+                        scene_->addItem(new Kylteri(paths_, this));
+                        break;
+                    case 8 :
+                        scene_->addItem(new Kylteri(paths_, this));
+                        break;
+                    case 0 :
+                        scene_->addItem(new Dokaani(paths_, this));
+                        break;
+                }
+            } else {  // last enemy of the wave
+                enemy_spawn_timer_->stop();
+                wave_in_progress_ = false;
+            }
+            break;
+        case 4:  // student couples wave
+            if (no_of_enemies_ <= 3*wave_) {
+                switch (no_of_enemies_ %6) {
+                    case 1 :
+                        scene_->addItem(new Fyysikko(paths_, this));
+                        break;
+                    case 2 :
+                        scene_->addItem(new Fyysikko(paths_, this));
+                        break;
+                    case 3 :
+                        scene_->addItem(new Koneteekkari(paths_, this));
+                        break;
+                    case 4 :
+                        scene_->addItem(new Koneteekkari(paths_, this));
+                        break;
+                    case 5 :
+                        scene_->addItem(new Kylteri(paths_, this));
+                        break;
+                    case 0 :
+                        scene_->addItem(new Kylteri(paths_, this));
+                        break;
+                }
+            } else {  // last enemy of the wave
+                enemy_spawn_timer_->stop();
+                wave_in_progress_ = false;
+            }
+            break; 
+        case 0:  // student couples wave
+            if (no_of_enemies_ <= 2*wave_) {
+                switch (no_of_enemies_ %10) {
+                    case 1 :
+                        scene_->addItem(new Fyysikko(paths_, this));
+                        break;
+                    case 2 :
+                        scene_->addItem(new Kylteri(paths_, this));
+                        break;
+                    case 5 :
+                        scene_->addItem(new Fyysikko(paths_, this));
+                        break;
+                    case 6 :
+                        scene_->addItem(new Fyysikko(paths_, this));
+                        break;
+                    case 0 :
+                        scene_->addItem(new Cruiseship(paths_, this));
+                        break;
+                    default :
+                        scene_->addItem(new Koneteekkari(paths_, this));
+                        break;
+                }
+            } else {  // last enemy of the wave
+                enemy_spawn_timer_->stop();
+                wave_in_progress_ = false;
+            }
+            break;
+    }
 }
 
 void Game::CreatePaths() {
