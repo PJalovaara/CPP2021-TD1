@@ -42,6 +42,7 @@ public:
 
     QList<QList<QPointF>> GetPaths();
     void CreatePaths();
+    void closeEvent(QCloseEvent *event);
 
     void PlayEnemyDiesSfx();
     void PlayDokaaniDiesSfx();

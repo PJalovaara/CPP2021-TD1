@@ -586,3 +586,8 @@ void Game::GameOver() {
         selected_tower_rect_ = nullptr;
     }
 }
+
+void Game::closeEvent(QCloseEvent *event) {
+    scene_->clear();
+    QWidget::closeEvent(event);
+}

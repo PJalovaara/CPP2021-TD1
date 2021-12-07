@@ -20,6 +20,7 @@ public:
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     
+    void closeEvent(QCloseEvent *event);
     QGraphicsScene* GetScene();
     QGraphicsPixmapItem* GetCursor();
     void ResetCursor();

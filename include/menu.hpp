@@ -24,6 +24,7 @@ public:
     void mousePressEvent(QMouseEvent* event);
     QGraphicsScene* GetScene();
     QList<QList<QPointF>> ReadPathsFromFile(const QString& filename);
+    void closeEvent(QCloseEvent *event);
 
 public slots:
     void StartLevel1();

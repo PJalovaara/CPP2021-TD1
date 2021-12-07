@@ -137,3 +137,8 @@ void Editor::SavePathToFile() {
     }
     file.close();
 }
+
+void Editor::closeEvent(QCloseEvent *event) {
+    scene_->clear();
+    QWidget::closeEvent(event);
+}

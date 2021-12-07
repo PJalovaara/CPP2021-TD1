@@ -161,8 +161,13 @@ void Menu::StartCustom() {
 
 void Menu::StartEditor() {
     // Level Editor
-    // THIS WILL CAUSE A MEMORY LEAK FOR SURE
     Editor* editor = new Editor();
     editor->show();
     active_editors_.push_back(editor);
+}
+
+
+void Menu::closeEvent(QCloseEvent *event) {
+    QWidget::closeEvent(event);
+    delete this;
 }
