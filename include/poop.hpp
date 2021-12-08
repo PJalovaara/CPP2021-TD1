@@ -1,12 +1,11 @@
-#ifndef TD_POOP
-#define TD_POOP
+#ifndef INCLUDE_POOP_HPP_
+#define INCLUDE_POOP_HPP_
 
 #include "bullet.hpp"
 
 class Poop : public Bullet {
-public:
-    Poop(QGraphicsItem* parent = 0);
+ public:
+    explicit Poop(QGraphicsItem* parent = 0);
 };
 
-
-#endif
+#endif  // INCLUDE_POOP_HPP_

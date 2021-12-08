@@ -1,17 +1,16 @@
-#ifndef TD_SNIPERGOOSE
-#define TD_SNIPERGOOSE
+#ifndef INCLUDE_SNIPERGOOSE_HPP_
+#define INCLUDE_SNIPERGOOSE_HPP_
 
 #include "tower.hpp"
 
 class SniperGoose : public Tower {
     Q_OBJECT
-public:
-    SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent = 0);
+
+ public:
+    explicit SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent = 0);
     virtual void AttackTarget();
-public slots:
+ public slots:
     virtual void AcquireTarget();
 };
 
-
-
-#endif
+#endif  // INCLUDE_SNIPERGOOSE_HPP_

@@ -1,5 +1,5 @@
-#ifndef TD_MENU
-#define TD_MENU
+#ifndef INCLUDE_MENU_HPP_
+#define INCLUDE_MENU_HPP_
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -17,7 +17,8 @@
 
 class Menu : public QGraphicsView{
     Q_OBJECT
-public:
+
+ public:
     // member functions
     Menu();
     ~Menu();
@@ -26,18 +27,19 @@ public:
     QList<QList<QPointF>> ReadPathsFromFile(const QString& filename);
     void closeEvent(QCloseEvent *event);
 
-public slots:
+ public slots:
     void StartLevel1();
-	void StartLevel2();
-	void StartLevel3();
-	void StartLevel4();
-	void StartLevel5();
+    void StartLevel2();
+    void StartLevel3();
+    void StartLevel4();
+    void StartLevel5();
     void StartCustom();
     void StartEditor();
 
-private:
+ private:
     QGraphicsScene* scene_;
     QList<Game*> active_games_;
     QList<Editor*> active_editors_;
 };
-#endif
+
+#endif  // INCLUDE_MENU_HPP_

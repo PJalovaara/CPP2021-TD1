@@ -1,16 +1,17 @@
-#ifndef TD_POOPERGOOSE
-#define TD_POOPERGOOSE
+#ifndef INCLUDE_POOPERGOOSE_HPP_
+#define INCLUDE_POOPERGOOSE_HPP_
 
 #include "tower.hpp"
 
 class PooperGoose : public Tower {
     Q_OBJECT
-public:
-    PooperGoose(QGraphicsScene* scene, QGraphicsItem* parent = 0);
+
+ public:
+    explicit PooperGoose(QGraphicsScene* scene, QGraphicsItem* parent = 0);
     void AttackTarget();
-public slots:
+ public slots:
     void AcquireTarget();
 };
 
 
-#endif
+#endif  // INCLUDE_POOPERGOOSE_HPP_

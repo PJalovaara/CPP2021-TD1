@@ -1,5 +1,5 @@
-#ifndef TD_TOWER
-#define TD_TOWER
+#ifndef INCLUDE_TOWER_HPP_
+#define INCLUDE_TOWER_HPP_
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsPolygonItem>
@@ -13,8 +13,9 @@
 
 class Tower : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
-public:
-    Tower(QGraphicsScene* scene, QGraphicsItem* parent = 0);
+
+ public:
+    explicit Tower(QGraphicsScene* scene, QGraphicsItem* parent = 0);
     ~Tower();
 
     unsigned int GetAttackRadius();
@@ -24,10 +25,10 @@ public:
     int GetWidth();
     int GetHeight();
 
-public slots:
+ public slots:
     virtual void AcquireTarget() = 0;
 
-protected:
+ protected:
     QGraphicsScene* scene_;
     QVector<QPointF> points_;
     QPointF tower_center_;
@@ -40,5 +41,4 @@ protected:
     bool has_target_;
 };
 
-
-#endif
+#endif  // INCLUDE_TOWER_HPP_

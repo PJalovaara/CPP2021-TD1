@@ -100,7 +100,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
 
     // Add the build icons and their prices
     BuildIcon<BasicGoose>* basic_icon = new BuildIcon<BasicGoose>(":/images/basicgoose.png", 100, this);
-    basic_icon->setPos(50,50);
+    basic_icon->setPos(50, 50);
     scene_->addItem(basic_icon);
     QLineEdit* basic_price_text = new QLineEdit(this);
     basic_price_text->setReadOnly(true);
@@ -295,7 +295,7 @@ void Game::StartWave() {
         wave_in_progress_ = true;
         no_of_enemies_ = 0;
         int spawn_period = std::max(1000 - wave_*30, 10);
-        enemy_spawn_timer_->start(spawn_period); 
+        enemy_spawn_timer_->start(spawn_period);
     }
 }
 
@@ -338,7 +338,7 @@ void Game::SpawnEnemy() {
                 wave_in_progress_ = false;
             }
             break;
-        case 3: 
+        case 3:
             if (no_of_enemies_ <= 2*wave_) {
                 switch (no_of_enemies_ % 9) {
                     case 1 :
@@ -420,7 +420,7 @@ void Game::SpawnEnemy() {
                 enemy_spawn_timer_->stop();
                 wave_in_progress_ = false;
             }
-            break; 
+            break;
         case 0:  // student couples wave
             if (no_of_enemies_ <= 2*wave_) {
                 switch (no_of_enemies_ %10) {

@@ -1,12 +1,12 @@
-#ifndef TD_GOLDENBULLET
-#define TD_GOLDENBULLET
+#ifndef INCLUDE_GOLDENBULLET_HPP_
+#define INCLUDE_GOLDENBULLET_HPP_
 
 #include "bullet.hpp"
 
 class GoldenBullet : public Bullet {
-public:
-    GoldenBullet(QGraphicsItem* parent = 0);
+ public:
+    explicit GoldenBullet(QGraphicsItem* parent = 0);
 };
 
 
-#endif
+#endif  // INCLUDE_GOLDENBULLET_HPP_

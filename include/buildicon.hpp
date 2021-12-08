@@ -1,5 +1,5 @@
-#ifndef TD_BUILD_ICON
-#define TD_BUILD_ICON
+#ifndef INCLUDE_BUILDICON_HPP_
+#define INCLUDE_BUILDICON_HPP_
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsSceneMouseEvent>
@@ -10,10 +10,10 @@
 
 template <typename T>
 class BuildIcon: public QGraphicsPixmapItem {
-public:
+ public:
     BuildIcon(QString imagepath, int price, Game* game, QGraphicsItem* parent = 0);
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
-private:
+ private:
     Game* game_;
     QString imagepath_;
     int price_;
@@ -27,15 +27,15 @@ inline BuildIcon<T>::BuildIcon(QString imagepath, int price, Game* game, QGraphi
     imagepath_ = imagepath;
     QPixmap p = QPixmap(imagepath_);
     p = p.scaled(100, 100, Qt::KeepAspectRatio);
-    setPixmap(p); // Set size for the goose
-    setOffset(-p.width() / 2, -p.height() / 2); // Centering
+    setPixmap(p);  // Set size for the goose
+    setOffset(-p.width() / 2, -p.height() / 2);  // Centering
     game_ = game;
-    price_ = price; // Set price
-};
+    price_ = price;  // Set price
+}
 
 template <class T>
 inline void BuildIcon<T>::mousePressEvent(QGraphicsSceneMouseEvent* event) {
-    if(!(game_->GetBuild()) && game_->GetMoney() >= price_ && !(game_->IsGameOver())) {
+    if (!(game_->GetBuild()) && game_->GetMoney() >= price_ && !(game_->IsGameOver())) {
         // Create a new tower to the build_ pointer
         T* newGoose = new T(game_->GetScene());
         game_->SetBuild(newGoose);
@@ -46,4 +46,4 @@ inline void BuildIcon<T>::mousePressEvent(QGraphicsSceneMouseEvent* event) {
     }
 }
 
-#endif
+#endif  // INCLUDE_BUILDICON_HPP_

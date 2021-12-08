@@ -1,5 +1,5 @@
-#ifndef TD_CRUISESHIP
-#define TD_CRUISESHIP
+#ifndef INCLUDE_CRUISESHIP_HPP_
+#define INCLUDE_CRUISESHIP_HPP_
 
 #include <QList>
 #include <QPointF>
@@ -8,12 +8,12 @@
 
 class Cruiseship : public Enemy {
     Q_OBJECT
-public:
+
+ public:
     Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent = 0);
     QList<QPointF> ChoosePath(QList<QList<QPointF>> paths);
     void Death();
     void CheckPoop();
-private:
 };
 
-#endif
+#endif  // INCLUDE_CRUISESHIP_HPP_

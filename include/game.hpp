@@ -1,5 +1,5 @@
-#ifndef TD_GAME
-#define TD_GAME
+#ifndef INCLUDE_GAME_HPP_
+#define INCLUDE_GAME_HPP_
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -18,9 +18,9 @@
 
 class Game : public QGraphicsView {
     Q_OBJECT
-public:
+ public:
     // member functions
-    Game(QList<QList<QPointF>> paths, QWidget* parent = 0);
+    explicit Game(QList<QList<QPointF>> paths, QWidget* parent = 0);
     ~Game();
 
     void SetCursor(QString filename);
@@ -50,14 +50,14 @@ public:
     void PlayHonkSfx();
     void GameOver();
 
-public slots:
+ public slots:
     void SpawnEnemy();
     void ClearTowers();
     void UpgradeTower();
     void RemoveTower();
     void StartWave();
 
-private:
+ private:
     QGraphicsScene* scene_;
     Tower* build_;
     QGraphicsPixmapItem* cursor_;
@@ -88,4 +88,4 @@ private:
 };
 
 
-#endif
+#endif  // INCLUDE_GAME_HPP_

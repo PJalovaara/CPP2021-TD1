@@ -1,12 +1,12 @@
-#ifndef TD_PLASMABALL
-#define TD_PLASMABALL
+#ifndef INCLUDE_PLASMABALL_HPP_
+#define INCLUDE_PLASMABALL_HPP_
 
 #include "bullet.hpp"
 
 class PlasmaBall : public Bullet {
-public:
-    PlasmaBall(QGraphicsItem* parent = 0);
+ public:
+    explicit PlasmaBall(QGraphicsItem* parent = 0);
 };
 
 
-#endif
+#endif  // INCLUDE_PLASMABALL_HPP_

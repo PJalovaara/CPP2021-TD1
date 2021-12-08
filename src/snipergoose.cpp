@@ -2,13 +2,11 @@
 
 #include <QTimer>
 #include <QList>
+#include <qmath.h>
 
 #include "mamagoose.hpp"
 #include "goldenbullet.hpp"
 #include "enemy.hpp"
-#include <QTimer>
-#include <QList>
-#include <qmath.h>
 
 SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
@@ -30,9 +28,9 @@ SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
     QTimer* timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(AcquireTarget()));
     timer->start(1000 / attack_speed_);
-};
+}
 
-void SniperGoose::AttackTarget(){
+void SniperGoose::AttackTarget() {
     GoldenBullet* bullet = new GoldenBullet(this);
     bullet->SetMaxRange(attack_radius_);
     bullet->setPos(pos());  // Center the bullet position w.r.t the goose
@@ -51,7 +49,7 @@ void SniperGoose::AcquireTarget() {
 
     has_target_ = false;  // Initialize to no target
     double dist_to_end = 10000;
-    QPointF closest_point = QPointF(0,0);
+    QPointF closest_point = QPointF(0, 0);
     Enemy* closest_enemy = nullptr;
 
     for (auto item : colliding_items) {
@@ -59,7 +57,7 @@ void SniperGoose::AcquireTarget() {
         Enemy* enemy = dynamic_cast<Enemy*>(item);
         if (enemy) {  // If cast is successful
             double this_dist = enemy->DistanceLeft();
-            if(this_dist < dist_to_end) {
+            if (this_dist < dist_to_end) {
                 dist_to_end = this_dist;
                 closest_point = enemy->pos();
                 closest_enemy = enemy;

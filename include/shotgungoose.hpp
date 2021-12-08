@@ -1,17 +1,18 @@
-#ifndef TD_SHOTGUNGOOSE
-#define TD_SHOTGUNGOOSE
+#ifndef INCLUDE_SHOTGUNGOOSE_HPP_
+#define INCLUDE_SHOTGUNGOOSE_HPP_
 
 #include "tower.hpp"
 
 class ShotgunGoose : public Tower {
     Q_OBJECT
-public:
-    ShotgunGoose(QGraphicsScene* scene, QGraphicsItem* parent = 0);
+
+ public:
+    explicit ShotgunGoose(QGraphicsScene* scene, QGraphicsItem* parent = 0);
     void AttackTarget();
-public slots:
+ public slots:
     void AcquireTarget();
 };
 
 
 
-#endif
+#endif  // INCLUDE_SHOTGUNGOOSE_HPP_

@@ -1,5 +1,5 @@
-#ifndef TD_ENEMY
-#define TD_ENEMY
+#ifndef INCLUDE_ENEMY_HPP_
+#define INCLUDE_ENEMY_HPP_
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
@@ -12,8 +12,9 @@
 
 class Enemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
-public:
-    Enemy(Game* game, QGraphicsItem* parent = 0);
+
+ public:
+    explicit Enemy(Game* game, QGraphicsItem* parent = 0);
     ~Enemy();
     void RotateToFacePoint(QPointF p);
     QPointF GetDest();
@@ -23,10 +24,10 @@ public:
     virtual void Death();
     virtual void CheckPoop();
     double DistanceLeft();
-public slots:
+ public slots:
     void MoveForward();
 
-protected:
+ protected:
     QTimer* timer_;
     QList<QPointF> path_points_;
     QPointF dest_;
@@ -41,4 +42,4 @@ protected:
     double distance_left_;
 };
 
-#endif
+#endif  // INCLUDE_ENEMY_HPP_

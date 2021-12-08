@@ -1,5 +1,5 @@
-#ifndef TD_EDITOR
-#define TD_EDITOR
+#ifndef INCLUDE_EDITOR_HPP_
+#define INCLUDE_EDITOR_HPP_
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -13,24 +13,25 @@
 
 class Editor : public QGraphicsView {
     Q_OBJECT
-public:
+
+ public:
     // member functions
-    Editor(QWidget* parent = 0);
+    explicit Editor(QWidget* parent = 0);
     void SetCursor(QString filename);
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
-    
+
     void closeEvent(QCloseEvent *event);
     QGraphicsScene* GetScene();
     QGraphicsPixmapItem* GetCursor();
     void ResetCursor();
     void CreatePath();
 
-public slots:
+ public slots:
     void SavePathToFile();
     void TogglePathMode();
 
-private:
+ private:
     QGraphicsScene* scene_;
     QGraphicsPixmapItem* cursor_ = nullptr;
     QList<QList<QPointF>> paths_;
@@ -39,4 +40,4 @@ private:
 };
 
 
-#endif
+#endif  // INCLUDE_EDITOR_HPP_

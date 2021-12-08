@@ -1,18 +1,18 @@
-#ifndef TD_DOKAANI
-#define TD_DOKAANI
+#ifndef INCLUDE_DOKAANI_HPP_
+#define INCLUDE_DOKAANI_HPP_
 
 #include "enemy.hpp"
 
 class Dokaani : public Enemy {
     Q_OBJECT
-public:
+
+ public:
     Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent = 0);
     QList<QPointF> ChoosePath(QList<QList<QPointF>> paths);
     void MoveForward();
     void Death();
-private:
 };
 
 
 
-#endif
+#endif  // INCLUDE_DOKAANI_HPP_
