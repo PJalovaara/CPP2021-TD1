@@ -5,7 +5,7 @@ The `.cpp` files are in a separate directory `src`.
 A short summary of files in this directory.
 
 **Menu, Game and Level editor** \
-`menu.hpp`          (Includes `game.hpp` and `editor.hpp`) \
+`menu.hpp`          (Includes `Game` and `Editor`) \
 `game.hpp` \
 `editor.hpp`
 
