@@ -4,8 +4,9 @@ The `.hpp` files are in a separate directory `include`.
 
 A short summary of files in this directory.
 
-**Menu and Level editor** \
+**Menu, Game and Level editor** \
 `menu.cpp`          (Includes `game.cpp` and `editor.cpp`) \
+`game.cpp` \
 `editor.cpp`
 
 **Towers** \
@@ -17,7 +18,7 @@ A short summary of files in this directory.
 `mamagoose.cpp`     (Inherits `Tower`)
 
 **Build Icon for Towers** \
-`buildicon.cpp`     (*Template class*)
+`---`     (*Template class* `BuildIcon` is implemented in .hpp)
 
 **Enemies** \
 `enemy.cpp`         (*Abstract base class* `Enemy`) \
