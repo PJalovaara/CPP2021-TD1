@@ -24,7 +24,7 @@ BasicGoose::BasicGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(sce
     UpgradeAttackRadius(100);  // BasicGoose has attackRadius of 100
 
     // Connect timer to AcquireTarget
-    QTimer* timer = new QTimer();
+    QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(AcquireTarget()));
     timer->start(1000 / attack_speed_);
 }

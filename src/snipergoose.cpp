@@ -25,7 +25,7 @@ SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
     UpgradeAttackRadius(300);  // SniperGoose has a very large radius
 
     // CONNECT TIMER TO ATTACK_TARGET
-    QTimer* timer = new QTimer();
+    QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(AcquireTarget()));
     timer->start(1000 / attack_speed_);
 }

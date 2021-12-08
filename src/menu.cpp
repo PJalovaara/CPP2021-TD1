@@ -37,7 +37,7 @@ Menu::Menu() {
     QPushButton* Level5Button = new QPushButton(QString("LEVEL 5"), this);
     QPushButton* CustomButton = new QPushButton(QString("CUSTOM LEVEL"), this);
     QPushButton* EditorButton = new QPushButton(QString("LEVEL EDITOR"), this);
-
+    
     Level1Button->move(10, WINDOW_HEIGHT - 230);
     Level2Button->move(10, WINDOW_HEIGHT - 200);
     Level3Button->move(10, WINDOW_HEIGHT - 170);
@@ -168,5 +168,6 @@ void Menu::closeEvent(QCloseEvent *event) {
         delete editor;
     }
     active_editors_.clear();
+    scene_->clear();
     QWidget::closeEvent(event);
 }

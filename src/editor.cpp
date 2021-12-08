@@ -45,6 +45,10 @@ Editor::Editor(QWidget* parent) : QGraphicsView(parent) {
     setMouseTracking(true);
 }
 
+Editor::~Editor() {
+    scene_->clear();
+}
+
 QGraphicsScene* Editor::GetScene() {
     return scene_;
 }

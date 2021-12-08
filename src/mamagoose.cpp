@@ -26,7 +26,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
     UpgradeAttackRadius(120);  // MamaGoose has attackRadius of 120
 
     // Connect timer to AcquireTarget
-    QTimer* timer = new QTimer();
+    QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(AcquireTarget()));
     timer->start(1000 / attack_speed_);
 }

@@ -31,6 +31,7 @@ class Game : public QGraphicsView {
     QProgressBar* GetHealthBar();
     int GetMoney();
     void SetMoney(int new_money);
+    void SetPriceText(int icon_x, int icon_height, int price);
     void UpdateMoneyText();
     void UpdateWaveText();
     Tower* GetBuild();
@@ -65,6 +66,7 @@ class Game : public QGraphicsView {
     int no_of_enemies_;
     QList<QList<QPointF>> paths_;
     QList<Tower*> towers_;
+    QList<QLineEdit*> line_edits_;
     QProgressBar* health_bar_;
     int money_;
     int wave_;
