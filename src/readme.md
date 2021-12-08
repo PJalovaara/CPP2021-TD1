@@ -5,7 +5,7 @@ The `.hpp` files are in a separate directory `include`.
 A short summary of files in this directory.
 
 **Menu, Game and Level editor** \
-`menu.cpp`          (Includes `game.cpp` and `editor.cpp`) \
+`menu.cpp`          (Includes `Game` and `Editor`) \
 `game.cpp` \
 `editor.cpp`
 
