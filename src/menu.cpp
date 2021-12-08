@@ -74,15 +74,6 @@ Menu::Menu() {
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
-Menu::~Menu() {
-    for (auto game : active_games_) {
-        delete game;
-    }
-    for (auto editor : active_editors_) {
-        delete editor;
-    }
-}
-
 QGraphicsScene* Menu::GetScene() {
     return scene_;
 }
@@ -154,6 +145,7 @@ void Menu::StartCustom() {
         QList<QList<QPointF>> paths = ReadPathsFromFile("custom_level.dat");
         Game* game = new Game(paths);
         game->show();
+        active_games_.push_back(game);
     } else {
         qDebug() << "Create a custom level in the level editor first!";
     }
@@ -168,5 +160,13 @@ void Menu::StartEditor() {
 
 
 void Menu::closeEvent(QCloseEvent *event) {
+    for (auto game : active_games_) {
+        delete game;
+    }
+    active_games_.clear();
+    for (auto editor : active_editors_) {
+        delete editor;
+    }
+    active_editors_.clear();
     QWidget::closeEvent(event);
 }

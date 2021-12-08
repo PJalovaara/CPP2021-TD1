@@ -21,7 +21,6 @@ class Menu : public QGraphicsView{
  public:
     // member functions
     Menu();
-    ~Menu();
     void mousePressEvent(QMouseEvent* event);
     QGraphicsScene* GetScene();
     QList<QList<QPointF>> ReadPathsFromFile(const QString& filename);
