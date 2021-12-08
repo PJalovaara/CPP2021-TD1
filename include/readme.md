@@ -6,6 +6,7 @@ A short summary of files in this directory.
 
 **Menu and Level editor** \
 `menu.hpp`          (Includes `game.hpp` and `editor.hpp`) \
+`game.hpp` \
 `editor.hpp`
 
 **Towers** \
