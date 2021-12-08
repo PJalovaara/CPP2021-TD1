@@ -169,5 +169,4 @@ void Menu::StartEditor() {
 
 void Menu::closeEvent(QCloseEvent *event) {
     QWidget::closeEvent(event);
-    delete this;
 }
