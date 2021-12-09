@@ -4,11 +4,16 @@
 #include <QTimer>
 #include <QString>
 #include <qmath.h>
-#include <QDebug>
 
 #include <bullet.hpp>
 #include <poop.hpp>
 
+/**
+ * @brief Construct a new Enemy:: Enemy object
+ * 
+ * @param game 
+ * @param parent 
+ */
 Enemy::Enemy(Game* game, QGraphicsItem* parent) {
     game_ = game;
 
@@ -37,6 +42,10 @@ void Enemy::RotateToFacePoint(QPointF p) {
     setRotation(-ln.angle());  // -ln.angle()
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Enemy::CheckPoop() {
     QList<QGraphicsItem*> colliding_items = this->collidingItems();
 
@@ -51,6 +60,11 @@ void Enemy::CheckPoop() {
     return;
 }
 
+/**
+ * @brief 
+ * 
+ * @return double 
+ */
 double Enemy::DistanceLeft() {
     double total_distance = 0;
     for (int i = 0; i < path_points_.length() - 1; i++) {
@@ -60,6 +74,10 @@ double Enemy::DistanceLeft() {
     return total_distance - distance_traveled_;
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Enemy::MoveForward() {
     // If close to dest, rotate towards the next dest
     QLineF ln(pos(), dest_);
@@ -112,6 +130,10 @@ void Enemy::Death() {
     game_->PlayEnemyDiesSfx();
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Enemy::ReachDest() {
     QProgressBar* health_bar = game_->GetHealthBar();
     int current_health = health_bar->value();

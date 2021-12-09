@@ -9,11 +9,15 @@
 #include <QGraphicsRectItem>
 #include <QBrush>
 #include <QPen>
-#include <QDebug>
 
 #include "bullet.hpp"
 #include "enemy.hpp"
-
+/**
+ * @brief Construct a new Tower:: Tower object
+ * 
+ * @param scene 
+ * @param parent 
+ */
 Tower::Tower(QGraphicsScene* scene, QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem(parent) {
     scene_ = scene;
 }
@@ -26,6 +30,11 @@ unsigned int Tower::GetAttackRadius() {
     return attack_radius_;
 }
 
+/**
+ * @brief 
+ * 
+ * @param new_radius 
+ */
 void Tower::UpgradeAttackRadius(unsigned int new_radius) {
     // Points for the "unit" polygon around the tower
     points_ = { QPointF(2.500000, 1.500000), QPointF(2.445817, 1.824699), QPointF(2.289141, 2.114213), QPointF(2.046948, 2.337166),

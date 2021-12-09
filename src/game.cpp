@@ -12,8 +12,6 @@
 #include <QLineEdit>
 #include <QPalette>
 
-#include <QDebug>
-
 #include "tower.hpp"
 #include "bullet.hpp"
 #include "enemy.hpp"
@@ -32,8 +30,12 @@
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 700
 
-// TODO: GameOver text etc, GameOver prohibits you from building more towers, Unlimited waves?
-
+/**
+ * @brief Construct a new Game:: Game object
+ * 
+ * @param paths 
+ * @param parent 
+ */
 Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent) {
     // Creating a scene and a timer to spawn enemies on the pathPoints path
     scene_ = new QGraphicsScene(this);
@@ -100,7 +102,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
 
     // Add the build icons and their prices
     BuildIcon<BasicGoose>* basic_icon = new BuildIcon<BasicGoose>(":/images/basicgoose.png", 100, this);
-    basic_icon->setPos(50,50);
+    basic_icon->setPos(50, 50);
     scene_->addItem(basic_icon);
     QLineEdit* basic_price_text = new QLineEdit(this);
     basic_price_text->setReadOnly(true);
@@ -226,6 +228,11 @@ void Game::SetBuild(Tower* newBuild) {
     build_ = newBuild;
 }
 
+/**
+ * @brief 
+ * 
+ * @param event 
+ */
 void Game::mousePressEvent(QMouseEvent* event) {
     if (!game_over_) {
         if (build_) {
@@ -288,6 +295,10 @@ Tower* Game::GetBuild() {
     return build_;
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Game::StartWave() {
     if (!wave_in_progress_) {
         wave_++;
@@ -295,11 +306,14 @@ void Game::StartWave() {
         wave_in_progress_ = true;
         no_of_enemies_ = 0;
         int spawn_period = std::max(1000 - wave_*30, 10);
-        enemy_spawn_timer_->start(spawn_period); 
+        enemy_spawn_timer_->start(spawn_period);
     }
 }
 
-// The following piece of code is only for the intellectually gifted
+/**
+ * @brief 
+ * 
+ */
 void Game::SpawnEnemy() {
     no_of_enemies_ += 1;
     switch (wave_ % 5) {
@@ -338,7 +352,7 @@ void Game::SpawnEnemy() {
                 wave_in_progress_ = false;
             }
             break;
-        case 3: 
+        case 3:
             if (no_of_enemies_ <= 2*wave_) {
                 switch (no_of_enemies_ % 9) {
                     case 1 :
@@ -420,7 +434,7 @@ void Game::SpawnEnemy() {
                 enemy_spawn_timer_->stop();
                 wave_in_progress_ = false;
             }
-            break; 
+            break;
         case 0:  // student couples wave
             if (no_of_enemies_ <= 2*wave_) {
                 switch (no_of_enemies_ %10) {
@@ -451,6 +465,10 @@ void Game::SpawnEnemy() {
     }
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Game::CreatePaths() {
     for (auto path_points : paths_) {
         for (int i = 0; i < path_points.size() - 1; i++) {
@@ -536,6 +554,10 @@ void Game::PlayHonkSfx() {
     honk_sfx_.play();
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Game::GameOver() {
     if (!game_over_) {
         game_over_ = true;

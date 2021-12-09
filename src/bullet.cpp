@@ -3,7 +3,11 @@
 #include <QPixmap>
 #include <QTimer>
 #include <qmath.h>
-
+/**
+ * @brief Construct a new Bullet:: Bullet object
+ * 
+ * @param parent 
+ */
 Bullet::Bullet(QGraphicsItem* parent) {
     // set graphics
     QPixmap p = QPixmap(":/images/bulletblack.png");
@@ -27,7 +31,10 @@ Bullet::Bullet(QGraphicsItem* parent) {
     move_timer->start(20);
 }
 
-
+/**
+ * @brief 
+ * 
+ */
 void Bullet::Move() {
     double theta = rotation();  // return the angle in degrees
     double dy = speed_ * qSin(qDegreesToRadians(theta));

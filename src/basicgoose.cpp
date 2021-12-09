@@ -2,10 +2,15 @@
 
 #include <QTimer>
 #include <QList>
-#include <QDebug>
 
 #include "bullet.hpp"
 #include "enemy.hpp"
+/**
+ * @brief Construct a new Basic Goose:: Basic Goose object
+ * 
+ * @param scene 
+ * @param parent 
+ */
 BasicGoose::BasicGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
     QPixmap p = QPixmap(":/images/basicgoose.png");
@@ -28,7 +33,10 @@ BasicGoose::BasicGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(sce
     connect(timer, SIGNAL(timeout()), this, SLOT(AcquireTarget()));
     timer->start(1000 / attack_speed_);
 }
-
+/**
+ * @brief 
+ * 
+ */
 void BasicGoose::AttackTarget() {
     Bullet* bullet = new Bullet(this);
     bullet->SetMaxRange(attack_radius_);  // Set max range for the bullet to equal the range of the tower
@@ -39,7 +47,10 @@ void BasicGoose::AttackTarget() {
     bullet->setRotation(angle);  // Rotate the bullet
     scene_->addItem(bullet);  // Add the bullet into the scene
 }
-
+/**
+ * @brief 
+ * 
+ */
 void BasicGoose::AcquireTarget() {
     // List of items within the attack_area
     QList<QGraphicsItem*> colliding_items = attack_area_->collidingItems();

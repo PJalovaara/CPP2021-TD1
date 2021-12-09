@@ -1,6 +1,5 @@
 #include "cruiseship.hpp"
 
-#include <QDebug>
 #include <qmath.h>
 
 #include "koneteekkari.hpp"
@@ -8,7 +7,13 @@
 #include "fyysikko.hpp"
 #include "bullet.hpp"
 
-
+/**
+ * @brief Construct a new Cruiseship:: Cruiseship object
+ * 
+ * @param paths 
+ * @param game 
+ * @param parent 
+ */
 Cruiseship::Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/cruiseship.png");
     p = p.scaled(200, 200, Qt::KeepAspectRatio);  // Set size for the enemy
@@ -30,7 +35,10 @@ Cruiseship::Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* p
 
     RotateToFacePoint(dest_);
 }
-
+/**
+ * @brief 
+ * 
+ */
 void Cruiseship::Death() {
     // Update the money system
     game_->SetMoney(game_->GetMoney() + price_);
@@ -63,7 +71,12 @@ void Cruiseship::CheckPoop() {
 }
 
 
-// Chooses the path with the furthest tower
+/**
+ * @brief 
+ * 
+ * @param paths 
+ * @return QList<QPointF> 
+ */
 QList<QPointF> Cruiseship::ChoosePath(QList<QList<QPointF>> paths) {
     QList<QPointF> path_with_furthest_tower;
     int furthest_dist = 0;

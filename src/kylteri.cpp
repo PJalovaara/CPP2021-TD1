@@ -1,5 +1,12 @@
 #include "kylteri.hpp"
 
+/**
+ * @brief Construct a new Kylteri:: Kylteri object
+ * 
+ * @param paths 
+ * @param game 
+ * @param parent 
+ */
 Kylteri::Kylteri(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/kylteri1.png");
     p = p.scaled(50, 100, Qt::KeepAspectRatio);  // Set size for the enemy
@@ -23,8 +30,12 @@ Kylteri::Kylteri(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent)
     RotateToFacePoint(dest_);
 }
 
-
-// Chooses the path with the nearest tower
+/**
+ * @brief 
+ * 
+ * @param paths 
+ * @return QList<QPointF> 
+ */
 QList<QPointF> Kylteri::ChoosePath(QList<QList<QPointF>> paths) {
     QList<QPointF> path_with_nearest_tower;
     int shortest_dist = 1000;

@@ -4,6 +4,13 @@
 
 #include "bullet.hpp"
 
+/**
+ * @brief Construct a new Dokaani:: Dokaani object
+ * 
+ * @param paths 
+ * @param game 
+ * @param parent 
+ */
 Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/dokaani.png");
     p = p.scaled(80, 80, Qt::KeepAspectRatio);  // Set size for the enemy
@@ -33,7 +40,12 @@ void Dokaani::Death() {
     game_->PlayDokaaniDiesSfx();
 }
 
-
+/**
+ * @brief 
+ * 
+ * @param paths 
+ * @return QList<QPointF> 
+ */
 QList<QPointF> Dokaani::ChoosePath(QList<QList<QPointF>> paths) {
     // Chooses the longest path
     int max_path_length = 0;

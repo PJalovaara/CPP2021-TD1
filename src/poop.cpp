@@ -1,5 +1,10 @@
 #include "poop.hpp"
 
+/**
+ * @brief Construct a new Poop:: Poop object
+ * 
+ * @param parent 
+ */
 Poop::Poop(QGraphicsItem* parent) : Bullet(parent) {
     // set graphics
     QPixmap p = QPixmap(":/images/poop.png");
