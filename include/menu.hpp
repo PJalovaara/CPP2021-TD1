@@ -39,6 +39,7 @@ class Menu : public QGraphicsView{
     QGraphicsScene* scene_;
     QList<Game*> active_games_;
     QList<Editor*> active_editors_;
+    QLineEdit* bottom_text_;
 };
 
 #endif  // INCLUDE_MENU_HPP_

@@ -57,19 +57,18 @@ Menu::Menu() {
     connect(CustomButton, SIGNAL(clicked()), this, SLOT(StartCustom()));
     connect(EditorButton, SIGNAL(clicked()), this, SLOT(StartEditor()));
 
-    QLineEdit* td_title = new QLineEdit(this);
-    td_title->setReadOnly(true);
-    td_title->setAlignment(Qt::AlignRight);
-    td_title->setText("ELEC-A7151 Course Project: Tower Defense Game");
-    td_title->move(0, WINDOW_HEIGHT - 20);
-    td_title->setStyleSheet("QLineEdit {color: black; font: 10px; background: rgba(0, 0, 0, 0); width: 400 px}");
+    bottom_text_ = new QLineEdit(this);
+    bottom_text_->setReadOnly(true);
+    bottom_text_->setAlignment(Qt::AlignRight);
+    bottom_text_->setText("ELEC-A7151: Tower Defense Game");
+    bottom_text_->move(0, WINDOW_HEIGHT - 20);
+    bottom_text_->setStyleSheet("QLineEdit {color: black; font: 10px; background: rgba(0, 0, 0, 0); width: 400 px}");
 
     QPixmap logo_p = QPixmap(":/images/logo.png");
     logo_p = logo_p.scaled(400, 300, Qt::KeepAspectRatio);
     QGraphicsPixmapItem* td_logo = new QGraphicsPixmapItem(logo_p);
     td_logo->setPos(0, 0);
     scene_->addItem(td_logo);
-
 
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     // No vertical nor horizontal scroll bars
@@ -156,7 +155,7 @@ void Menu::StartCustom() {
         game->show();
         active_games_.push_back(game);
     } else {
-        qDebug() << "Create a custom level in the level editor first!";
+        bottom_text_->setText("Create a level in the editor first! | ELEC-A7151: Tower Defense Game");
     }
 }
 
