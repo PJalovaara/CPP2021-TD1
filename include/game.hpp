@@ -17,7 +17,7 @@
 #include "tower.hpp"
 
 /**
- * @brief 
+ * @brief
  * 
  */
 class Game : public QGraphicsView {

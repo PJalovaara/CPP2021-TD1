@@ -4,7 +4,7 @@
 #include "bullet.hpp"
 
 /**
- * @brief 
+ * @brief A GoldenBullet is a Bullet that slows is fast and has high damage
  * 
  */
 class GoldenBullet : public Bullet {
