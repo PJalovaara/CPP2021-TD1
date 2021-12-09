@@ -66,7 +66,6 @@ class Game : public QGraphicsView {
     int no_of_enemies_;
     QList<QList<QPointF>> paths_;
     QList<Tower*> towers_;
-    QList<QLineEdit*> line_edits_;
     QProgressBar* health_bar_;
     int money_;
     int wave_;

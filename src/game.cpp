@@ -102,52 +102,27 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     BuildIcon<BasicGoose>* basic_icon = new BuildIcon<BasicGoose>(":/images/basicgoose.png", 100, this);
     basic_icon->setPos(50,50);
     scene_->addItem(basic_icon);
-    QLineEdit* basic_price_text = new QLineEdit(this);
-    basic_price_text->setReadOnly(true);
-    basic_price_text->setAlignment(Qt::AlignCenter);
-    basic_price_text->setText(QString("$") + QString::number(100));
-    basic_price_text->move(0, basic_icon->pixmap().height());
-    basic_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
+    SetPriceText(basic_icon->pos().x(), basic_icon->pixmap().height(), 100);
 
     BuildIcon<PooperGoose>* pooper_icon = new BuildIcon<PooperGoose>(":/images/poopergoose.png", 200, this);
     pooper_icon->setPos(basic_icon->pos().x() + basic_icon->pixmap().width() + 10, 50);
     scene_->addItem(pooper_icon);
-    QLineEdit* pooper_price_text = new QLineEdit(this);
-    pooper_price_text->setReadOnly(true);
-    pooper_price_text->setAlignment(Qt::AlignCenter);
-    pooper_price_text->setText(QString("$") + QString::number(200));
-    pooper_price_text->move(pooper_icon->pos().x() - pooper_price_text->width() / 2, pooper_icon->pixmap().height());
-    pooper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
+    SetPriceText(pooper_icon->pos().x(), pooper_icon->pixmap().height(), 200);
 
     BuildIcon<ShotgunGoose>* shotgun_icon = new BuildIcon<ShotgunGoose>(":/images/shotgungoose.png", 400, this);
     shotgun_icon->setPos(pooper_icon->pos().x() + pooper_icon->pixmap().width() + 10, 50);
     scene_->addItem(shotgun_icon);
-    QLineEdit* shotgun_price_text = new QLineEdit(this);
-    shotgun_price_text->setReadOnly(true);
-    shotgun_price_text->setAlignment(Qt::AlignCenter);
-    shotgun_price_text->setText(QString("$") + QString::number(400));
-    shotgun_price_text->move(shotgun_icon->pos().x() - shotgun_price_text->width() / 2, shotgun_icon->pixmap().height());
-    shotgun_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
+    SetPriceText(shotgun_icon->pos().x(), shotgun_icon->pixmap().height(), 400);
 
     BuildIcon<SniperGoose>* sniper_icon = new BuildIcon<SniperGoose>(":/images/snipergoose.png", 500, this);
     sniper_icon->setPos(shotgun_icon->pos().x() + shotgun_icon->pixmap().width() + 10, 50);
     scene_->addItem(sniper_icon);
-    QLineEdit* sniper_price_text = new QLineEdit(this);
-    sniper_price_text->setReadOnly(true);
-    sniper_price_text->setAlignment(Qt::AlignCenter);
-    sniper_price_text->setText(QString("$") + QString::number(500));
-    sniper_price_text->move(sniper_icon->pos().x() - sniper_price_text->width() / 2, sniper_icon->pixmap().height());
-    sniper_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
+    SetPriceText(sniper_icon->pos().x(), sniper_icon->pixmap().height(), 500);
 
     BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/mamagoose.png", 5000, this);
     mama_icon->setPos(sniper_icon->pos().x() + sniper_icon->pixmap().width() + 10, 50);
     scene_->addItem(mama_icon);
-    QLineEdit* mama_price_text = new QLineEdit(this);
-    mama_price_text->setReadOnly(true);
-    mama_price_text->setAlignment(Qt::AlignCenter);
-    mama_price_text->setText(QString("$") + QString::number(5000));
-    mama_price_text->move(mama_icon->pos().x() - mama_price_text->width() / 2, mama_icon->pixmap().height());
-    mama_price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
+    SetPriceText(mama_icon->pos().x(), mama_icon->pixmap().height(), 5000);
 
     // Set cursor and build ptr to nullptr and turn on mouse tracking
     cursor_ = nullptr;
@@ -175,6 +150,7 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
 }
 
 Game::~Game() {
+    towers_.clear();
     scene_->clear();
 }
 
@@ -224,6 +200,15 @@ void Game::ResetCursor() {
 void Game::SetBuild(Tower* newBuild) {
     chaching_sfx_.play();
     build_ = newBuild;
+}
+
+void Game::SetPriceText(int icon_x, int icon_height, int price) {
+    QLineEdit* price_text = new QLineEdit(this);
+    price_text->setReadOnly(true);
+    price_text->setAlignment(Qt::AlignCenter);
+    price_text->setText(QString("$") + QString::number(price));
+    price_text->move(icon_x - price_text->width() / 2, icon_height);
+    price_text->setStyleSheet("QLineEdit {color: black; font: bold; background: rgba(0, 0, 0, 50); width: 100 px}");
 }
 
 void Game::mousePressEvent(QMouseEvent* event) {
@@ -589,6 +574,7 @@ void Game::GameOver() {
 }
 
 void Game::closeEvent(QCloseEvent *event) {
+    towers_.clear();
     scene_->clear();
     QWidget::closeEvent(event);
 }
