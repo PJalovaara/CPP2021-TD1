@@ -2,11 +2,15 @@
 
 #include <QTimer>
 #include <QList>
-#include <QDebug>
 
 #include "bullet.hpp"
 #include "enemy.hpp"
-
+/**
+ * @brief Construct a new Shotgun Goose:: Shotgun Goose object
+ * 
+ * @param scene 
+ * @param parent 
+ */
 ShotgunGoose::ShotgunGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
     QPixmap p = QPixmap(":/images/shotgungoose.png");  // TODO: Change graphics

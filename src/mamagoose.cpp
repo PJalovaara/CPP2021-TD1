@@ -2,12 +2,17 @@
 
 #include <QTimer>
 #include <QList>
-#include <QDebug>
 
 #include "bullet.hpp"
 #include "enemy.hpp"
 #include "plasmaball.hpp"
 
+/**
+ * @brief Construct a new Mama Goose:: Mama Goose object
+ * 
+ * @param scene 
+ * @param parent 
+ */
 MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
     QPixmap p = QPixmap(":/images/mamagoose.png");
@@ -30,7 +35,10 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
     connect(timer, SIGNAL(timeout()), this, SLOT(AcquireTarget()));
     timer->start(1000 / attack_speed_);
 }
-
+/**
+ * @brief 
+ * 
+ */
 void MamaGoose::AttackTarget() {
     PlasmaBall* bullet = new PlasmaBall(this);
     bullet->SetMaxRange(attack_radius_);  // Set max range for the bullet to equal the range of the tower
@@ -42,7 +50,10 @@ void MamaGoose::AttackTarget() {
     scene_->addItem(bullet);  // Add the bullet into the scene
 }
 
-// Choose the target that is closest to the end of their path
+/**
+ * @brief 
+ * 
+ */
 void MamaGoose::AcquireTarget() {
     // List of items within the attack_area
     QList<QGraphicsItem*> colliding_items = attack_area_->collidingItems();

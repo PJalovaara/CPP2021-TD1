@@ -10,7 +10,6 @@
 #include <QPushButton>
 #include <QProgressBar>
 #include <QLineEdit>
-#include <QDebug>
 
 #include "game.hpp"
 #include "editor.hpp"
@@ -18,6 +17,10 @@
 #define WINDOW_WIDTH 400
 #define WINDOW_HEIGHT 300
 
+/**
+ * @brief Construct a new Menu:: Menu object
+ * 
+ */
 Menu::Menu() {
     // Set the scene
     scene_ = new QGraphicsScene(this);
@@ -82,6 +85,12 @@ void Menu::mousePressEvent(QMouseEvent* event) {
         QGraphicsView::mousePressEvent(event);
 }
 
+/**
+ * @brief 
+ * 
+ * @param filename 
+ * @return QList<QList<QPointF>> 
+ */
 QList<QList<QPointF>> Menu::ReadPathsFromFile(const QString& filename) {
     QFile file(filename);
     file.open(QIODevice::ReadOnly);

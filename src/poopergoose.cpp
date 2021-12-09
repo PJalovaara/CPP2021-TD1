@@ -2,11 +2,15 @@
 
 #include <QTimer>
 #include <QList>
-#include <QDebug>
 
 #include "poop.hpp"
 #include "enemy.hpp"
-
+/**
+ * @brief Construct a new Pooper Goose:: Pooper Goose object
+ * 
+ * @param scene 
+ * @param parent 
+ */
 PooperGoose::PooperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
     QPixmap p = QPixmap(":/images/poopergoose.png");
@@ -40,7 +44,10 @@ void PooperGoose::AttackTarget() {
     poop->setRotation(angle);  // Rotate the bullet
     scene_->addItem(poop);  // Add the bullet into the scene
 }
-
+/**
+ * @brief 
+ * 
+ */
 void PooperGoose::AcquireTarget() {
     // List of items within the attack_area
     QList<QGraphicsItem*> colliding_items = attack_area_->collidingItems();

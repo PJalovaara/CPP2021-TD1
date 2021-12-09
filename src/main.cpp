@@ -2,7 +2,7 @@
 #include "game.hpp"
 #include "editor.hpp"
 #include "menu.hpp"
-// This is an example of how to use doxygen
+//  This is an example of how to use doxygen
 /**
  * @brief Here we put a brief description, that will end on the first dot, newline etc.
  *

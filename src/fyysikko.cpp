@@ -1,7 +1,12 @@
 #include "fyysikko.hpp"
 
-#include <QDebug>
-
+/**
+ * @brief Construct a new Fyysikko:: Fyysikko object
+ * 
+ * @param paths 
+ * @param game 
+ * @param parent 
+ */
 Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/fyssa1.png");
     p = p.scaled(50, 100, Qt::KeepAspectRatio);  // Set size for the enemy
@@ -25,7 +30,12 @@ Fyysikko::Fyysikko(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* paren
 }
 
 
-// Chooses the shortest path
+/**
+ * @brief 
+ * 
+ * @param paths 
+ * @return QList<QPointF> 
+ */
 QList<QPointF> Fyysikko::ChoosePath(QList<QList<QPointF>> paths) {
     int min_path_length = 0;
     int min_path_length_index = 0;

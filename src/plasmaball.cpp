@@ -1,5 +1,10 @@
 #include "plasmaball.hpp"
 
+/**
+ * @brief Construct a new Plasma Ball:: Plasma Ball object
+ * 
+ * @param parent 
+ */
 PlasmaBall::PlasmaBall(QGraphicsItem* parent) : Bullet(parent) {
     // set graphics
     QPixmap p = QPixmap(":/images/plasmaball.png");

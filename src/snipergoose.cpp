@@ -7,7 +7,12 @@
 #include "mamagoose.hpp"
 #include "goldenbullet.hpp"
 #include "enemy.hpp"
-
+/**
+ * @brief Construct a new Sniper Goose:: Sniper Goose object
+ * 
+ * @param scene 
+ * @param parent 
+ */
 SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
     QPixmap p = QPixmap(":/images/snipergoose.png");

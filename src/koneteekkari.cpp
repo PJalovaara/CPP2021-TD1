@@ -2,6 +2,13 @@
 
 #include <QRandomGenerator>
 
+/**
+ * @brief Construct a new Koneteekkari:: Koneteekkari object
+ * 
+ * @param paths 
+ * @param game 
+ * @param parent 
+ */
 Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/kone1.png");
     p = p.scaled(50, 100, Qt::KeepAspectRatio);  // Set size for the enemy
@@ -24,7 +31,12 @@ Koneteekkari::Koneteekkari(QList<QList<QPointF>> paths, Game* game, QGraphicsIte
     RotateToFacePoint(dest_);
 }
 
-// Chooses the path at random
+/**
+ * @brief 
+ * 
+ * @param paths 
+ * @return QList<QPointF> 
+ */
 QList<QPointF> Koneteekkari::ChoosePath(QList<QList<QPointF>> paths) {
     int rand_idx = QRandomGenerator::global()->bounded(static_cast<int>(paths.size()));
     return paths[rand_idx];

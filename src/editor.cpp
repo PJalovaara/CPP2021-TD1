@@ -9,12 +9,16 @@
 #include <QPen>
 #include <QPushButton>
 #include <QLineEdit>
-#include <QDebug>
 #include <QFileDialog>
 
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 700
 
+/**
+ * @brief Construct a new Editor:: Editor object
+ * 
+ * @param parent 
+ */
 Editor::Editor(QWidget* parent) : QGraphicsView(parent) {
     // create and set scene
     scene_ = new QGraphicsScene(this);
@@ -57,6 +61,10 @@ QGraphicsPixmapItem* Editor::GetCursor() {
     return cursor_;
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Editor::TogglePathMode() {
     in_path_mode_ = !in_path_mode_;
     if (in_path_mode_) {
@@ -104,6 +112,10 @@ void Editor::mousePressEvent(QMouseEvent* event) {
     }
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Editor::CreatePath() {
     QList<QPointF> path_points = paths_[path_index_];
     for (int i = 0; i < path_points.size() - 1; i++) {
@@ -120,6 +132,10 @@ void Editor::CreatePath() {
     }
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Editor::SavePathToFile() {
     QFile file("custom_level.dat");
     file.open(QIODevice::WriteOnly);

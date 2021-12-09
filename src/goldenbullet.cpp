@@ -1,6 +1,10 @@
 #include "goldenbullet.hpp"
 
-
+/**
+ * @brief Construct a new Golden Bullet:: Golden Bullet object
+ * 
+ * @param parent 
+ */
 GoldenBullet::GoldenBullet(QGraphicsItem* parent) : Bullet(parent) {
     // set graphics
     QPixmap p = QPixmap(":/images/bulletgold.png");
