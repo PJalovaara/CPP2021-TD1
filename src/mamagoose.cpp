@@ -8,10 +8,10 @@
 #include "plasmaball.hpp"
 
 /**
- * @brief Construct a new Mama Goose:: Mama Goose object
+ * @brief Construct a new MamaGoose object
  * 
- * @param scene 
- * @param parent 
+ * @param scene the Scene where the Tower is rendered
+ * @param parent optional QGraphicsItem parent
  */
 MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
@@ -36,7 +36,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
     timer->start(1000 / attack_speed_);
 }
 /**
- * @brief 
+ * @brief Attacks the current target with a single PlasmaBall
  * 
  */
 void MamaGoose::AttackTarget() {
@@ -51,7 +51,7 @@ void MamaGoose::AttackTarget() {
 }
 
 /**
- * @brief 
+ * @brief Targets the Enemy closest to its destination (highest priority)
  * 
  */
 void MamaGoose::AcquireTarget() {

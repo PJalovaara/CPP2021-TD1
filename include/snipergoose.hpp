@@ -4,7 +4,7 @@
 #include "tower.hpp"
 
 /**
- * @brief 
+ * @brief A long-range Tower that shoots powerful GoldenBullet objects
  * 
  */
 class SniperGoose : public Tower {

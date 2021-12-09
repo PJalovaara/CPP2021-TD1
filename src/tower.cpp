@@ -13,10 +13,10 @@
 #include "bullet.hpp"
 #include "enemy.hpp"
 /**
- * @brief Construct a new Tower:: Tower object
+ * @brief Construct a new Tower object (Abstract class).
  * 
- * @param scene 
- * @param parent 
+ * @param scene the Scene where the Tower is rendered
+ * @param parent optional QGraphicsItem parent
  */
 Tower::Tower(QGraphicsScene* scene, QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem(parent) {
     scene_ = scene;
@@ -31,9 +31,9 @@ unsigned int Tower::GetAttackRadius() {
 }
 
 /**
- * @brief 
+ * @brief Increases the attack radius of the tower and updates the attack area accordingly.
  * 
- * @param new_radius 
+ * @param new_radius the attack radius we want to achieve
  */
 void Tower::UpgradeAttackRadius(unsigned int new_radius) {
     // Points for the "unit" polygon around the tower

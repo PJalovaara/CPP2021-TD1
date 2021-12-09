@@ -9,9 +9,12 @@
 #include "tower.hpp"
 
 /**
- * @brief 
+ * @brief A template class for building Tower objects in a Game
  * 
- * @tparam T 
+ * Template classes' implementation and definition cannot simply be separated into header and source files.
+ * This is solved using inline definitions for the class methods in this header.
+ * 
+ * @tparam T is a Tower subclass for which we want to create the BuildIcon
  */
 template <typename T>
 class BuildIcon: public QGraphicsPixmapItem {
@@ -24,16 +27,14 @@ class BuildIcon: public QGraphicsPixmapItem {
     int price_;
 };
 
-// Template classes' implementation and definition cannot be separated into .hpp and .cpp files.
-// This is solved using inline definitions for the class methods in the header.
 /**
- * @brief Construct a new Build Icon< T>:: Build Icon object
+ * @brief Construct a new BuildIcon object
  * 
- * @tparam T 
- * @param imagepath 
- * @param price 
- * @param game 
- * @param parent 
+ * @tparam T is a Tower subclass for which we want to create the BuildIcon
+ * @param imagepath a QString file path to the wanted image
+ * @param price the price that will be associated with the Tower
+ * @param game the Game where this BuildIcon is used
+ * @param parent optional QGraphicsItem parent
  */
 template <typename T>
 inline BuildIcon<T>::BuildIcon(QString imagepath, int price, Game* game, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
@@ -47,10 +48,10 @@ inline BuildIcon<T>::BuildIcon(QString imagepath, int price, Game* game, QGraphi
 }
 
 /**
- * @brief 
+ * @brief Sets the cursor in Game to the Tower image and sets the Game to Build mode
  * 
- * @tparam T 
- * @param event 
+ * @tparam T is a Tower subclass for which we want to create the BuildIcon
+ * @param event a QGraphicsSceneMouseEvent that is passed as a parameter for GUI events
  */
 template <class T>
 inline void BuildIcon<T>::mousePressEvent(QGraphicsSceneMouseEvent* event) {

@@ -4,7 +4,7 @@
 #include "tower.hpp"
 
 /**
- * @brief 
+ * @brief A close-range Tower that shoots multiple Bullet objects
  * 
  */
 class ShotgunGoose : public Tower {
