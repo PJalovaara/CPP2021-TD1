@@ -9,12 +9,14 @@
 #include <poop.hpp>
 
 /**
- * @brief Construct a new Enemy:: Enemy object
+ * @brief Construct a new Enemy object (Abstract class)
  * 
- * @param game 
- * @param parent 
+ * Creates a timer for Enemy that calls the MoveForward() slot.
+ * 
+ * @param game The Game where the Enemy is created in
+ * @param parent Optional QGraphicsItem pointer parent, default to 0
  */
-Enemy::Enemy(Game* game, QGraphicsItem* parent) {
+Enemy::Enemy(Game* game, QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem(parent) {
     game_ = game;
 
     // Connect a timer to the move forward
@@ -43,7 +45,7 @@ void Enemy::RotateToFacePoint(QPointF p) {
 }
 
 /**
- * @brief 
+ * @brief If enemy gets hit by poop, reduce its volume by 0.5 units.
  * 
  */
 void Enemy::CheckPoop() {
@@ -61,7 +63,7 @@ void Enemy::CheckPoop() {
 }
 
 /**
- * @brief 
+ * @brief Returns how much distance the Enemy has left to travel
  * 
  * @return double 
  */
@@ -76,7 +78,7 @@ double Enemy::DistanceLeft() {
 }
 
 /**
- * @brief 
+ * @brief Check if Enemy gets hit by Poop or Bullet. Rotate to face the next point and check if it has reached its destination.
  * 
  */
 void Enemy::MoveForward() {
@@ -132,7 +134,7 @@ void Enemy::Death() {
 }
 
 /**
- * @brief 
+ * @brief If Enemy has reached its destination, reduce player health and/or start GameOver.
  * 
  */
 void Enemy::ReachDest() {

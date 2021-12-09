@@ -3,6 +3,10 @@
 
 #include "enemy.hpp"
 
+/**
+ * @brief Dokaani is the head of the enemies which takes a lot of damage but also has nice yield.
+ * 
+ */
 class Dokaani : public Enemy {
     Q_OBJECT
 

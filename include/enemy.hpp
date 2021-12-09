@@ -7,9 +7,17 @@
 #include <QPointF>
 #include <QProgressBar>
 
-
 #include "game.hpp"
 
+
+/**
+ * @brief Enemy is an abstract class that all enemies inherit.
+ * 
+ * Chooses its path on the map according to the virtual ChoosePath method.
+ * Has a virtual void function Death when enemy has reached its destination.
+ * All enemies move with the public slot MoveForward().
+ * 
+ */
 class Enemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 

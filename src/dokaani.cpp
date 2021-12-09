@@ -5,11 +5,11 @@
 #include "bullet.hpp"
 
 /**
- * @brief Construct a new Dokaani:: Dokaani object
+ * @brief Construct a new Dokaani object
  * 
- * @param paths 
- * @param game 
- * @param parent 
+ * @param paths List of different paths on the map
+ * @param game The Game where the enemy is created in
+ * @param parent Optional QGraphicsItem pointer parent, default to 0
  */
 Dokaani::Dokaani(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/dokaani.png");
@@ -41,9 +41,9 @@ void Dokaani::Death() {
 }
 
 /**
- * @brief 
+ * @brief Chooses the path with the longest length
  * 
- * @param paths 
+ * @param paths List of different paths on the map
  * @return QList<QPointF> 
  */
 QList<QPointF> Dokaani::ChoosePath(QList<QList<QPointF>> paths) {

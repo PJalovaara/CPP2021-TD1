@@ -3,9 +3,15 @@
 
 #include <QList>
 #include <QPointF>
+
 #include "game.hpp"
 #include "enemy.hpp"
 
+
+/**
+ * @brief Cruiseship is a strong enemy which spawns new enemies when it's killed
+ * 
+ */
 class Cruiseship : public Enemy {
     Q_OBJECT
 

@@ -3,6 +3,10 @@
 
 #include "enemy.hpp"
 
+/**
+ * @brief Kylteri is a quick enemy but always chooses the path with the closest Tower.
+ * 
+ */
 class Kylteri : public Enemy {
     Q_OBJECT
 

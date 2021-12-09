@@ -3,6 +3,10 @@
 
 #include "enemy.hpp"
 
+/**
+ * @brief Koneteekkari is the basic Enemy that chooses its path at random.
+ * 
+ */
 class Koneteekkari : public Enemy {
     Q_OBJECT
 

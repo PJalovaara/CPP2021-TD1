@@ -3,6 +3,10 @@
 
 #include "enemy.hpp"
 
+/**
+ * @brief Fyysikko is a smart enemy that chooses the optimized with the shortest length.
+ * 
+ */
 class Fyysikko : public Enemy {
     Q_OBJECT
 

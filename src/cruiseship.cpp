@@ -8,11 +8,11 @@
 #include "bullet.hpp"
 
 /**
- * @brief Construct a new Cruiseship:: Cruiseship object
+ * @brief Construct a new Cruiseship object
  * 
- * @param paths 
- * @param game 
- * @param parent 
+ * @param paths List of different paths on the map
+ * @param game The Game where the enemy is created in
+ * @param parent Optional QGraphicsItem pointer parent, default to 0
  */
 Cruiseship::Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* parent) : Enemy(game) {
     QPixmap p = QPixmap(":/images/cruiseship.png");
@@ -35,8 +35,9 @@ Cruiseship::Cruiseship(QList<QList<QPointF>> paths, Game* game, QGraphicsItem* p
 
     RotateToFacePoint(dest_);
 }
+
 /**
- * @brief 
+ * @brief When cruiseship dies, spawn new enemies, update player money, and play the sound effects
  * 
  */
 void Cruiseship::Death() {
@@ -70,11 +71,10 @@ void Cruiseship::CheckPoop() {
     return;
 }
 
-
 /**
- * @brief 
+ * @brief Chooses the path which starts the furthers from any Tower
  * 
- * @param paths 
+ * @param paths List of different paths on the map
  * @return QList<QPointF> 
  */
 QList<QPointF> Cruiseship::ChoosePath(QList<QList<QPointF>> paths) {
