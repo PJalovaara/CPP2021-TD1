@@ -4,7 +4,7 @@
 #include "bullet.hpp"
 
 /**
- * @brief 
+ * @brief A PlasmaBall is a Bullet that MamaGoose uses
  * 
  */
 class PlasmaBall : public Bullet {

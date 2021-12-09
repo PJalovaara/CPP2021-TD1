@@ -4,7 +4,7 @@
 #include "bullet.hpp"
 
 /**
- * @brief 
+ * @brief A Poop is a Bullet that slows down enemies
  * 
  */
 class Poop : public Bullet {

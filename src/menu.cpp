@@ -18,7 +18,7 @@
 #define WINDOW_HEIGHT 300
 
 /**
- * @brief Construct a new Menu:: Menu object
+ * @brief Construct a Menu object
  * 
  */
 Menu::Menu() {
@@ -85,10 +85,11 @@ void Menu::mousePressEvent(QMouseEvent* event) {
 }
 
 /**
- * @brief 
+ * @brief Convert the path read from a .dat file to a QList<QList<QPointF>> value
  * 
  * @param filename 
- * @return QList<QList<QPointF>> 
+ * @return QList<QList<QPointF>> This will be used by the Game to construct the path
+ * @see Editor::SavePathToFile()
  */
 QList<QList<QPointF>> Menu::ReadPathsFromFile(const QString& filename) {
     QFile file(filename);

@@ -16,10 +16,12 @@
 #include "editor.hpp"
 
 /**
- * @brief 
+ * @brief Menu is a class for the main menu of the game
  * 
+ * The menu is responsible for opening editors and instances of Games.
+ * The menu reads the paths for the levels from .dat files
  */
-class Menu : public QGraphicsView{
+class Menu : public QGraphicsView {
     Q_OBJECT
 
  public:
