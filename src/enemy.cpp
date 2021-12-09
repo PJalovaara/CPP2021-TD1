@@ -68,8 +68,9 @@ void Enemy::CheckPoop() {
 double Enemy::DistanceLeft() {
     double total_distance = 0;
     for (int i = 0; i < path_points_.length() - 1; i++) {
-        QLineF ln(path_points_[i], path_points_[i+1]);
-        total_distance += ln.length();
+        double x_squared = (path_points_[i+1].x() - path_points_[i].x()) * (path_points_[i+1].x() - path_points_[i].x());
+        double y_squared = (path_points_[i+1].y() - path_points_[i].y()) * (path_points_[i+1].y() - path_points_[i].y());
+        total_distance +=  qSqrt(x_squared + y_squared);
     }
     return total_distance - distance_traveled_;
 }
