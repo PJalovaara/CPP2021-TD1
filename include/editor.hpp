@@ -11,6 +11,10 @@
 
 #include "editor.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class Editor : public QGraphicsView {
     Q_OBJECT
 

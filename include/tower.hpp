@@ -11,6 +11,10 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 
+/**
+ * @brief 
+ * 
+ */
 class Tower : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 

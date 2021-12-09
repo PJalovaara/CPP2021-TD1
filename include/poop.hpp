@@ -3,6 +3,10 @@
 
 #include "bullet.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class Poop : public Bullet {
  public:
     explicit Poop(QGraphicsItem* parent = 0);

@@ -3,6 +3,10 @@
 
 #include "enemy.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class Koneteekkari : public Enemy {
     Q_OBJECT
 

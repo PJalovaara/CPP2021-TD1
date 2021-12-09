@@ -3,6 +3,10 @@
 
 #include "bullet.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class GoldenBullet : public Bullet {
  public:
     explicit GoldenBullet(QGraphicsItem* parent = 0);

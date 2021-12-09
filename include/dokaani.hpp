@@ -3,6 +3,10 @@
 
 #include "enemy.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class Dokaani : public Enemy {
     Q_OBJECT
 

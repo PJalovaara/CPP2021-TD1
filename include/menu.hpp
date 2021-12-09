@@ -15,6 +15,10 @@
 #include "game.hpp"
 #include "editor.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class Menu : public QGraphicsView{
     Q_OBJECT
 

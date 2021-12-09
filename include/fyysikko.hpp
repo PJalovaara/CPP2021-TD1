@@ -3,6 +3,10 @@
 
 #include "enemy.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class Fyysikko : public Enemy {
     Q_OBJECT
 

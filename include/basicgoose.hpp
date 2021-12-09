@@ -2,7 +2,10 @@
 #define INCLUDE_BASICGOOSE_HPP_
 
 #include "tower.hpp"
-
+/**
+ * @brief 
+ * 
+ */
 class BasicGoose : public Tower {
     Q_OBJECT
 

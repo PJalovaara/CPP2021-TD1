@@ -7,9 +7,12 @@
 #include <QPointF>
 #include <QProgressBar>
 
-
 #include "game.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class Enemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 

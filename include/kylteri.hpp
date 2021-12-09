@@ -3,6 +3,10 @@
 
 #include "enemy.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class Kylteri : public Enemy {
     Q_OBJECT
 

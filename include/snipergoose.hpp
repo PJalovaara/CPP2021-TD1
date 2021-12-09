@@ -3,6 +3,10 @@
 
 #include "tower.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class SniperGoose : public Tower {
     Q_OBJECT
 

@@ -3,6 +3,10 @@
 
 #include "bullet.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class PlasmaBall : public Bullet {
  public:
     explicit PlasmaBall(QGraphicsItem* parent = 0);

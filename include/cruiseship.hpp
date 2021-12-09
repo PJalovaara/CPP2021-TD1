@@ -6,6 +6,11 @@
 #include "game.hpp"
 #include "enemy.hpp"
 
+/**
+ * @brief 
+ * 
+ * 
+ */
 class Cruiseship : public Enemy {
     Q_OBJECT
 
