@@ -3,6 +3,10 @@
 
 #include "tower.hpp"
 
+/**
+ * @brief 
+ * 
+ */
 class MamaGoose : public Tower {
     Q_OBJECT
 

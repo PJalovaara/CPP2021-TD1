@@ -3,8 +3,10 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
-
-
+/**
+ * @brief 
+ * 
+ */
 class Bullet : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT  // Macro needed to work with signals and slots (and it needs to inherit from QObject)
 

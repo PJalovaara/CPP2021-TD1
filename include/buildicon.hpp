@@ -8,6 +8,11 @@
 #include "game.hpp"
 #include "tower.hpp"
 
+/**
+ * @brief 
+ * 
+ * @tparam T 
+ */
 template <typename T>
 class BuildIcon: public QGraphicsPixmapItem {
  public:
@@ -21,7 +26,15 @@ class BuildIcon: public QGraphicsPixmapItem {
 
 // Template classes' implementation and definition cannot be separated into .hpp and .cpp files.
 // This is solved using inline definitions for the class methods in the header.
-
+/**
+ * @brief Construct a new Build Icon< T>:: Build Icon object
+ * 
+ * @tparam T 
+ * @param imagepath 
+ * @param price 
+ * @param game 
+ * @param parent 
+ */
 template <typename T>
 inline BuildIcon<T>::BuildIcon(QString imagepath, int price, Game* game, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     imagepath_ = imagepath;
@@ -33,6 +46,12 @@ inline BuildIcon<T>::BuildIcon(QString imagepath, int price, Game* game, QGraphi
     price_ = price;  // Set price
 }
 
+/**
+ * @brief 
+ * 
+ * @tparam T 
+ * @param event 
+ */
 template <class T>
 inline void BuildIcon<T>::mousePressEvent(QGraphicsSceneMouseEvent* event) {
     if (!(game_->GetBuild()) && game_->GetMoney() >= price_ && !(game_->IsGameOver())) {
