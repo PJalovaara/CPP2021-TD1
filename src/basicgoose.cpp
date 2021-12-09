@@ -6,10 +6,10 @@
 #include "bullet.hpp"
 #include "enemy.hpp"
 /**
- * @brief Construct a new Basic Goose:: Basic Goose object
+ * @brief Construct a new BasicGoose object
  * 
- * @param scene 
- * @param parent 
+ * @param scene the Scene where the Tower is rendered
+ * @param parent optional QGraphicsItem parent
  */
 BasicGoose::BasicGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
@@ -33,8 +33,9 @@ BasicGoose::BasicGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(sce
     connect(timer, SIGNAL(timeout()), this, SLOT(AcquireTarget()));
     timer->start(1000 / attack_speed_);
 }
+
 /**
- * @brief 
+ * @brief Attacks the current target with a single Bullet
  * 
  */
 void BasicGoose::AttackTarget() {
@@ -47,8 +48,9 @@ void BasicGoose::AttackTarget() {
     bullet->setRotation(angle);  // Rotate the bullet
     scene_->addItem(bullet);  // Add the bullet into the scene
 }
+
 /**
- * @brief 
+ * @brief Targets the closest Enemy within its attack area
  * 
  */
 void BasicGoose::AcquireTarget() {

@@ -6,10 +6,10 @@
 #include "poop.hpp"
 #include "enemy.hpp"
 /**
- * @brief Construct a new Pooper Goose:: Pooper Goose object
+ * @brief Construct a new PooperGoose object
  * 
- * @param scene 
- * @param parent 
+ * @param scene the Scene where the Tower is rendered
+ * @param parent optional QGraphicsItem parent
  */
 PooperGoose::PooperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
@@ -34,6 +34,10 @@ PooperGoose::PooperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(s
     timer->start(1000 / attack_speed_);
 }
 
+/**
+ * @brief Attacks the current target with a single Poop that slows
+ * 
+ */
 void PooperGoose::AttackTarget() {
     Poop* poop = new Poop(this);
     poop->SetMaxRange(attack_radius_);  // Set max range for the bullet to equal the range of the tower
@@ -44,8 +48,9 @@ void PooperGoose::AttackTarget() {
     poop->setRotation(angle);  // Rotate the bullet
     scene_->addItem(poop);  // Add the bullet into the scene
 }
+
 /**
- * @brief 
+ * @brief Targets the closest Enemy within its attack area
  * 
  */
 void PooperGoose::AcquireTarget() {

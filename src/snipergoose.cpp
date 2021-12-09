@@ -8,10 +8,10 @@
 #include "goldenbullet.hpp"
 #include "enemy.hpp"
 /**
- * @brief Construct a new Sniper Goose:: Sniper Goose object
+ * @brief Construct a SniperGoose object
  * 
- * @param scene 
- * @param parent 
+ * @param scene the Scene where the Tower is rendered
+ * @param parent optional QGraphicsItem parent
  */
 SniperGoose::SniperGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
@@ -46,8 +46,10 @@ void SniperGoose::AttackTarget() {
     scene_->addItem(bullet);  // Add the bullet into the scene
 }
 
-
-// Choose the target that is closest to the end of their path
+/**
+ * @brief Targets the Enemy closest to its destination (highest priority)
+ * 
+ */
 void SniperGoose::AcquireTarget() {
     // List of items within the attack_area
     QList<QGraphicsItem*> colliding_items = attack_area_->collidingItems();

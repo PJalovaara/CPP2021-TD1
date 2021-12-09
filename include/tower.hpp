@@ -12,7 +12,10 @@
 #include <QGraphicsSceneMouseEvent>
 
 /**
- * @brief 
+ * @brief Tower is an abstract class that all towers inherit.
+ * 
+ * Towers attack enemies in their attack range according to the pure virtual AttackTarget().
+ * The pure virtual slot AcquireTarget() is used to choose the Enemy which is attacked.
  * 
  */
 class Tower : public QObject, public QGraphicsPixmapItem {

@@ -4,7 +4,7 @@
 #include "tower.hpp"
 
 /**
- * @brief 
+ * @brief A close-range Tower that slows enemies with Poop
  * 
  */
 class PooperGoose : public Tower {

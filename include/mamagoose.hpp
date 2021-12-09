@@ -4,7 +4,7 @@
 #include "tower.hpp"
 
 /**
- * @brief 
+ * @brief A powerful Tower that shoots PlasmaBall objects with high frequency
  * 
  */
 class MamaGoose : public Tower {

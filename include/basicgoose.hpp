@@ -3,7 +3,7 @@
 
 #include "tower.hpp"
 /**
- * @brief 
+ * @brief A basic Tower that shoots basic Bullet objects
  * 
  */
 class BasicGoose : public Tower {

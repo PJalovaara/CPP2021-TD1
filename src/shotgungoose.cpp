@@ -6,10 +6,10 @@
 #include "bullet.hpp"
 #include "enemy.hpp"
 /**
- * @brief Construct a new Shotgun Goose:: Shotgun Goose object
+ * @brief Construct a new ShotgunGoose object
  * 
- * @param scene 
- * @param parent 
+ * @param scene the Scene where the Tower is rendered
+ * @param parent optional QGraphicsItem parent
  */
 ShotgunGoose::ShotgunGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene, parent) {
     // Set the graphics
@@ -34,6 +34,10 @@ ShotgunGoose::ShotgunGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower
     timer->start(1000 / attack_speed_);
 }
 
+/**
+ * @brief Attacks the current target with five Bullet objects
+ * 
+ */
 void ShotgunGoose::AttackTarget() {
     for (int i = 0; i < 5; i++) {
         Bullet* bullet = new Bullet(this);
@@ -46,6 +50,10 @@ void ShotgunGoose::AttackTarget() {
     }
 }
 
+/**
+ * @brief Targets the closest Enemy within its attack area
+ * 
+ */
 void ShotgunGoose::AcquireTarget() {
     // List of items within the attack_area
     QList<QGraphicsItem*> colliding_items = attack_area_->collidingItems();
