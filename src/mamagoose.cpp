@@ -18,7 +18,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
     QPixmap p = QPixmap(":/images/mamagoose.png");
     p = p.scaled(200, 100, Qt::KeepAspectRatio);
     setPixmap(p);  // Set size for the goose
-    attack_speed_ = 7;  // Attack 7 times a second
+    attack_speed_ = 9;  // Attack 9 times a second
 
     // Set attack_radius and tower width, height and center
     tower_width_ = p.width();
@@ -28,7 +28,7 @@ MamaGoose::MamaGoose(QGraphicsScene* scene, QGraphicsItem* parent) : Tower(scene
 
     // Set the attack area to nullptr and then create it with the UpdateAttackRadius function
     attack_area_ = nullptr;
-    UpgradeAttackRadius(120);  // MamaGoose has attackRadius of 120
+    UpgradeAttackRadius(200);  // MamaGoose has attackRadius of 200
 
     // Connect timer to AcquireTarget
     QTimer* timer = new QTimer(this);
