@@ -1,9 +1,9 @@
 #include "poop.hpp"
 
 /**
- * @brief Construct a new Poop:: Poop object
+ * @brief Construct a new Poop object
  * 
- * @param parent 
+ * @param parent Optional QGraphicsItem pointer, default value = 0
  */
 Poop::Poop(QGraphicsItem* parent) : Bullet(parent) {
     // set graphics

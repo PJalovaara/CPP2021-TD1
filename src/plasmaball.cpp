@@ -1,9 +1,9 @@
 #include "plasmaball.hpp"
 
 /**
- * @brief Construct a new Plasma Ball:: Plasma Ball object
+ * @brief Construct a new Plasma Ball object
  * 
- * @param parent 
+ * @param parent Optional QGraphicsItem pointer, default value = 0
  */
 PlasmaBall::PlasmaBall(QGraphicsItem* parent) : Bullet(parent) {
     // set graphics
