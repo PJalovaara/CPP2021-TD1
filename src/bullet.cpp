@@ -4,9 +4,9 @@
 #include <QTimer>
 #include <qmath.h>
 /**
- * @brief Construct a new Bullet:: Bullet object
+ * @brief Construct a new Bullet object
  * 
- * @param parent 
+ * @param parent Optional QGraphicsItem pointer, default value = 0
  */
 Bullet::Bullet(QGraphicsItem* parent) {
     // set graphics

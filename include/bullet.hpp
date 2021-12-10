@@ -4,7 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 /**
- * @brief 
+ * @brief A base class for all projectiles/bullets that Tower class object shoot
  * 
  */
 class Bullet : public QObject, public QGraphicsPixmapItem {
@@ -26,8 +26,6 @@ class Bullet : public QObject, public QGraphicsPixmapItem {
     double distance_traveled_;
     int bullet_damage_;
 };
-
-
 
 
 #endif  // INCLUDE_BULLET_HPP_

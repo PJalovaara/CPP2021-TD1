@@ -1,9 +1,9 @@
 #include "goldenbullet.hpp"
 
 /**
- * @brief Construct a new Golden Bullet:: Golden Bullet object
+ * @brief Construct a new Golden Golden Bullet object
  * 
- * @param parent 
+ * @param parent Optional QGraphicsItem pointer, default value = 0
  */
 GoldenBullet::GoldenBullet(QGraphicsItem* parent) : Bullet(parent) {
     // set graphics
