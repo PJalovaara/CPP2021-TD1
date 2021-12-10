@@ -1,7 +1,5 @@
 #include <QApplication>
 
-#include "game.hpp"
-#include "editor.hpp"
 #include "menu.hpp"
 
 /**
