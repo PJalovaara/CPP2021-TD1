@@ -17,7 +17,10 @@
 #include "tower.hpp"
 
 /**
- * @brief
+ * @brief A single game of tower defense
+ * 
+ * A single game is responsible for handling the towers and enemies.
+ * The path that will be used in the game is given as a parameter to game's constructor.
  * 
  */
 class Game : public QGraphicsView {

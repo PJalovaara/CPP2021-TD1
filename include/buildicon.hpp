@@ -16,7 +16,7 @@
  * 
  * @tparam T is a Tower subclass for which we want to create the BuildIcon
  */
-template <typename T>
+template <class T>
 class BuildIcon: public QGraphicsPixmapItem {
  public:
     BuildIcon(QString imagepath, int price, Game* game, QGraphicsItem* parent = 0);
@@ -36,7 +36,7 @@ class BuildIcon: public QGraphicsPixmapItem {
  * @param game the Game where this BuildIcon is used
  * @param parent optional QGraphicsItem parent
  */
-template <typename T>
+template <class T>
 inline BuildIcon<T>::BuildIcon(QString imagepath, int price, Game* game, QGraphicsItem* parent) : QGraphicsPixmapItem(parent) {
     imagepath_ = imagepath;
     QPixmap p = QPixmap(imagepath_);

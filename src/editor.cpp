@@ -15,9 +15,9 @@
 #define WINDOW_HEIGHT 700
 
 /**
- * @brief Construct a new Editor:: Editor object
+ * @brief Construct a new Editor object
  * 
- * @param parent 
+ * @param parent will be Menu in this case
  */
 Editor::Editor(QWidget* parent) : QGraphicsView(parent) {
     // create and set scene
@@ -62,7 +62,7 @@ QGraphicsPixmapItem* Editor::GetCursor() {
 }
 
 /**
- * @brief 
+ * @brief Toggling in_path_mode_ enables the creation of path points which will be visualized by the CreatePath method
  * 
  */
 void Editor::TogglePathMode() {
@@ -113,7 +113,7 @@ void Editor::mousePressEvent(QMouseEvent* event) {
 }
 
 /**
- * @brief 
+ * @brief Visualizes the most recent path with a (almost) unique color.
  * 
  */
 void Editor::CreatePath() {
@@ -133,8 +133,9 @@ void Editor::CreatePath() {
 }
 
 /**
- * @brief 
+ * @brief Saves the paths to a .dat file using a serialized binary format, which can be read by the Menu class.
  * 
+ * @see Menu::ReadPathsFromFile(const QString& filename)
  */
 void Editor::SavePathToFile() {
     QFile file("custom_level.dat");

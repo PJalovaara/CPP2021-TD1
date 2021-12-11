@@ -12,7 +12,9 @@
 #include "editor.hpp"
 
 /**
- * @brief 
+ * @brief A level editor that can be used to create custom levels.
+ *
+ * Levels are saved in a serialized binary format which can be read by the Menu class.
  * 
  */
 class Editor : public QGraphicsView {

@@ -31,10 +31,10 @@
 #define WINDOW_HEIGHT 700
 
 /**
- * @brief Construct a new Game:: Game object
+ * @brief Construct a Game object
  * 
- * @param paths 
- * @param parent 
+ * @param paths the path(s) that the enemies can travel
+ * @param parent the parent will be the menu in this case
  */
 Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent) {
     // Creating a scene and a timer to spawn enemies on the pathPoints path
@@ -214,7 +214,9 @@ void Game::SetPriceText(int icon_x, int icon_height, int price) {
 }
 
 /**
- * @brief 
+ * @brief This function handles an incoming mousePressEvent.
+ * 
+ * Given that the game is not over, the function will either create a new tower, upgrade an existing tower, or delete an existing tower
  * 
  * @param event 
  */
@@ -281,7 +283,9 @@ Tower* Game::GetBuild() {
 }
 
 /**
- * @brief 
+ * @brief The function that starts a new wave
+ * 
+ *  The variable wave_ is incremented at the start of each wave, which results in different, and harder waves.
  * 
  */
 void Game::StartWave() {
@@ -296,7 +300,9 @@ void Game::StartWave() {
 }
 
 /**
- * @brief 
+ * @brief The function that spawns new enemies to the game
+ * 
+ * Based on the current value of the wave_ variable, different types of enemies will be spawned.
  * 
  */
 void Game::SpawnEnemy() {
@@ -451,7 +457,9 @@ void Game::SpawnEnemy() {
 }
 
 /**
- * @brief 
+ * @brief Draw a path to the scene
+ * 
+ * The path is based on the paths_ variable, which gets its value from the games constructor
  * 
  */
 void Game::CreatePaths() {
@@ -540,7 +548,7 @@ void Game::PlayHonkSfx() {
 }
 
 /**
- * @brief 
+ * @brief End the game if we run out of HPs
  * 
  */
 void Game::GameOver() {
