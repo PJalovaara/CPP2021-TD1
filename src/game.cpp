@@ -121,10 +121,10 @@ Game::Game(QList<QList<QPointF>> paths, QWidget* parent) : QGraphicsView(parent)
     scene_->addItem(sniper_icon);
     SetPriceText(sniper_icon->pos().x(), sniper_icon->pixmap().height(), 500);
 
-    BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/mamagoose.png", 5000, this);
+    BuildIcon<MamaGoose>* mama_icon = new BuildIcon<MamaGoose>(":/images/mamagoose.png", 2000, this);
     mama_icon->setPos(sniper_icon->pos().x() + sniper_icon->pixmap().width() + 10, 50);
     scene_->addItem(mama_icon);
-    SetPriceText(mama_icon->pos().x(), mama_icon->pixmap().height(), 5000);
+    SetPriceText(mama_icon->pos().x(), mama_icon->pixmap().height(), 2000);
 
     // Set cursor and build ptr to nullptr and turn on mouse tracking
     cursor_ = nullptr;
